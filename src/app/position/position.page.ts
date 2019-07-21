@@ -70,7 +70,6 @@ export class PositionPage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('positionPage');
     this.configurationService.initialize().then(config => {
       this.configuration = config;
       this.route.params.subscribe(params => {
@@ -155,7 +154,6 @@ export class PositionPage implements OnInit, OnDestroy {
     this.category = this.endgameDatabase.categories[this.idxCategory];
     this.subcategory = this.category.subcategories[this.idxSubcategory];
     this.position = this.subcategory.games[this.idxPosition];
-    console.log('position: ' + JSON.stringify(this.position));
     this.subcategory.images = this.miscService.textToImages(this.subcategory.name);
     this.category$ = of(this.category);
     this.subcategory$ = of(this.subcategory);
@@ -186,9 +184,6 @@ export class PositionPage implements OnInit, OnDestroy {
   }
 
   loadFen(fen: string, target: string) {
-
-    console.log('fen: ' + JSON.stringify(fen));
-    console.log('target: ' + JSON.stringify(target));
     this.fen = fen;
     const chess: Chess = new Chess();
     chess.load(fen);

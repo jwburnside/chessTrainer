@@ -33,7 +33,12 @@
               {
                 "glob": "**/stockfish.*",
                 "input": "node_modules/stockfish.js/",
-                "output": "assets/stockfish"
+                "output": "assets/stockfish-js"
+              },
+              {
+                "glob": "**/stockfish.*",
+                "input": "node_modules/stockfish.wasm/",
+                "output": "assets/stockfish-wasm"
               }
             ],
             "styles": [
@@ -44,12 +49,12 @@
                 "input": "src/global.scss"
               },
               {
-                "input": "node_modules/@chrisoakman/chessboardjs/lib/chessboard.css"
+                "input": "node_modules/chessboardjs/www/releases/0.3.0/css/chessboard-0.3.0.css"
               }
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/@chrisoakman/chessboardjs/lib/chessboard.js"
+              "node_modules/chessboardjs/www/releases/0.3.0/js/chessboard-0.3.0.js"
             ],
             "es5BrowserSupport": true
           },

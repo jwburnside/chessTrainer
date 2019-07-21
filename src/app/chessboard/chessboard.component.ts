@@ -148,7 +148,62 @@ export class ChessboardComponent implements OnInit, OnDestroy {
         ]).subscribe(async res => {
             this.literales = res;
         });
+
         this.uglyForceBoardRedraw();
+    }
+
+    buildPgn(pgn: Array<string>) {
+        const self = this;
+        this.initializing = true;
+        this.autosolve = false;
+        this.ooopsPlayed = false;
+        if (this.board) {
+            this.board.destroy();
+        }
+
+        this.chess.load_pgn(pgn.join('\n'));
+
+        this.getMovesAsFENs(pgn);
+
+        const movesAsFens = this.getMovesAsFENs(this.chess);
+        this.originalFen = movesAsFens[5];
+        this.fenHistory = movesAsFens;
+
+        this.board = ChessBoard('__chessboard__', {
+            position: this.originalFen,
+            pieceTheme: function(piece) { return '/assets/pieces/' + self.configuration.pieceTheme + '/' + piece + '.svg'},
+            draggable: false,
+        });
+
+        this.cleanHighlights();
+        this.originalPlayer = this.chess.turn();
+        this.player = this.originalPlayer;
+        this.translate.get([
+            'chessboard.stalemate',
+            'chessboard.insufficent-material',
+            'chessboard.three-repetition',
+            'chessboard.rule-fifty',
+            'chessboard.game-over',
+            'chessboard.mate-in',
+            'chessboard.receive-mate-in',
+            'chessboard.unfeasible-mate',
+            'chessboard.white-advantage',
+            'chessboard.black-advantage',
+            'chessboard.querying-syzygy',
+            'chessboard.syzygy-error'
+        ]).subscribe(async res => {
+            this.literales = res;
+        });
+        this.uglyForceBoardRedraw();
+
+    }
+
+    getMovesAsFENs(pgn: Array<string>) {
+        const chessObj: Chess = new Chess();
+        return this.chess.history().map(function(move) {
+            chessObj.move(move);
+            return chessObj.fen();
+        });
     }
 
     rewind() {
@@ -394,8 +449,6 @@ export class ChessboardComponent implements OnInit, OnDestroy {
     };
 
     private onDrop(source, target, piece, newPos, oldPos, orientation) {
-        console.log('target: ' + JSON.stringify(target));
-        console.log('target: ' + JSON.stringify(target));
         this.removeGreySquares();
         if (source == target) {
             this.squareSelected = source;
