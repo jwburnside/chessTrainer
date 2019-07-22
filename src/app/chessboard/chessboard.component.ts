@@ -8,6 +8,16 @@ import { Subscription } from 'rxjs';
 import { Configuration, ConfigurationService, StockfishService } from '../shared';
 import { PromotionDialog } from './promotion.dialog';
 
+export class ChessHeader {
+  event: string;
+  openingName: string;
+
+  constructor(stringHeader: any) {
+    this.event = stringHeader.Event;
+    this.openingName = stringHeader.OpeningName;
+  }
+}
+
 declare var ChessBoard: any;
 declare var $: any;
 
@@ -205,8 +215,20 @@ export class ChessboardComponent implements OnInit, OnDestroy {
       return chessObj.fen();
     });
     fens.unshift('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
-    console.log('fens: ' + JSON.stringify(fens));
     return fens;
+  }
+
+  getHeader() {
+    return this.chess.header();
+  }
+
+  getChessHeader(): ChessHeader {
+    return new ChessHeader(this.chess.header());
+  }
+
+  getHeaderValue(theKey: string): ChessHeader {
+    const header: any = this.chess.header();
+    header.valueOf();
   }
 
   rewind() {

@@ -36,11 +36,16 @@
       <button class="move-button" (click)="showNextPosition()"><span> > </span></button>
       <button class="start-button" (click)="startMoving()"><span> Start </span></button>
       <button class="stop-button" (click)="stopMoving()"><span> Stop </span></button>
+      <button class="load-next-button" (click)="loadNextOpening()"><span> Load Next Opening </span></button>
+      <button class="load-previous-button" (click)="loadPreviousOpening()"><span> Load Previous Opening </span></button>
+      <button class="flip-button" (click)="flipBoard()"><span> Flip board </span></button>
+      <button class="random-button" (click)="getRandomOpening()"><span> Random </span></button>
+
     </div>
     <div class="info_wrapper">
       <div class="info">
 
-        This is the info wrapper
+        <div *ngIf="chessHeader">{{chessHeader.event}}</div>
         <!--<div class="innerinfo" *ngIf="(position$ | async) as position">-->
           <!--<p class="text-centered">-->
             <!--<img *ngIf="targetImage" [src]="targetImage" class="thumbnail" />-->
@@ -56,7 +61,6 @@
         <!--</div>-->
       </div>
       <div class="action_buttons">
-        These are the action buttons.
         <ion-grid>
           <!--<ion-row *ngIf="!engineThinking && !gameOver">-->
             <!--<ion-col size="2">-->
