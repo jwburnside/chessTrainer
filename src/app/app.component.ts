@@ -27,15 +27,19 @@ export class AppComponent implements OnInit, OnDestroy {
     categories: null,
     count: 0
   };
+
+  // JW: These are pages before the categories.
   public prePages = [
     {
       title: 'home',
       url: '/home',
       icon: 'home'
-    }
-  ];
-
-  postPages = [
+    },
+    {
+      title: 'openings',
+      url: '/openings/quiz',
+      icon: 'home'
+    },
     {
       title: 'preferences',
       url: '/preferences',
@@ -115,7 +119,7 @@ export class AppComponent implements OnInit, OnDestroy {
           category.selected = false;
           category.subcategories.forEach((subcategory, idxSubcategory) => {
             subcategory.games.forEach((game, idxGame) => {
-              if (automaticShowFirstPosition && goCategory == -1 && (!game.record || game.record <= 0)) {
+              if (automaticShowFirstPosition && goCategory === -1 && (!game.record || game.record <= 0)) {
                 goCategory = idxCategory;
                 goSubcategory = idxSubcategory;
                 goGame = idxGame;
@@ -168,7 +172,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   showList(idxCategory, idxSubcategory) {
-    //this.router.navigate(['/list/'+ idxCategory+ '/' + idxSubcategory]);
     this.navCtrl.navigateRoot('/list/' + idxCategory + '/' + idxSubcategory);
   }
 

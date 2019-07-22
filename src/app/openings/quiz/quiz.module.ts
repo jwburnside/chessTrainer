@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { FormBuilder, FormGroupDirective, FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonRadioGroup } from '@ionic/angular';
 import { ChessboardComponent } from '../../chessboard';
+
 
 import { QuizPage } from './quiz.page';
 
@@ -16,12 +17,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [QuizPage, ChessboardComponent]
+  imports: [CommonModule, IonicModule, RouterModule.forChild(routes), FormsModule],
+  declarations: [QuizPage, ChessboardComponent, FormGroupDirective],
+  providers: [FormBuilder, IonRadioGroup]
+
 })
 export class QuizPageModule {}

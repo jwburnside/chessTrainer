@@ -5,18 +5,9 @@ import { TranslateService } from '@ngx-translate/core';
 import * as Chess from 'chess.js';
 import { Howl, Howler } from 'howler';
 import { Subscription } from 'rxjs';
+import { ChessHeader } from '../models/chess-header';
 import { Configuration, ConfigurationService, StockfishService } from '../shared';
 import { PromotionDialog } from './promotion.dialog';
-
-export class ChessHeader {
-  event: string;
-  openingName: string;
-
-  constructor(stringHeader: any) {
-    this.event = stringHeader.Event;
-    this.openingName = stringHeader.OpeningName;
-  }
-}
 
 declare var ChessBoard: any;
 declare var $: any;

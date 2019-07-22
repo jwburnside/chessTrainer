@@ -39,13 +39,28 @@
       <button class="load-next-button" (click)="loadNextOpening()"><span> Load Next Opening </span></button>
       <button class="load-previous-button" (click)="loadPreviousOpening()"><span> Load Previous Opening </span></button>
       <button class="flip-button" (click)="flipBoard()"><span> Flip board </span></button>
-      <button class="random-button" (click)="getRandomOpening()"><span> Random </span></button>
+      <button class="random-button" (click)="loadRandomOpening()"><span> Random </span></button>
+      <button class="display-answer-button" (click)="displayAnswer()"><span> Display Answer </span></button>
 
     </div>
     <div class="info_wrapper">
       <div class="info">
 
-        <div *ngIf="chessHeader">{{chessHeader.event}}</div>
+        <div *ngIf="chessHeader && shouldDisplayAnswer">{{chessHeader.openingName}}</div>
+
+        <div *ngIf="multipleChoiceCard">
+
+          <!--<form [formGroup]="multipleChoiceForm">-->
+            <!--<ion-list formControlName="multipleChoiceForm" radio-group [(ngModel)]="multipleChoiceCard.selectedAnswer" margin-bottom>-->
+              <!--<ion-item *ngFor="let choice of multipleChoiceCard.answerChoices" text-wrap>-->
+                <!--<ion-label>{{choice}}</ion-label>-->
+                <!--<ion-radio slot="start" value="choice" checked></ion-radio>-->
+              <!--</ion-item>-->
+
+            <!--</ion-list>-->
+          <!--</form>-->
+        </div>
+
         <!--<div class="innerinfo" *ngIf="(position$ | async) as position">-->
           <!--<p class="text-centered">-->
             <!--<img *ngIf="targetImage" [src]="targetImage" class="thumbnail" />-->
