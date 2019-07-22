@@ -1,19 +1,26 @@
-import { Component, ViewChildren, QueryList, OnInit, OnDestroy } from '@angular/core';
-import { Platform, NavController, IonRouterOutlet, ToastController } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { TranslateService } from '@ngx-translate/core';
-import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
-import { EndgameDatabaseService, EndgameDatabase, Category, ConfigurationService, Configuration, ThemeSwitcherService, BoardThemeSwitcherService } from './shared';
+import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
+import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { IonRouterOutlet, NavController, Platform, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import {
+  BoardThemeSwitcherService,
+  Category,
+  Configuration,
+  ConfigurationService,
+  EndgameDatabase,
+  EndgameDatabaseService,
+  ThemeSwitcherService
+} from './shared';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-
   public initialized = false;
   public endgameDatabase: EndgameDatabase = {
     version: null,
@@ -86,45 +93,44 @@ export class AppComponent implements OnInit, OnDestroy {
         this.goBack();
       });
     });
-    Promise.all([
-      this.configurationService.initialize(),
-      this.endgameDatabaseService.initialize(),
-      this.platform.ready()
-    ]).then((values: any[]) => {
-      this.config = values[0];
-      this.pieceTheme = this.config.pieceTheme;
-      this.themeSwitcherService.setTheme(this.config.colorTheme);
-      this.boardThemeSwitcherService.setTheme(this.config.boardTheme);
-      if (this.config.fullScreen && this.platform.is('cordova')) {
-        this.androidFullScreen.isImmersiveModeSupported()
-          .then(() => this.androidFullScreen.immersiveMode());
-      }
-      this.translate.get(['app.back-to-exit']).subscribe(async res => {
-        this.literals = res;
-      });
-      const automaticShowFirstPosition = this.config.automaticShowFirstPosition;
-      let goCategory = -1, goSubcategory = -1, goGame = -1;
-      let gotoNextPosition = false;
-      this.endgameDatabase = this.endgameDatabaseService.getDatabase();
-      this.endgameDatabase.categories.forEach((category, idxCategory) => {
-        category.selected = false;
-        category.subcategories.forEach((subcategory, idxSubcategory) => {
-          subcategory.games.forEach((game, idxGame) => {
-            if (automaticShowFirstPosition && goCategory == -1 && (!game.record || game.record <= 0)) {
-              goCategory = idxCategory;
-              goSubcategory = idxSubcategory;
-              goGame = idxGame;
-              gotoNextPosition = (goCategory > 0 || goSubcategory > 0 || goGame > 0 || (game.record && game.record <= 0));
-            }
-          });
-        });
-        if (gotoNextPosition) {
-          // this.navCtrl.navigateRoot('/position/' + goCategory + '/' + goSubcategory + '/' + goGame);
+    Promise.all([this.configurationService.initialize(), this.endgameDatabaseService.initialize(), this.platform.ready()]).then(
+      (values: any[]) => {
+        this.config = values[0];
+        this.pieceTheme = this.config.pieceTheme;
+        this.themeSwitcherService.setTheme(this.config.colorTheme);
+        this.boardThemeSwitcherService.setTheme(this.config.boardTheme);
+        if (this.config.fullScreen && this.platform.is('cordova')) {
+          this.androidFullScreen.isImmersiveModeSupported().then(() => this.androidFullScreen.immersiveMode());
         }
-        this.initialized = true;
-        this.splashScreen.hide();
-      });
-    });
+        this.translate.get(['app.back-to-exit']).subscribe(async res => {
+          this.literals = res;
+        });
+        const automaticShowFirstPosition = this.config.automaticShowFirstPosition;
+        let goCategory = -1,
+          goSubcategory = -1,
+          goGame = -1;
+        let gotoNextPosition = false;
+        this.endgameDatabase = this.endgameDatabaseService.getDatabase();
+        this.endgameDatabase.categories.forEach((category, idxCategory) => {
+          category.selected = false;
+          category.subcategories.forEach((subcategory, idxSubcategory) => {
+            subcategory.games.forEach((game, idxGame) => {
+              if (automaticShowFirstPosition && goCategory == -1 && (!game.record || game.record <= 0)) {
+                goCategory = idxCategory;
+                goSubcategory = idxSubcategory;
+                goGame = idxGame;
+                gotoNextPosition = goCategory > 0 || goSubcategory > 0 || goGame > 0 || (game.record && game.record <= 0);
+              }
+            });
+          });
+          if (gotoNextPosition) {
+            // this.navCtrl.navigateRoot('/position/' + goCategory + '/' + goSubcategory + '/' + goGame);
+          }
+          this.initialized = true;
+          this.splashScreen.hide();
+        });
+      }
+    );
   }
 
   trackFunc(index: number, obj: any) {
@@ -145,8 +151,7 @@ export class AppComponent implements OnInit, OnDestroy {
         toast.present();
         this.lastTimeBackPress = new Date().getTime();
       }
-    } else if (this.router.url.startsWith('/list/') ||
-      this.router.url === '/preferences' || this.router.url === '/about') {
+    } else if (this.router.url.startsWith('/list/') || this.router.url === '/preferences' || this.router.url === '/about') {
       this.navCtrl.navigateRoot('/home');
     } else if (this.router.url.startsWith('/position/')) {
       this.navCtrl.navigateRoot(this.router.url.substring(0, this.router.url.lastIndexOf('/')).replace('position', 'list'));
@@ -170,5 +175,4 @@ export class AppComponent implements OnInit, OnDestroy {
   exit() {
     navigator['app'].exitApp();
   }
-
 }

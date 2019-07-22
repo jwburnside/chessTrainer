@@ -34,6 +34,8 @@
       </chessboard>
       <button class="move-button" (click)="showPreviousPosition()"><span> < </span></button>
       <button class="move-button" (click)="showNextPosition()"><span> > </span></button>
+      <button class="start-button" (click)="startMoving()"><span> Start </span></button>
+      <button class="stop-button" (click)="stopMoving()"><span> Stop </span></button>
     </div>
     <div class="info_wrapper">
       <div class="info">
@@ -106,7 +108,7 @@
               <!--</ion-button>-->
             <!--</ion-col>-->
             <!--<ion-col size="2">-->
-              <!--<ion-button *ngIf="!autoplaying" [disabled]="chessboard.isShowingLatestPosition()"-->
+              <!--<ion-button *ngIf="!autoplaying" [disabled]="chessboard.isShowingLaquizPosition()"-->
                           <!--(click)="btnPlayClick()" size="small" fill="clear" color="dark">-->
                 <!--<ion-icon slot="icon-only" name="play"></ion-icon>-->
               <!--</ion-button>-->
@@ -115,14 +117,14 @@
               <!--</ion-button>-->
             <!--</ion-col>-->
             <!--<ion-col size="2">-->
-              <!--<ion-button [disabled]="autoplaying || chessboard.isShowingLatestPosition()"-->
+              <!--<ion-button [disabled]="autoplaying || chessboard.isShowingLaquizPosition()"-->
                           <!--(click)="btnShowNextPositionClick()" size="small" fill="clear" color="dark">-->
                 <!--<ion-icon slot="icon-only" name="skip-forward"></ion-icon>-->
               <!--</ion-button>-->
             <!--</ion-col>-->
             <!--<ion-col size="2">-->
-              <!--<ion-button [disabled]="autoplaying || chessboard.isShowingLatestPosition()"-->
-                          <!--(click)="btnShowLatestPositionClick()" size="small" fill="clear" color="dark">-->
+              <!--<ion-button [disabled]="autoplaying || chessboard.isShowingLaquizPosition()"-->
+                          <!--(click)="btnShowLaquizPositionClick()" size="small" fill="clear" color="dark">-->
                 <!--<ion-icon slot="icon-only" name="fastforward"></ion-icon>-->
               <!--</ion-button>-->
             <!--</ion-col>-->
@@ -147,7 +149,7 @@
 
 <!--<ion-header>-->
   <!--<ion-toolbar>-->
-    <!--<ion-title>test</ion-title>-->
+    <!--<ion-title>quiz</ion-title>-->
   <!--</ion-toolbar>-->
 <!--</ion-header>-->
 
