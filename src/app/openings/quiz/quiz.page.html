@@ -14,28 +14,20 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title>Title</ion-title>
-
-    <!--<ion-title text-center class="padding-0" *ngIf="(subcategory$ | async) as subcategory" [routerDirection]="'root'"-->
-               <!--routerLink="/list/{{idxCategory}}/{{idxSubcategory}}">-->
-      <!--<img *ngFor="let image of subcategory.imageUrls; trackBy: trackFunc" [src]="image" class="responsive-thumbnail" />-->
-      <!--&nbsp;<span class="responsive-text">[ {{idxPosition + 1}} / {{idxLastPosition + 1}} ]</span>-->
-    <!--</ion-title>-->
-    <!--<ion-title text-center class="padding-0" *ngIf="fen">-->
-      <!--<span class="responsive-text">{{fen}}</span>-->
-    <!--</ion-title>-->
+    <ion-title>Opening Training</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <div class="container">
     <div class="board_wrapper" id="board-wrapper">
       <ion-icon class="reset" (click)="reset()" name="refresh"></ion-icon>
       <chessboard #chessboard>
       </chessboard>
-      <button class="move-button" (click)="showPreviousPosition()"><span> < </span></button>
-      <button class="move-button" (click)="showNextPosition()"><span> > </span></button>
-      <button class="start-button" (click)="startMoving()"><span> Start </span></button>
-      <button class="stop-button" (click)="stopMoving()"><span> Stop </span></button>
+      <!--<button class="move-button" (click)="showPreviousPosition()"><span> < </span></button>-->
+      <!--<button class="move-button" (click)="showNextPosition()"><span> > </span></button>-->
+      <!--<button class="start-button" (click)="startMoving()"><span> Start </span></button>-->
+      <!--<button class="stop-button" (click)="stopMoving()"><span> Stop </span></button>-->
       <button class="load-next-button" (click)="loadNextOpening()"><span> Load Next Opening </span></button>
       <button class="load-previous-button" (click)="loadPreviousOpening()"><span> Load Previous Opening </span></button>
       <button class="flip-button" (click)="flipBoard()"><span> Flip board </span></button>
@@ -45,136 +37,39 @@
     </div>
     <div class="info_wrapper">
       <div class="info">
+        <button *ngIf="shouldDisplayStartButton" class="load-next-button" (click)="startTraining()">
+          <span *ngIf="!isFirstOpeningLoaded"> Start </span>
+          <span *ngIf="isFirstOpeningLoaded"> Next </span>
+        </button>
 
         <div *ngIf="chessHeader && shouldDisplayAnswer">{{chessHeader.openingName}}</div>
 
         <div *ngIf="multipleChoiceCard">
 
-          <!--<form [formGroup]="multipleChoiceForm">-->
-            <!--<ion-list formControlName="multipleChoiceForm" radio-group [(ngModel)]="multipleChoiceCard.selectedAnswer" margin-bottom>-->
-              <!--<ion-item *ngFor="let choice of multipleChoiceCard.answerChoices" text-wrap>-->
-                <!--<ion-label>{{choice}}</ion-label>-->
-                <!--<ion-radio slot="start" value="choice" checked></ion-radio>-->
-              <!--</ion-item>-->
+          <form [formGroup]="multipleChoiceForm">
 
-            <!--</ion-list>-->
-          <!--</form>-->
+
+            <ion-list>
+              <ion-radio-group (ionChange)="answerSelected($event)">
+                <ion-list-header>
+                  <ion-label>Select the name of this opening</ion-label>
+                </ion-list-header>
+
+                <ion-item *ngFor="let choice of multipleChoiceCard.answerChoices" text-wrap>
+                  <ion-label>{{choice}}</ion-label>
+                  <ion-radio slot="start" value="{{choice}}"></ion-radio>
+                </ion-item>
+
+              </ion-radio-group>
+            </ion-list>
+
+
+          </form>
+
+
         </div>
 
-        <!--<div class="innerinfo" *ngIf="(position$ | async) as position">-->
-          <!--<p class="text-centered">-->
-            <!--<img *ngIf="targetImage" [src]="targetImage" class="thumbnail" />-->
-            <!--{{('position.' + move) | translate}} {{'position.to' | translate}}-->
-            <!--{{('position.' + position.target) | translate}}-->
-          <!--</p>-->
-          <!--<p *ngIf="engineThinking" class="text-centered">-->
-            <!--<ion-spinner name="dots"></ion-spinner>-->
-          <!--</p>-->
-          <!--<p *ngIf="!engineThinking" class="text-centered">{{infotext}}</p>-->
-          <!--<p *ngIf="position.record > 0" class="text-centered">{{'position.personal-record' | translate}}:-->
-            <!--{{position.record}} {{'position.moves' | translate}}</p>-->
-        <!--</div>-->
       </div>
-      <div class="action_buttons">
-        <ion-grid>
-          <!--<ion-row *ngIf="!engineThinking && !gameOver">-->
-            <!--<ion-col size="2">-->
-              <!--<ion-button [disabled]="!btnRewindEnabled" (click)="btnRewindClick()" size="small" fill="clear"-->
-                          <!--color="dark">-->
-                <!--<ion-icon slot="icon-only" name="rewind"></ion-icon>-->
-              <!--</ion-button>-->
-            <!--</ion-col>-->
-            <!--<ion-col size="2">-->
-              <!--<ion-button [disabled]="!btnUndoEnabled" (click)="btnUndoClick()" size="small" fill="clear" color="dark">-->
-                <!--<ion-icon slot="icon-only" name="skip-backward"></ion-icon>-->
-              <!--</ion-button>-->
-            <!--</ion-col>-->
-            <!--<ion-col size="2">-->
-              <!--<ion-button [disabled]="!btnFlipEnabled" (click)="btnFlipClick()" size="small" fill="clear" color="dark">-->
-                <!--<ion-icon slot="icon-only" name="sync"></ion-icon>-->
-              <!--</ion-button>-->
-            <!--</ion-col>-->
-            <!--<ion-col size="2">-->
-              <!--<ion-button [disabled]="!btnSolveEnabled" (click)="btnHintlick()" size="small" fill="clear" color="dark">-->
-                <!--<ion-icon slot="icon-only" name="bulb"></ion-icon>-->
-              <!--</ion-button>-->
-            <!--</ion-col>-->
-            <!--<ion-col size="2">-->
-              <!--<ion-button [disabled]="!btnSolveEnabled" (click)="btnSolveClick()" size="small" fill="clear"-->
-                          <!--color="dark">-->
-                <!--<ion-icon slot="icon-only" name="color-wand"></ion-icon>-->
-              <!--</ion-button>-->
-            <!--</ion-col>-->
-          <!--</ion-row>-->
-          <!--<ion-row *ngIf="engineThinking && !gameOver">-->
-            <!--<ion-col>-->
-              <!--<ion-button (click)="btnStopEngineClick()" size="small" expand="full" fill="clear" color="dark">-->
-                <!--<ion-icon slot="icon-only" name="square"></ion-icon>-->
-              <!--</ion-button>-->
-            <!--</ion-col>-->
-          <!--</ion-row>-->
-          <!--<ion-row *ngIf="gameOver">-->
-            <!--<ion-col size="2">-->
-              <!--<ion-button [disabled]="autoplaying || chessboard.isShowingFirstPosition()"-->
-                          <!--(click)="btnShowFirstPositionClick()" size="small" fill="clear" color="dark">-->
-                <!--<ion-icon slot="icon-only" name="rewind"></ion-icon>-->
-              <!--</ion-button>-->
-            <!--</ion-col>-->
-            <!--<ion-col size="2">-->
-              <!--<ion-button [disabled]="autoplaying || chessboard.isShowingFirstPosition()"-->
-                          <!--(click)="btnShowPreviousPositionClick()" size="small" fill="clear" color="dark">-->
-                <!--<ion-icon slot="icon-only" name="skip-backward"></ion-icon>-->
-              <!--</ion-button>-->
-            <!--</ion-col>-->
-            <!--<ion-col size="2">-->
-              <!--<ion-button *ngIf="!autoplaying" [disabled]="chessboard.isShowingLaquizPosition()"-->
-                          <!--(click)="btnPlayClick()" size="small" fill="clear" color="dark">-->
-                <!--<ion-icon slot="icon-only" name="play"></ion-icon>-->
-              <!--</ion-button>-->
-              <!--<ion-button *ngIf="autoplaying" (click)="btnPauseClick()" size="small" fill="clear" color="dark">-->
-                <!--<ion-icon slot="icon-only" name="pause"></ion-icon>-->
-              <!--</ion-button>-->
-            <!--</ion-col>-->
-            <!--<ion-col size="2">-->
-              <!--<ion-button [disabled]="autoplaying || chessboard.isShowingLaquizPosition()"-->
-                          <!--(click)="btnShowNextPositionClick()" size="small" fill="clear" color="dark">-->
-                <!--<ion-icon slot="icon-only" name="skip-forward"></ion-icon>-->
-              <!--</ion-button>-->
-            <!--</ion-col>-->
-            <!--<ion-col size="2">-->
-              <!--<ion-button [disabled]="autoplaying || chessboard.isShowingLaquizPosition()"-->
-                          <!--(click)="btnShowLaquizPositionClick()" size="small" fill="clear" color="dark">-->
-                <!--<ion-icon slot="icon-only" name="fastforward"></ion-icon>-->
-              <!--</ion-button>-->
-            <!--</ion-col>-->
-          <!--</ion-row>-->
-        </ion-grid>
-      </div>
-      <ion-fab #fab vertical="bottom" horizontal="end" slot="fixed">
-        This is the fab
-        <!--<ion-fab-button color="light" size="small" [disabled]="engineThinking || autoplaying">-->
-          <!--<ion-icon name="arrow-dropup"></ion-icon>-->
-        <!--</ion-fab-button>-->
-        <!--<ion-fab-list side="top">-->
-          <!--<ion-fab-button color="dark" *ngIf="gameOver" (click)="btnRewindClick()"><ion-icon name="trash"></ion-icon></ion-fab-button>-->
-          <!--<ion-fab-button color="dark" (click)="btnCopyClipboardClick()"><ion-icon name="clipboard"></ion-icon></ion-fab-button>-->
-          <!--<ion-fab-button color="dark" (click)="btnSettingsClick()"><ion-icon name="options"></ion-icon></ion-fab-button>-->
-        <!--</ion-fab-list>-->
-      </ion-fab>
     </div>
   </div>
 </ion-content>
-
-
-<!--<ion-header>-->
-  <!--<ion-toolbar>-->
-    <!--<ion-title>quiz</ion-title>-->
-  <!--</ion-toolbar>-->
-<!--</ion-header>-->
-
-<!--<ion-content>-->
-
-  <!--<chessboard #chessboard>-->
-  <!--</chessboard>-->
-
-<!--</ion-content>-->

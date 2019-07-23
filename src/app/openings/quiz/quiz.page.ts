@@ -20,6 +20,8 @@ export class QuizPage implements OnInit {
   showNavNext: boolean = false;
   chessHeader: ChessHeader;
   shouldDisplayAnswer: boolean = false;
+  shouldDisplayStartButton: boolean = true;
+  isFirstOpeningLoaded: boolean = false;
   multipleChoiceCard: MultipleChoiceCard;
   multipleChoiceForm: FormGroup;
 
@@ -44,9 +46,8 @@ export class QuizPage implements OnInit {
       '[OpeningName "Four Knights Game: Double Spanish Variation, 5.O-O O-O"]',
       '1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6 4.Bb5 Bb4 5.O-O O-O'
     ]);
-    this.loadRandomOpening();
-    this.chessHeader = this.chessboard.getChessHeader();
-    this.buildMultipleChoiceCard();
+
+    this.chessboard.buildStartPosition();
   }
 
   buildBoardForPgn(position: number) {
@@ -56,7 +57,13 @@ export class QuizPage implements OnInit {
   buildMultipleChoiceCard() {
     const tempAnswersArray: Array<string> = ['Answer A', 'Answer B', 'Answer C', 'Answer D'];
     tempAnswersArray.push(this.chessHeader.openingName);
-    this.multipleChoiceCard = shuffle(new MultipleChoiceCard(tempAnswersArray, this.chessHeader.openingName));
+    this.multipleChoiceCard = new MultipleChoiceCard(tempAnswersArray, this.chessHeader.openingName);
+  }
+
+  startTraining() {
+    this.loadRandomOpening();
+    this.chessHeader = this.chessboard.getChessHeader();
+    this.startMoving();
   }
 
   public reset() {
@@ -72,6 +79,7 @@ export class QuizPage implements OnInit {
   }
 
   startMoving() {
+    this.shouldDisplayStartButton = false;
     this.subscription = this.timer$.subscribe(result => {
       if (!this.chessboard.isShowingLatestPosition()) {
         this.showNextPosition();
@@ -83,6 +91,9 @@ export class QuizPage implements OnInit {
 
   stopMoving() {
     this.subscription.unsubscribe();
+    this.shouldDisplayStartButton = true;
+    this.isFirstOpeningLoaded = true;
+    this.buildMultipleChoiceCard();
   }
 
   disableButtons() {
@@ -105,8 +116,8 @@ export class QuizPage implements OnInit {
     }
   }
 
-  answerSelected() {
-
+  answerSelected(event: any) {
+    this.multipleChoiceCard.selectedAnswer = event.detail;
   }
 
   displayAnswer() {
