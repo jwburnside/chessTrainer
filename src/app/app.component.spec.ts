@@ -49,10 +49,6 @@ describe('AppComponent', () => {
         {
           path: 'list/:idxcategory/:idxsubcategory',
           loadChildren: './list/list.module#ListPageModule'
-        },
-        {
-          path: 'position/:idxcategory/:idxsubcategory/:idxposition',
-          loadChildren: './position/position.module#PositionPageModule'
         }]),
         SharedModule,
         HttpClientModule,

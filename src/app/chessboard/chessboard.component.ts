@@ -7,7 +7,6 @@ import { Howl, Howler } from 'howler';
 import { Subscription } from 'rxjs';
 import { ChessHeader } from '../models/chess-header';
 import { Configuration, ConfigurationService, StockfishService } from '../shared';
-import { PromotionDialog } from './promotion.dialog';
 
 declare var ChessBoard: any;
 declare var $: any;
@@ -58,10 +57,7 @@ export class ChessboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-    this.onConfigChangeSubscription = this.configurationService.onChange$.subscribe(event => this.configurationChanged(event));
-    this.onStockfishMessageSubscription = this.stockfish.onMessage$.subscribe(event => this.messageReceived(event));
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.onConfigChangeSubscription.unsubscribe();
@@ -75,12 +71,6 @@ export class ChessboardComponent implements OnInit, OnDestroy {
     window.setTimeout(function() {
       window.dispatchEvent(new Event('resize'));
     }, 1000);
-  }
-
-  private configurationChanged(config) {
-    this.configuration = config;
-    this.useSyzygy = this.configuration.useSyzygy;
-    this.uglyForceBoardRedraw();
   }
 
   @HostListener('window:resize', ['$event']) onResize(event) {
@@ -102,7 +92,6 @@ export class ChessboardComponent implements OnInit, OnDestroy {
       draggable: false
     });
     this.chess.load(startingFen);
-    this.cleanHighlights();
     this.translate
       .get([
         'chessboard.stalemate',
@@ -144,7 +133,6 @@ export class ChessboardComponent implements OnInit, OnDestroy {
       draggable: true
     });
     this.chess.load(fen);
-    this.cleanHighlights();
     this.originalPlayer = this.chess.turn();
     this.player = this.originalPlayer;
     this.translate
@@ -191,7 +179,6 @@ export class ChessboardComponent implements OnInit, OnDestroy {
       draggable: false
     });
 
-    this.cleanHighlights();
     this.originalPlayer = this.chess.turn();
     this.player = this.originalPlayer;
     this.translate
@@ -220,7 +207,6 @@ export class ChessboardComponent implements OnInit, OnDestroy {
 
   getMovesAsFENs() {
     const chessObj: Chess = new Chess();
-    console.log('history:' + JSON.stringify(this.chess.history()));
     const fens: Array<string> = this.chess.history().map(function(move) {
       chessObj.move(move);
       return chessObj.fen();
@@ -237,66 +223,12 @@ export class ChessboardComponent implements OnInit, OnDestroy {
     return new ChessHeader(this.chess.header());
   }
 
-  rewind() {
-    this.cleanHighlights();
-    this.board.position(this.originalFen);
-    this.chess.load(this.originalFen);
-    this.fenHistory = [this.originalFen];
-    this.player = this.chess.turn();
-    this.ooopsPlayed = false;
-  }
-
-  undo() {
-    this.cleanHighlights();
-    this.chess.undo();
-    this.chess.undo();
-    this.fenHistory.pop();
-    this.fenHistory.pop();
-    this.board.position(this.chess.fen());
-    this.ooopsPlayed = false;
-  }
-
   history() {
     return this.chess.history();
   }
 
-  solve() {
-    this.removeGreySquares();
-    this.initializing = false;
-    this.autosolve = true;
-    if (this.player === 'w') {
-      this.player = 'b';
-    } else {
-      this.player = 'w';
-    }
-    this.prepareMove();
-  }
-
-  hint() {
-    this.removeGreySquares();
-    this.initializing = false;
-    this.hinting = true;
-    this.getEngineMove();
-    this.engineStartThinking.emit();
-  }
-
   flip() {
     this.board.flip();
-  }
-
-  stop() {
-    if (this.autosolve) {
-      this.autosolve = false;
-    }
-    this.stockfish.postMessage('stop');
-  }
-
-  winner() {
-    if (this.chess.in_checkmate()) {
-      return this.chess.turn() === 'w' ? 'black' : 'white';
-    } else {
-      return null;
-    }
   }
 
   showFirstPosition() {
@@ -322,8 +254,8 @@ export class ChessboardComponent implements OnInit, OnDestroy {
     this.fenPointer++;
     this.showFenPointer();
   }
-
-  showLatestPosition() {
+ 
+  showLastPosition() {
     if (this.fenPointer === this.fenHistory.length - 1) {
       return;
     }
@@ -344,25 +276,6 @@ export class ChessboardComponent implements OnInit, OnDestroy {
   }
 
   private showFenPointer() {
-    this.cleanHighlights();
     this.board.position(this.fenHistory[this.fenPointer], true);
   }
-
-  private cleanHighlights() {
-    document.querySelectorAll('.highlight-square').forEach(square => {
-      square.classList.remove('highlight-square');
-    });
-  }
-
-
-
-
-
-
-
-
-
-
-
-
 }
