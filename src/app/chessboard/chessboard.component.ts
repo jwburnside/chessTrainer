@@ -1,12 +1,11 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
-import { ModalController, Platform } from '@ionic/angular';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import * as Chess from 'chess.js';
 import { Howl, Howler } from 'howler';
 import { Subscription } from 'rxjs';
 import { ChessHeader } from '../models/chess-header';
-import { Configuration, ConfigurationService, StockfishService } from '../shared';
+import { Configuration, ConfigurationService } from '../shared';
 
 declare var ChessBoard: any;
 declare var $: any;
@@ -27,33 +26,16 @@ export class ChessboardComponent implements OnInit, OnDestroy {
   private target: string;
   private originalPlayer: string;
   private player: string;
-  private autosolve = false;
-  private hinting = false;
   private initializing = false;
-  private useSyzygy = false;
-  private squareSelected;
-  private onStockfishMessageSubscription: Subscription;
   public literales: any;
-  private ooopsPlayed = false;
-
-  @Output() engineReady: EventEmitter<void> = new EventEmitter<void>();
-  @Output() engineStartThinking: EventEmitter<void> = new EventEmitter<void>();
-  @Output() engineEndThinking: EventEmitter<void> = new EventEmitter<void>();
-  @Output() engineInfo: EventEmitter<string> = new EventEmitter<string>();
-  @Output() playerMoved: EventEmitter<void> = new EventEmitter<void>();
-  @Output() gameOver: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private configurationService: ConfigurationService,
-    private stockfish: StockfishService,
     public translate: TranslateService,
-    public modalController: ModalController,
-    private http: HttpClient,
-    private platform: Platform
+    public modalController: ModalController
   ) {
     this.configurationService.initialize().then(config => {
       this.configuration = config;
-      this.useSyzygy = this.configuration.useSyzygy;
     });
   }
 
@@ -61,7 +43,6 @@ export class ChessboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.onConfigChangeSubscription.unsubscribe();
-    this.onStockfishMessageSubscription.unsubscribe();
   }
 
   private uglyForceBoardRedraw() {
@@ -74,7 +55,9 @@ export class ChessboardComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('window:resize', ['$event']) onResize(event) {
-    if (this.board) this.board.resize(event);
+    if (this.board) {
+      this.board.resize(event);
+    }
   }
 
   buildStartPosition() {
@@ -92,49 +75,6 @@ export class ChessboardComponent implements OnInit, OnDestroy {
       draggable: false
     });
     this.chess.load(startingFen);
-    this.translate
-      .get([
-        'chessboard.stalemate',
-        'chessboard.insufficent-material',
-        'chessboard.three-repetition',
-        'chessboard.rule-fifty',
-        'chessboard.game-over',
-        'chessboard.mate-in',
-        'chessboard.receive-mate-in',
-        'chessboard.unfeasible-mate',
-        'chessboard.white-advantage',
-        'chessboard.black-advantage',
-        'chessboard.querying-syzygy',
-        'chessboard.syzygy-error'
-      ])
-      .subscribe(async res => {
-        this.literales = res;
-      });
-
-    this.uglyForceBoardRedraw();
-  }
-
-  build(fen: string, target) {
-    const self = this;
-    this.initializing = true;
-    this.target = target;
-    this.autosolve = false;
-    this.originalFen = fen;
-    this.fenHistory = [fen];
-    this.ooopsPlayed = false;
-    if (this.board) {
-      this.board.destroy();
-    }
-    this.board = ChessBoard('__chessboard__', {
-      position: fen,
-      pieceTheme: function(piece) {
-        return '/assets/pieces/' + self.configuration.pieceTheme + '/' + piece + '.svg';
-      },
-      draggable: true
-    });
-    this.chess.load(fen);
-    this.originalPlayer = this.chess.turn();
-    this.player = this.originalPlayer;
     this.translate
       .get([
         'chessboard.stalemate',
@@ -254,7 +194,7 @@ export class ChessboardComponent implements OnInit, OnDestroy {
     this.fenPointer++;
     this.showFenPointer();
   }
- 
+
   showLastPosition() {
     if (this.fenPointer === this.fenHistory.length - 1) {
       return;
@@ -267,7 +207,7 @@ export class ChessboardComponent implements OnInit, OnDestroy {
     return this.fenPointer === 0;
   }
 
-  isShowingLatestPosition() {
+  isShowingLastPosition() {
     return this.fenPointer === this.fenHistory.length - 1;
   }
 

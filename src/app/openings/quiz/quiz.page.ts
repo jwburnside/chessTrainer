@@ -81,7 +81,7 @@ export class QuizPage implements OnInit {
   startMoving() {
     this.shouldDisplayStartButton = false;
     this.subscription = this.timer$.subscribe(result => {
-      if (!this.chessboard.isShowingLatestPosition()) {
+      if (!this.chessboard.isShowingLastPosition()) {
         this.showNextPosition();
       } else {
         this.stopMoving();
