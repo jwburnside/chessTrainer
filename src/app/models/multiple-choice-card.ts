@@ -1,16 +1,17 @@
+import { MultipleChoiceItem } from './multiple-choice-item';
+
 export class MultipleChoiceCard {
+  multipleChoiceItems: Array<MultipleChoiceItem>;
 
-    answerChoices: Array<string>;
-    selectedAnswer: string;
-    correctAnswer: string;
+  selectedAnswer: MultipleChoiceItem;
 
-    constructor(answerChoices: Array<string>, correctAnswer: string) {
-        this.answerChoices = answerChoices;
-        this.correctAnswer = correctAnswer;
-    }
+  constructor(multipleChoiceItems: Array<MultipleChoiceItem>, correctAnswer: string) {
 
-    evaluateAnswer(answer: string): boolean {
-        this.selectedAnswer = answer;
-        return answer === this.correctAnswer;
-    }
+    this.multipleChoiceItems = multipleChoiceItems;
+  }
+
+  public evaluateAnswer(answer: string): boolean {
+    this.selectedAnswer = answer;
+    return answer === this.correctAnswer;
+  }
 }

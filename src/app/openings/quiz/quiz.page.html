@@ -3,17 +3,6 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-buttons slot="start" *ngIf="showNavPrev" (click)="gotoPrev()" class="">
-      <ion-button>
-        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end" *ngIf="showNavNext" (click)="gotoNext()" class="">
-      <ion-button>
-        <ion-icon slot="icon-only" name="arrow-round-forward"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
     <ion-title>Opening Training</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,54 +10,38 @@
 <ion-content>
   <div class="container">
     <div class="board_wrapper" id="board-wrapper">
-      <ion-icon class="reset" (click)="reset()" name="refresh"></ion-icon>
-      <chessboard #chessboard>
-      </chessboard>
-      <!--<button class="move-button" (click)="showPreviousPosition()"><span> < </span></button>-->
-      <!--<button class="move-button" (click)="showNextPosition()"><span> > </span></button>-->
-      <!--<button class="start-button" (click)="startMoving()"><span> Start </span></button>-->
-      <!--<button class="stop-button" (click)="stopMoving()"><span> Stop </span></button>-->
-      <button class="load-next-button" (click)="loadNextOpening()"><span> Load Next Opening </span></button>
-      <button class="load-previous-button" (click)="loadPreviousOpening()"><span> Load Previous Opening </span></button>
-      <button class="flip-button" (click)="flipBoard()"><span> Flip board </span></button>
-      <button class="random-button" (click)="loadRandomOpening()"><span> Random </span></button>
-      <button class="display-answer-button" (click)="displayAnswer()"><span> Display Answer </span></button>
-
+      <chessboard #chessboard></chessboard>
+      <button *ngIf="shouldDisplayStartButton" class="load-next-button" (click)="startTraining()">
+        <span *ngIf="!isFirstOpeningLoaded"> Start </span>
+        <span *ngIf="isFirstOpeningLoaded"> Next </span>
+      </button>
     </div>
     <div class="info_wrapper">
       <div class="info">
-        <button *ngIf="shouldDisplayStartButton" class="load-next-button" (click)="startTraining()">
-          <span *ngIf="!isFirstOpeningLoaded"> Start </span>
-          <span *ngIf="isFirstOpeningLoaded"> Next </span>
-        </button>
-
-        <div *ngIf="chessHeader && shouldDisplayAnswer">{{chessHeader.openingName}}</div>
-
         <div *ngIf="multipleChoiceCard">
-
           <form [formGroup]="multipleChoiceForm">
-
-
             <ion-list>
-              <ion-radio-group (ionChange)="answerSelected($event)">
+              <ion-radio-group>
                 <ion-list-header>
                   <ion-label>Select the name of this opening</ion-label>
                 </ion-list-header>
 
-                <ion-item *ngFor="let choice of multipleChoiceCard.answerChoices" text-wrap>
-                  <ion-label>{{choice}}</ion-label>
-                  <ion-radio slot="start" value="{{choice}}"></ion-radio>
+                <ion-item
+                  *ngFor="let multipleChoiceItem of multipleChoiceCard.multipleChoiceItems; let i = index"
+                  (click)="multipleChoiceItemSelected(multipleChoiceItem, i)"
+                  text-wrap
+                >
+                  <ion-label>{{multipleChoiceItem.answer}}</ion-label>
+                  <ion-radio slot="start"></ion-radio>
+                  <span *ngIf="selectedIndex === i">
+                    <ion-icon *ngIf="!multipleChoiceItem.isCorrectAnswer" class="wrong-icon" name="close-circle-outline"></ion-icon>
+                    <ion-icon *ngIf="multipleChoiceItem.isCorrectAnswer" class="right-icon" name="checkmark-circle-outline"></ion-icon>
+                  </span>
                 </ion-item>
-
               </ion-radio-group>
             </ion-list>
-
-
           </form>
-
-
         </div>
-
       </div>
     </div>
   </div>

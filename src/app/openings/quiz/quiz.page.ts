@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
-import { isNullOrUndefined } from 'util';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import * as Chess from 'chess.js';
+import { sampleSize, shuffle, random } from 'lodash';
+import { Observable, Subscription, timer } from 'rxjs';
 import { ChessboardComponent } from '../../chessboard';
-import { timer } from 'rxjs';
-import { shuffle } from 'lodash';
 import { ChessHeader } from '../../models/chess-header';
 import { MultipleChoiceCard } from '../../models/multiple-choice-card';
+import { MultipleChoiceItem } from '../../models/multiple-choice-item';
 
 @Component({
   selector: 'app-quiz',
@@ -14,26 +14,22 @@ import { MultipleChoiceCard } from '../../models/multiple-choice-card';
   styleUrls: ['./quiz.page.scss']
 })
 export class QuizPage implements OnInit {
-  currentPgnsPosition = 0;
+  moveInterval: number = 1000;
+  multipleChoiceItemCount: number = 4;
+  selectedIndex: number;
   pgns: Array<Array<string>> = [];
-  showNavPrev: boolean = false;
-  showNavNext: boolean = false;
-  chessHeader: ChessHeader;
-  shouldDisplayAnswer: boolean = false;
   shouldDisplayStartButton: boolean = true;
   isFirstOpeningLoaded: boolean = false;
   multipleChoiceCard: MultipleChoiceCard;
   multipleChoiceForm: FormGroup;
 
   private subscription: Subscription;
-  private timer$: Observable<number> = timer(0, 1000);
+  private timer$: Observable<number> = timer(0, this.moveInterval);
 
   @ViewChild('chessboard', { static: true }) chessboard: ChessboardComponent;
 
   constructor(public formBuilder: FormBuilder) {
-    this.multipleChoiceForm = this.formBuilder.group(
-        {}
-    );
+    this.multipleChoiceForm = this.formBuilder.group({});
   }
 
   ngOnInit() {
@@ -50,32 +46,44 @@ export class QuizPage implements OnInit {
     this.chessboard.buildStartPosition();
   }
 
-  buildBoardForPgn(position: number) {
-    this.chessboard.buildPgn(this.pgns[position]);
-  }
-
-  buildMultipleChoiceCard() {
-    const tempAnswersArray: Array<string> = ['Answer A', 'Answer B', 'Answer C', 'Answer D'];
-    tempAnswersArray.push(this.chessHeader.openingName);
-    this.multipleChoiceCard = new MultipleChoiceCard(tempAnswersArray, this.chessHeader.openingName);
+  buildBoardForPgn(pgn: string) {
+    this.chessboard.buildPgn(pgn);
   }
 
   startTraining() {
-    this.loadRandomOpening();
-    this.chessHeader = this.chessboard.getChessHeader();
+    this.selectedIndex = null;
+    this.buildMultipleChoiceCard();
+    const correctMultipleChoiceCard = this.multipleChoiceCard.multipleChoiceItems.find(mci => {
+      return mci.isCorrectAnswer;
+    });
+    this.buildBoardForPgn(correctMultipleChoiceCard.pgn);
+    this.randomizeFlip();
     this.startMoving();
   }
 
-  public reset() {
-    this.chessboard.showFirstPosition();
+  buildMultipleChoiceCard() {
+    this.multipleChoiceCard = new MultipleChoiceCard(this.parsePgns());
   }
 
-  public showNextPosition() {
+  parsePgns(): Array<MultipleChoiceItem> {
+    const chess: Chess = new Chess();
+    const multipleChoiceItems: MultipleChoiceItem = [];
+
+    sampleSize(this.pgns, this.multipleChoiceItemCount).forEach(pgn => {
+      chess.load_pgn(pgn.join('\n'));
+      const multipleChoiceItem: MultipleChoiceItem = new MultipleChoiceItem();
+      multipleChoiceItem.answer = new ChessHeader(chess.header()).openingName;
+      multipleChoiceItem.pgn = pgn;
+      multipleChoiceItems.push(multipleChoiceItem);
+    });
+
+    multipleChoiceItems[0].isCorrectAnswer = true;
+
+    return multipleChoiceItems;
+  }
+
+  showNextPosition() {
     this.chessboard.showNextPosition();
-  }
-
-  showPreviousPosition() {
-    this.chessboard.showPreviousPosition();
   }
 
   startMoving() {
@@ -93,39 +101,19 @@ export class QuizPage implements OnInit {
     this.subscription.unsubscribe();
     this.shouldDisplayStartButton = true;
     this.isFirstOpeningLoaded = true;
-    this.buildMultipleChoiceCard();
   }
 
-  disableButtons() {
-    // TODO: This is where ngrx would be helpful. There are several buttons which must be enabled/disabled depending on a particular state.
+  multipleChoiceItemSelected(multipleChoiceItem: MultipleChoiceItem, selectedIndex: number) {
+    this.selectedIndex = selectedIndex;
   }
-
-  loadNextOpening() {
-    if (this.currentPgnsPosition < this.pgns.length) {
-      this.currentPgnsPosition++;
-    }
-    this.chessboard.buildPgn(this.pgns[this.currentPgnsPosition]);
-  }
-
-  loadPreviousOpening() {}
-
-  loadRandomOpening() {
-    this.chessboard.buildPgn(shuffle(this.pgns)[0]);
-    if (shuffle([0, 1])[0] === 0) {
+  
+  randomizeFlip() {
+    if (random(1)) {
       this.flipBoard();
     }
-  }
-
-  answerSelected(event: any) {
-    this.multipleChoiceCard.selectedAnswer = event.detail;
-  }
-
-  displayAnswer() {
-    this.shouldDisplayAnswer = true;
   }
 
   flipBoard() {
     this.chessboard.flip();
   }
-
 }

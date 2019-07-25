@@ -23,7 +23,6 @@ export class ChessboardComponent implements OnInit, OnDestroy {
   private originalFen: string;
   private fenHistory: string[];
   private fenPointer: number;
-  private target: string;
   private originalPlayer: string;
   private player: string;
   private initializing = false;
@@ -100,14 +99,14 @@ export class ChessboardComponent implements OnInit, OnDestroy {
   buildPgn(pgn: Array<string>) {
     const self = this;
     this.initializing = true;
-    this.autosolve = false;
-    this.ooopsPlayed = false;
     if (this.board) {
       this.board.destroy();
     }
 
     this.chess.load_pgn(pgn.join('\n'));
+
     const movesAsFens = this.getMovesAsFENs();
+
     this.originalFen = movesAsFens[0];
     this.fenHistory = movesAsFens;
 
