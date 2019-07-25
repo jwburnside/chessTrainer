@@ -14,12 +14,12 @@ import { MultipleChoiceItem } from '../../models/multiple-choice-item';
   styleUrls: ['./quiz.page.scss']
 })
 export class QuizPage implements OnInit {
-  moveInterval: number = 1000;
-  multipleChoiceItemCount: number = 4;
+  moveInterval = 1000;
+  multipleChoiceItemCount = 4;
   selectedIndex: number;
   pgns: Array<Array<string>> = [];
-  shouldDisplayStartButton: boolean = true;
-  isFirstOpeningLoaded: boolean = false;
+  shouldDisplayStartButton = true;
+  isFirstOpeningLoaded = false;
   multipleChoiceCard: MultipleChoiceCard;
   multipleChoiceForm: FormGroup;
 
@@ -33,20 +33,21 @@ export class QuizPage implements OnInit {
   }
 
   ngOnInit() {
-    // TODO: Make sure you check these.
-    // Only go as deep as the named opening. "Four Knights Game: Double Spanish Variation, 5.O-O O-O" should end with the 4th move, etc.
-    this.pgns.push(['[OpeningName "Ruy Lopez Opening: Morphy Defense, Closed"]', '1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Be7']);
-    this.pgns.push(['[OpeningName "Giuoco Piano Game: Center Attack, 5...exd4"]', '1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.c3 Nf6 5.d4 exd4']);
-    this.pgns.push(['[OpeningName "Italian Game: Two Knights Defense, 5...exd4"]', '1.e4 e5 2.Nf3 Nc6 3.Bc4 Nf6']);
-    this.pgns.push([
-      '[OpeningName "Four Knights Game: Double Spanish Variation, 5.O-O O-O"]',
-      '1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6 4.Bb5 Bb4 5.O-O O-O'
-    ]);
-
+    this.loadPgns();
     this.chessboard.buildStartPosition();
   }
 
-  buildBoardForPgn(pgn: string) {
+  loadPgns() {
+    this.pgns.push(['[OpeningName "Ruy Lopez Opening"]', '1.e4 e5 2.Nf3 Nc6 3.Bb5']);
+    this.pgns.push(['[OpeningName "Italian Game"]', '1.e4 e5 2.Nf3 Nc6 3.Bc4']);
+    this.pgns.push(['[OpeningName "Four Knights Opening"]', '1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6']);
+    this.pgns.push(['[OpeningName "Italian Game: Two Knights Defense (Fried Liver)"]', '1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6']);
+    this.pgns.push(['[OpeningName "Queen\'s Gambit Accepted"]', '1.d4 d5 2.c4 dxc4']);
+    this.pgns.push(['[OpeningName "Queen\'s Gambit Declined"]', '1.d4 d5 2.c4 e6']);
+    this.pgns.push(['[OpeningName "Slav Defense"]', '1.d4 d5 2.c4 c6']);
+  }
+
+  buildBoardForPgn(pgn: Array<string>) {
     this.chessboard.buildPgn(pgn);
   }
 
@@ -67,7 +68,7 @@ export class QuizPage implements OnInit {
 
   parsePgns(): Array<MultipleChoiceItem> {
     const chess: Chess = new Chess();
-    const multipleChoiceItems: MultipleChoiceItem = [];
+    const multipleChoiceItems: Array<MultipleChoiceItem> = [];
 
     sampleSize(this.pgns, this.multipleChoiceItemCount).forEach(pgn => {
       chess.load_pgn(pgn.join('\n'));
@@ -106,7 +107,7 @@ export class QuizPage implements OnInit {
   multipleChoiceItemSelected(multipleChoiceItem: MultipleChoiceItem, selectedIndex: number) {
     this.selectedIndex = selectedIndex;
   }
-  
+
   randomizeFlip() {
     if (random(1)) {
       this.flipBoard();
