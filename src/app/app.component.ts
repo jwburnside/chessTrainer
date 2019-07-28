@@ -41,6 +41,11 @@ export class AppComponent implements OnInit, OnDestroy {
       icon: 'home'
     },
     {
+      title: 'Square Color',
+      url: '/vision/square-color',
+      icon: 'home'
+    },
+    {
       title: 'preferences',
       url: '/preferences',
       icon: 'options'

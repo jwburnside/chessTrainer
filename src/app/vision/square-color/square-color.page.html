@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Square Color</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-button *ngIf="!exerciseStarted" (click)="startExercise()">Start Exercise</ion-button>
+
+  <div *ngIf="exerciseStarted">
+
+    <div class="countdown-timer">{{totalExerciseTimeInSeconds}}</div>
+
+    <div>Total Answered: {{totalAnsweredCount}}</div>
+    <div>Number Wrong: <span>{{wrongCount}}</span></div>
+
+    <ion-card>
+      <ion-card-header>Square</ion-card-header>
+      <div class="current-square">{{currentSquare}}</div>
+      <div class="wrapper-buttons">
+        <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer(0)">White</ion-button>
+        <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer(1)">Black</ion-button>
+      </div>
+      <div class="answer-{{answerStr}}" text-capitalize>{{answerStr}}</div>
+    </ion-card>
+
+  </div>
+
+
+
+</ion-content>

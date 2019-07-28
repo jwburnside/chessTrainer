@@ -1,0 +1,25 @@
+ion-card {
+  width: 500px;
+  text-align: center;
+  padding: 20px;
+}
+
+.current-square {
+  font-size: 30px;
+}
+
+.wrapper-buttons {
+  margin-top: 20px;
+}
+
+.answer-right {
+  color: #ffffff;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.answer-wrong {
+  color: red;
+  font-size: 15px;
+  margin-top: 5px;
+}

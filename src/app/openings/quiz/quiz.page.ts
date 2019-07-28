@@ -14,6 +14,7 @@ import { MultipleChoiceItem } from '../../models/multiple-choice-item';
   styleUrls: ['./quiz.page.scss']
 })
 export class QuizPage implements OnInit {
+  orientation = 'flip';
   moveInterval = 1000;
   multipleChoiceItemCount = 4;
   selectedIndex: number;
@@ -51,14 +52,20 @@ export class QuizPage implements OnInit {
     this.chessboard.buildPgn(pgn);
   }
 
-  startTraining() {
+  loadOpening() {
     this.selectedIndex = null;
     this.buildMultipleChoiceCard();
     const correctMultipleChoiceCard = this.multipleChoiceCard.multipleChoiceItems.find(mci => {
       return mci.isCorrectAnswer;
     });
     this.buildBoardForPgn(correctMultipleChoiceCard.pgn);
-    this.randomizeFlip();
+
+    if (this.orientation === 'flip') {
+      this.chessboard.flipRandom();
+    } else {
+      this.chessboard.setOrientation(this.orientation);
+    }
+
     this.startMoving();
   }
 
@@ -108,13 +115,8 @@ export class QuizPage implements OnInit {
     this.selectedIndex = selectedIndex;
   }
 
-  randomizeFlip() {
-    if (random(1)) {
-      this.flipBoard();
-    }
+  onOrientationChangedHandler() {
+    this.loadOpening();
   }
 
-  flipBoard() {
-    this.chessboard.flip();
-  }
 }

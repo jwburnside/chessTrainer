@@ -6,6 +6,7 @@ import { Howl, Howler } from 'howler';
 import { Subscription } from 'rxjs';
 import { ChessHeader } from '../models/chess-header';
 import { Configuration, ConfigurationService } from '../shared';
+import { sampleSize, shuffle, random } from 'lodash';
 
 declare var ChessBoard: any;
 declare var $: any;
@@ -168,6 +169,16 @@ export class ChessboardComponent implements OnInit, OnDestroy {
 
   flip() {
     this.board.flip();
+  }
+
+  flipRandom() {
+    if (random(1)) {
+      this.flip();
+    }
+  }
+
+  setOrientation(orientation: string) {
+    this.board.orientation(orientation);
   }
 
   showFirstPosition() {
