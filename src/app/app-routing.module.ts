@@ -30,7 +30,8 @@ const routes: Routes = [
   {
     path: 'list/:idxcategory/:idxsubcategory',
     loadChildren: './list/list.module#ListPageModule'
-  }
+  },
+  { path: 'traps', loadChildren: './traps/traps.module#TrapsPageModule' }
 ];
 
 @NgModule({

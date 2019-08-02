@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { random, inRange } from 'lodash';
+import { random, inRange, sample } from 'lodash';
 import { Observable, Subscription, timer } from 'rxjs';
 import { isNullOrUndefined } from 'util';
 import { GeneralConstants } from '../../constants/general-constants';
@@ -11,7 +11,7 @@ import { GeneralConstants } from '../../constants/general-constants';
 })
 export class SquareColorPage implements OnInit {
   exerciseStarted = false;
-  buttonsDisabled: false;
+  buttonsDisabled = false;
   currentSquareIndex: number;
   answerStr: string;
   nextQuestionInterval = 1000;
@@ -20,7 +20,7 @@ export class SquareColorPage implements OnInit {
   wrongCount = 0;
 
   private loadSquareSubscription: Subscription;
-  private loadSquareTimer$: Observable<number> = timer(1000, 0, this.nextQuestionInterval);
+  private loadSquareTimer$: Observable<number> = timer(1000, this.nextQuestionInterval);
 
   private countdownSubscription: Subscription;
   private countdownTimer$: Observable<number> = timer(0, 1000);
@@ -39,11 +39,34 @@ export class SquareColorPage implements OnInit {
       }
     });
 
-    this.loadRandomSquareIndex();
+    this.loadRandomSquare();
   }
 
-  loadRandomSquareIndex() {
-    this.currentSquareIndex = random(GeneralConstants.SQUARES_2.length - 1);
+  getTopAndBottomSquareIndexes() {
+    const sideSquares = [];
+    return sideSquares.concat([0, 1, 2, 3, 4, 5, 6, 7]) // Bottom rank
+        .concat([57, 58, 59, 60, 61, 62, 63, 64]); // Top rank
+  }
+
+  getLeftAndRightSquareIndexes(): Array<number> {
+    const sideSquares = [];
+    return sideSquares
+        .concat([8, 16, 24, 32, 40, 48, 56]) // Left file
+        .concat([15, 23, 31, 39, 47, 55, 63]); // Right file
+  }
+
+  // TODO: Let's serve these choices as openings. At the end of the opening, ask the user to name it.
+  getAllSidesSquareIndexes(): Array<number> {
+    const sideSquares = [];
+    return sideSquares.concat([0, 1, 2, 3, 4, 5, 6, 7]) // Bottom rank
+        .concat([8, 16, 24, 32, 40, 48, 56]) // Left file
+        .concat([15, 23, 31, 39, 47, 55, 63]) // Right file
+        .concat([57, 58, 59, 60, 61, 62, 63, 64]); // Top rank
+  }
+
+  loadRandomSquare() {
+
+    this.currentSquareIndex = sample(this.getTopAndBottomSquareIndexes());
     this.answerStr = null;
   }
 
@@ -68,7 +91,7 @@ export class SquareColorPage implements OnInit {
 
     this.loadSquareSubscription = this.loadSquareTimer$.subscribe(result => {
       this.buttonsDisabled = false;
-      this.loadRandomSquareIndex();
+      this.loadRandomSquare();
       this.loadSquareSubscription.unsubscribe();
     });
   }
@@ -77,8 +100,8 @@ export class SquareColorPage implements OnInit {
 
   }
 
-  get currentSquare() {
-    return GeneralConstants.SQUARES_2[this.currentSquareIndex];
+  get currentSquare(): string {
+    return GeneralConstants.SQUARES[this.currentSquareIndex];
   }
 
   get isEvenRank() {
