@@ -19,17 +19,21 @@ export class SquareColorPage implements OnInit {
   totalAnsweredCount = 0;
   wrongCount = 0;
 
-  private loadSquareSubscription: Subscription;
-  private loadSquareTimer$: Observable<number> = timer(1000, this.nextQuestionInterval);
+  loadSquareSubscription: Subscription;
+  loadSquareTimer$: Observable<number> = timer(1000, this.nextQuestionInterval);
 
-  private countdownSubscription: Subscription;
-  private countdownTimer$: Observable<number> = timer(0, 1000);
+  countdownSubscription: Subscription;
+  countdownTimer$: Observable<number> = timer(0, 1000);
+
+  levels: Array<string> = ['Top/Bottom Squares', 'Side Squares', 'All Edge Squares'];
+  squarePool: Array<number> = [];
 
   constructor() {}
 
   ngOnInit() {}
 
   startExercise() {
+    this.setCurrentLevel();
     this.exerciseStarted = true;
     this.countdownSubscription = this.countdownTimer$.subscribe(result => {
       if (this.totalExerciseTimeInSeconds !== 0) {
@@ -42,31 +46,45 @@ export class SquareColorPage implements OnInit {
     this.loadRandomSquare();
   }
 
-  getTopAndBottomSquareIndexes() {
-    const sideSquares = [];
-    return sideSquares.concat([0, 1, 2, 3, 4, 5, 6, 7]) // Bottom rank
-        .concat([57, 58, 59, 60, 61, 62, 63, 64]); // Top rank
+  setCurrentLevel(): string {
+    switch (this.totalAnsweredCount) {
+      case 0:
+        this.squarePool = this.squarePool.concat(this.getBottomRankSquareIndexes());
+        break;
+      case 20:
+        this.squarePool = this.squarePool.concat(this.getTopRankSquareIndexes());
+        break;
+      case 40:
+        this.squarePool = this.squarePool.concat(this.getLeftSquareIndexes());
+        break;
+      case 60:
+        this.squarePool = this.squarePool.concat(this.getRightSquareIndexes());
+        break;
+    }
   }
 
-  getLeftAndRightSquareIndexes(): Array<number> {
-    const sideSquares = [];
-    return sideSquares
-        .concat([8, 16, 24, 32, 40, 48, 56]) // Left file
-        .concat([15, 23, 31, 39, 47, 55, 63]); // Right file
+  get currentLevelString(): string {
+    return this.levels[this.levelProgress];
   }
 
-  // TODO: Let's serve these choices as openings. At the end of the opening, ask the user to name it.
-  getAllSidesSquareIndexes(): Array<number> {
-    const sideSquares = [];
-    return sideSquares.concat([0, 1, 2, 3, 4, 5, 6, 7]) // Bottom rank
-        .concat([8, 16, 24, 32, 40, 48, 56]) // Left file
-        .concat([15, 23, 31, 39, 47, 55, 63]) // Right file
-        .concat([57, 58, 59, 60, 61, 62, 63, 64]); // Top rank
+  getTopRankSquareIndexes(): Array<number> {
+    return [57, 58, 59, 60, 61, 62, 63, 64];
+  }
+
+  getBottomRankSquareIndexes(): Array<number> {
+    return [0, 1, 2, 3, 4, 5, 6, 7];
+  }
+
+  getLeftSquareIndexes(): Array<number> {
+    return [8, 16, 24, 32, 40, 48, 56];
+  }
+
+  getRightSquareIndexes(): Array<number> {
+    return [15, 23, 31, 39, 47, 55, 63];
   }
 
   loadRandomSquare() {
-
-    this.currentSquareIndex = sample(this.getTopAndBottomSquareIndexes());
+    this.currentSquareIndex = sample(this.squarePool);
     this.answerStr = null;
   }
 
@@ -89,6 +107,9 @@ export class SquareColorPage implements OnInit {
       }
     }
 
+    this.setCurrentLevel();
+
+
     this.loadSquareSubscription = this.loadSquareTimer$.subscribe(result => {
       this.buttonsDisabled = false;
       this.loadRandomSquare();
@@ -96,9 +117,7 @@ export class SquareColorPage implements OnInit {
     });
   }
 
-  endExercise() {
-
-  }
+  endExercise() {}
 
   get currentSquare(): string {
     return GeneralConstants.SQUARES[this.currentSquareIndex];
