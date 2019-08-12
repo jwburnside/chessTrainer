@@ -8,8 +8,59 @@ ion-card {
   font-size: 30px;
 }
 
+.wrapper-select-exercise {
+  float: left;
+  width: 300px;
+}
+
+.button-toggle-exercise {
+  position: relative;
+  top: 12px;
+  left: 20px;
+}
+
 .wrapper-buttons {
   margin-top: 20px;
+}
+
+.wrapper-progress {
+  padding: 10px;
+}
+
+.icon-answer-right {
+  position: relative;
+  top: 7px;
+  margin-right: 5px;
+  color: green;
+  font-size: 40px;
+}
+
+.right-answer-count {
+  font-size: 40px;
+}
+
+.icon-countdown {
+  position: relative;
+  top: 7px;
+  margin-right: 5px;
+  color: lightgray;
+  font-size: 40px;
+}
+
+.countdown {
+  font-size: 40px;
+}
+
+.icon-answer-wrong {
+  position: relative;
+  top: 7px;
+  margin-right: 5px;
+  color: red;
+  font-size: 40px;
+}
+
+.wrong-answer-count {
+  font-size: 40px;
 }
 
 .answer-right {

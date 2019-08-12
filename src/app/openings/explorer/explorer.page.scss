@@ -1,0 +1,49 @@
+.hideOnSmallWidth {
+  @media (max-width: 500px) {
+    display: none !important;
+  }
+}
+.showOnSmallWidth {
+  @media (min-width: 500px) {
+    display: none !important;
+  }
+}
+.container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.board_wrapper {
+  float: left;
+  padding-left: 2px;
+  width:500px;
+  height:500px;
+}
+.info_wrapper {
+  float: left;
+  margin: 0 0 0 10px;
+}
+.info {
+  width: 100%;
+  display: table;
+  height: calc(100% - 52px);
+}
+
+.action_buttons {
+  width: 100%;
+  height: 48px;
+}
+
+.load-next-button {
+  padding: 10px 20px 10px 20px;
+}
+
+.wrong-icon {
+  color: red;
+}
+
+.right-icon {
+  color: green;
+}
+
+

@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: './openings/quiz/quiz.module#QuizPageModule'
   },
   {
+    path: 'openings/explorer',
+    loadChildren: './openings/explorer/explorer.module#ExplorerPageModule'
+  },
+  {
     path: 'vision/square-color',
     loadChildren: './vision/square-color/square-color.module#SquareColorPageModule'
   },

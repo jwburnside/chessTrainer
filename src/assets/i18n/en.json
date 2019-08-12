@@ -2,7 +2,10 @@
     "app": {
         "menu": "Menu",
         "home": "Home",
+        "squareColors": "Square Colors",
         "preferences": "Preferences",
+        "openingsQuiz": "Openings Quiz",
+        "openingsExplorer": "Openings Explorer",
         "about": "About",
         "exit": "Exit",
         "back-to-exit": "Press back again to exit"

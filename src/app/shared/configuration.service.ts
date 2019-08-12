@@ -18,7 +18,7 @@ export class ConfigurationService {
         stockfishDepth: 28,
         automaticShowFirstPosition: true,
         preventScreenOff: true,
-        colorTheme: 'dark',
+        colorTheme: 'light blue',
         playSounds: true,
         fullScreen: true,
         highlightSquares: true,
@@ -43,7 +43,9 @@ export class ConfigurationService {
                     if (config.stockfishDepth === undefined) config.stockfishDepth = this.DEFAULT_CONFIG.stockfishDepth;
                     if (config.automaticShowFirstPosition === undefined) config.automaticShowFirstPosition = this.DEFAULT_CONFIG.automaticShowFirstPosition;
                     if (config.preventScreenOff === undefined) config.preventScreenOff = this.DEFAULT_CONFIG.preventScreenOff;
-                    if (config.colorTheme === undefined) config.colorTheme = this.DEFAULT_CONFIG.colorTheme;
+                    // if (config.colorTheme === undefined) config.colorTheme = this.DEFAULT_CONFIG.colorTheme;
+                    // JW: Couldn't figure out how to set the default theme as light blue.
+                    config.colorTheme = this.DEFAULT_CONFIG.colorTheme;
                     if (config.playSounds === undefined) config.playSounds = this.DEFAULT_CONFIG.playSounds;
                     if (config.fullScreen === undefined) config.fullScreen = this.DEFAULT_CONFIG.fullScreen;
                     if (config.highlightSquares === undefined) config.highlightSquares = this.DEFAULT_CONFIG.highlightSquares;

@@ -36,12 +36,17 @@ export class AppComponent implements OnInit, OnDestroy {
       icon: 'home'
     },
     {
-      title: 'openings',
+      title: 'openingsQuiz',
       url: '/openings/quiz',
       icon: 'home'
     },
     {
-      title: 'Square Color',
+      title: 'openingsExplorer',
+      url: '/openings/explorer',
+      icon: 'home'
+    },
+    {
+      title: 'squareColors',
       url: '/vision/square-color',
       icon: 'home'
     },
@@ -56,7 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
       icon: 'help'
     }
   ];
-
+e
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   private lastTimeBackPress = 0;
   private timePeriodToExit = 2000;

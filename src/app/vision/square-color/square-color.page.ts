@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { random, inRange, sample } from 'lodash';
+import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { inRange, sample } from 'lodash';
 import { Observable, Subscription, timer } from 'rxjs';
-import { isNullOrUndefined } from 'util';
 import { GeneralConstants } from '../../constants/general-constants';
 
 @Component({
@@ -9,30 +9,34 @@ import { GeneralConstants } from '../../constants/general-constants';
   templateUrl: './square-color.page.html',
   styleUrls: ['./square-color.page.scss']
 })
-export class SquareColorPage implements OnInit {
+export class SquareColorPage {
   exerciseStarted = false;
   buttonsDisabled = false;
   currentSquareIndex: number;
-  answerStr: string;
-  nextQuestionInterval = 1000;
-  totalExerciseTimeInSeconds = 10;
   totalAnsweredCount = 0;
-  wrongCount = 0;
+  rightAnswerCount = 0;
+  wrongAnswerCount = 0;
+
+  nextQuestionInterval = 1000;
+  totalExerciseTimeInSeconds = 60;
 
   loadSquareSubscription: Subscription;
-  loadSquareTimer$: Observable<number> = timer(1000, this.nextQuestionInterval);
+  loadSquareTimer$: Observable<number> = timer(100, this.nextQuestionInterval);
 
   countdownSubscription: Subscription;
   countdownTimer$: Observable<number> = timer(0, 1000);
 
-  levels: Array<string> = ['Top/Bottom Squares', 'Side Squares', 'All Edge Squares'];
+  levels: Array<string> = ['Bottom Squares', 'Top Squares', 'Left Squares', 'Right Squares', 'All Sides'];
+  currentLevelString = this.levels[0];
   squarePool: Array<number> = [];
 
-  constructor() {}
+  constructor(private alertController: AlertController) {}
 
-  ngOnInit() {}
+  loadExerciseType() {
 
-  startExercise() {
+  }
+
+  toggleExercise() {
     this.setCurrentLevel();
     this.exerciseStarted = true;
     this.countdownSubscription = this.countdownTimer$.subscribe(result => {
@@ -40,31 +44,32 @@ export class SquareColorPage implements OnInit {
         this.totalExerciseTimeInSeconds--;
       } else {
         this.countdownSubscription.unsubscribe();
+        this.endExercise();
       }
     });
 
     this.loadRandomSquare();
   }
 
-  setCurrentLevel(): string {
+  setCurrentLevel() {
     switch (this.totalAnsweredCount) {
       case 0:
         this.squarePool = this.squarePool.concat(this.getBottomRankSquareIndexes());
+        this.currentLevelString = this.levels[0];
         break;
       case 20:
-        this.squarePool = this.squarePool.concat(this.getTopRankSquareIndexes());
+        this.squarePool = this.squarePool = this.getTopRankSquareIndexes();
+        this.currentLevelString = this.levels[1];
         break;
       case 40:
-        this.squarePool = this.squarePool.concat(this.getLeftSquareIndexes());
+        this.squarePool = this.squarePool = this.getLeftSquareIndexes();
+        this.currentLevelString = this.levels[2];
         break;
       case 60:
-        this.squarePool = this.squarePool.concat(this.getRightSquareIndexes());
+        this.squarePool = this.squarePool = this.getRightSquareIndexes();
+        this.currentLevelString = this.levels[3];
         break;
     }
-  }
-
-  get currentLevelString(): string {
-    return this.levels[this.levelProgress];
   }
 
   getTopRankSquareIndexes(): Array<number> {
@@ -85,7 +90,6 @@ export class SquareColorPage implements OnInit {
 
   loadRandomSquare() {
     this.currentSquareIndex = sample(this.squarePool);
-    this.answerStr = null;
   }
 
   evaluateAnswer(answer: number) {
@@ -93,22 +97,29 @@ export class SquareColorPage implements OnInit {
     this.totalAnsweredCount++;
     if (this.isEvenRank) {
       if (this.currentSquareIndex % 2 === answer) {
-        this.answerStr = 'wrong';
-        this.wrongCount++;
+        if (this.wrongAnswerCount === 2) {
+          this.endExercise();
+          return;
+        } else {
+          this.wrongAnswerCount++;
+        }
       } else {
-        this.answerStr = 'right';
+        this.rightAnswerCount++;
       }
     } else {
-      if (this.currentSquareIndex % 2 === answer) {
-        this.answerStr = 'right';
+      if (this.currentSquareIndex % 2 !== answer) {
+        if (this.wrongAnswerCount === 2) {
+          this.endExercise();
+          return;
+        } else {
+          this.wrongAnswerCount++;
+        }
       } else {
-        this.answerStr = 'wrong';
-        this.wrongCount++;
+        this.rightAnswerCount++;
       }
     }
 
     this.setCurrentLevel();
-
 
     this.loadSquareSubscription = this.loadSquareTimer$.subscribe(result => {
       this.buttonsDisabled = false;
@@ -117,7 +128,33 @@ export class SquareColorPage implements OnInit {
     });
   }
 
-  endExercise() {}
+  async endExercise() {
+    this.countdownSubscription.unsubscribe();
+    const alert = await this.alertController.create({
+      header: 'Game Over',
+      message: 'You got ' + this.rightAnswerCount.toString() + ' right!',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.resetGame();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  resetGame() {
+    this.countdownSubscription = null;
+    this.exerciseStarted = false;
+    this.buttonsDisabled = false;
+    this.totalAnsweredCount = 0;
+    this.currentSquareIndex = 0;
+    this.squarePool = [];
+    this.totalExerciseTimeInSeconds = 60;
+  }
 
   get currentSquare(): string {
     return GeneralConstants.SQUARES[this.currentSquareIndex];

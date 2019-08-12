@@ -18,7 +18,6 @@ declare var $: any;
 })
 export class ChessboardComponent implements OnInit, OnDestroy {
   private configuration: Configuration;
-  private onConfigChangeSubscription: Subscription;
   private board: any;
   private chess: Chess = new Chess();
   private originalFen: string;
@@ -37,12 +36,6 @@ export class ChessboardComponent implements OnInit, OnDestroy {
     this.configurationService.initialize().then(config => {
       this.configuration = config;
     });
-  }
-
-  ngOnInit() {}
-
-  ngOnDestroy() {
-    this.onConfigChangeSubscription.unsubscribe();
   }
 
   private uglyForceBoardRedraw() {

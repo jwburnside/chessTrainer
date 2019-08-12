@@ -1,21 +1,47 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Square Color</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-button *ngIf="!exerciseStarted" (click)="startExercise()">Start Exercise</ion-button>
+  <div class="wrapper-select-exercise">
+    <ion-list>
+      <ion-item>
+        <ion-label>Exercise Type</ion-label>
+        <ion-select placeholder="Select One">
+          <ion-select-option value="f">Bottom Only</ion-select-option>
+          <ion-select-option value="m">Top Only</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+  </div>
+
+  <ion-button (click)="toggleExercise()" class="button-toggle-exercise">
+    <span *ngIf="!exerciseStarted">Start Exercise</span>
+    <span *ngIf="exerciseStarted">End Exercise</span>
+  </ion-button>
+  <div style="clear: both"></div>
+
 
   <div *ngIf="exerciseStarted">
 
-    <div class="countdown-timer">{{totalExerciseTimeInSeconds}}</div>
+    <div class="wrapper-progress">
+      <ion-icon class="icon-answer-right" name="checkmark-circle-outline"></ion-icon>
+      <span class="right-answer-count">{{rightAnswerCount}}</span>
+      &nbsp; &nbsp; &nbsp;
+      <ion-icon class="icon-answer-wrong" name="close-circle-outline"></ion-icon>
+      <span class="wrong-answer-count">{{wrongAnswerCount}}</span>
+      &nbsp; &nbsp; &nbsp;
+      <ion-icon class="icon-countdown" name="alarm"></ion-icon>
+      <span class="countdown">{{totalExerciseTimeInSeconds}}</span>
+    </div>
 
-    <div>Total Answered: {{totalAnsweredCount}}</div>
-    <div>Number Wrong: <span>{{wrongCount}}</span></div>
-
-    <h4>{{currentLevelString}}</h4>
     <ion-card>
       <ion-card-header>Square</ion-card-header>
       <div class="current-square">{{currentSquare}}</div>
@@ -23,7 +49,6 @@
         <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer(0)">White</ion-button>
         <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer(1)">Black</ion-button>
       </div>
-      <div class="answer-{{answerStr}}" text-capitalize>{{answerStr}}</div>
     </ion-card>
 
   </div>
