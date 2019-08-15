@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { inRange, sample } from 'lodash';
+import * as Chess from 'chess.js';
+import { sample } from 'lodash';
 import { Observable, Subscription, timer } from 'rxjs';
-import { GeneralConstants } from '../../constants/general-constants';
 
 @Component({
   selector: 'app-square-color',
@@ -10,9 +10,12 @@ import { GeneralConstants } from '../../constants/general-constants';
   styleUrls: ['./square-color.page.scss']
 })
 export class SquareColorPage {
+  readonly squareColors: Array<string> = ['light', 'dark'];
+
+  chess: Chess = new Chess();
   exerciseStarted = false;
   buttonsDisabled = false;
-  currentSquareIndex: number;
+  currentSquare: string;
   totalAnsweredCount = 0;
   rightAnswerCount = 0;
   wrongAnswerCount = 0;
@@ -22,23 +25,41 @@ export class SquareColorPage {
 
   loadSquareSubscription: Subscription;
   loadSquareTimer$: Observable<number> = timer(100, this.nextQuestionInterval);
-
   countdownSubscription: Subscription;
   countdownTimer$: Observable<number> = timer(0, 1000);
 
-  levels: Array<string> = ['Bottom Squares', 'Top Squares', 'Left Squares', 'Right Squares', 'All Sides'];
-  currentLevelString = this.levels[0];
-  squarePool: Array<number> = [];
+  squareGroups: Array<SquareGroup> = [];
+  selectedSquareGroups: Array<SquareGroup> = [];
 
-  constructor(private alertController: AlertController) {}
+  constructor(private alertController: AlertController) {
+    this.loadSquareGroups();
+  }
 
-  loadExerciseType() {
+  loadSquareGroups() {
+    // The 8 ranks
+    this.squareGroups.push(new SquareGroup('a1-h1', ['a1', 'b1', 'c1', 'd1', 'e1', 'f1', 'g1', 'h1']));
+    this.squareGroups.push(new SquareGroup('a2-h2', ['a2', 'b2', 'c2', 'd2', 'e2', 'f2', 'g2', 'h2']));
+    this.squareGroups.push(new SquareGroup('a3-h3', ['a3', 'b3', 'c3', 'd3', 'e3', 'f3', 'g3', 'h3']));
+    this.squareGroups.push(new SquareGroup('a4-h4', ['a4', 'b4', 'c4', 'd4', 'e4', 'f4', 'g4', 'h4']));
+    this.squareGroups.push(new SquareGroup('a5-h5', ['a5', 'b5', 'c5', 'd5', 'e5', 'f5', 'g5', 'h5']));
+    this.squareGroups.push(new SquareGroup('a6-h6', ['a6', 'b6', 'c6', 'd6', 'e6', 'f6', 'g6', 'h6']));
+    this.squareGroups.push(new SquareGroup('a7-h7', ['a7', 'b7', 'c7', 'd7', 'e7', 'f7', 'g7', 'h7']));
+    this.squareGroups.push(new SquareGroup('a8-h8', ['a8', 'b8', 'c8', 'd8', 'e8', 'f8', 'g8', 'h8']));
 
+    // The 8 files
+    this.squareGroups.push(new SquareGroup('a1-a8', ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8']));
+    this.squareGroups.push(new SquareGroup('b1-b8', ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8']));
+    this.squareGroups.push(new SquareGroup('c1-c8', ['c1', 'c2', 'c3', 'c4', 'c5', 'd6', 'c7', 'c8']));
+    this.squareGroups.push(new SquareGroup('d1-d8', ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8']));
+    this.squareGroups.push(new SquareGroup('e1-e8', ['e1', 'e2', 'e3', 'e4', 'e5', 'e6', 'e7', 'e8']));
+    this.squareGroups.push(new SquareGroup('f1-f8', ['f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8']));
+    this.squareGroups.push(new SquareGroup('g1-g8', ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8']));
+    this.squareGroups.push(new SquareGroup('h1-h8', ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8']));
   }
 
   toggleExercise() {
-    this.setCurrentLevel();
     this.exerciseStarted = true;
+    this.selectRandomSquareFromSquareGroups();
     this.countdownSubscription = this.countdownTimer$.subscribe(result => {
       if (this.totalExerciseTimeInSeconds !== 0) {
         this.totalExerciseTimeInSeconds--;
@@ -47,83 +68,42 @@ export class SquareColorPage {
         this.endExercise();
       }
     });
-
-    this.loadRandomSquare();
   }
 
-  setCurrentLevel() {
-    switch (this.totalAnsweredCount) {
-      case 0:
-        this.squarePool = this.squarePool.concat(this.getBottomRankSquareIndexes());
-        this.currentLevelString = this.levels[0];
-        break;
-      case 20:
-        this.squarePool = this.squarePool = this.getTopRankSquareIndexes();
-        this.currentLevelString = this.levels[1];
-        break;
-      case 40:
-        this.squarePool = this.squarePool = this.getLeftSquareIndexes();
-        this.currentLevelString = this.levels[2];
-        break;
-      case 60:
-        this.squarePool = this.squarePool = this.getRightSquareIndexes();
-        this.currentLevelString = this.levels[3];
-        break;
+  handleSquareGroupSelected(event: any) {
+    const squareGroupNames: Array<string> = event.detail.value;
+    this.selectedSquareGroups = this.getSquareGroupsByNames(squareGroupNames);
+  }
+
+  getSquareGroupsByNames(squareGroupNames: Array<string>): Array<SquareGroup> {
+    const selectedSquareGroups: Array<SquareGroup> = [];
+    for (const squareGroupName of squareGroupNames) {
+      selectedSquareGroups.push(this.squareGroups.find(sg => sg.name === squareGroupName));
     }
+    return selectedSquareGroups;
   }
 
-  getTopRankSquareIndexes(): Array<number> {
-    return [57, 58, 59, 60, 61, 62, 63, 64];
+  selectRandomSquareFromSquareGroups() {
+    const selectedSquareGroup: SquareGroup = sample(this.selectedSquareGroups);
+    this.currentSquare = sample(selectedSquareGroup.squarePool);
   }
 
-  getBottomRankSquareIndexes(): Array<number> {
-    return [0, 1, 2, 3, 4, 5, 6, 7];
-  }
-
-  getLeftSquareIndexes(): Array<number> {
-    return [8, 16, 24, 32, 40, 48, 56];
-  }
-
-  getRightSquareIndexes(): Array<number> {
-    return [15, 23, 31, 39, 47, 55, 63];
-  }
-
-  loadRandomSquare() {
-    this.currentSquareIndex = sample(this.squarePool);
-  }
-
-  evaluateAnswer(answer: number) {
+  evaluateAnswer(answer: string) {
     this.buttonsDisabled = true;
     this.totalAnsweredCount++;
-    if (this.isEvenRank) {
-      if (this.currentSquareIndex % 2 === answer) {
-        if (this.wrongAnswerCount === 2) {
-          this.endExercise();
-          return;
-        } else {
-          this.wrongAnswerCount++;
-        }
-      } else {
-        this.rightAnswerCount++;
-      }
-    } else {
-      if (this.currentSquareIndex % 2 !== answer) {
-        if (this.wrongAnswerCount === 2) {
-          this.endExercise();
-          return;
-        } else {
-          this.wrongAnswerCount++;
-        }
-      } else {
-        this.rightAnswerCount++;
-      }
-    }
 
-    this.setCurrentLevel();
+    const squareColor: string = this.chess.square_color(this.currentSquare);
+    if (squareColor === answer) {
+      this.rightAnswerCount++;
+      this.buttonsDisabled = false;
+      this.selectRandomSquareFromSquareGroups();
+    } else {
+      this.endExercise();
+    }
 
     this.loadSquareSubscription = this.loadSquareTimer$.subscribe(result => {
       this.buttonsDisabled = false;
-      this.loadRandomSquare();
+
       this.loadSquareSubscription.unsubscribe();
     });
   }
@@ -151,17 +131,15 @@ export class SquareColorPage {
     this.exerciseStarted = false;
     this.buttonsDisabled = false;
     this.totalAnsweredCount = 0;
-    this.currentSquareIndex = 0;
-    this.squarePool = [];
     this.totalExerciseTimeInSeconds = 60;
   }
+}
 
-  get currentSquare(): string {
-    return GeneralConstants.SQUARES[this.currentSquareIndex];
-  }
-
-  get isEvenRank() {
-    const i = this.currentSquareIndex;
-    return inRange(i, 8) || inRange(i, 16, 24) || inRange(i, 32, 40) || inRange(i, 48, 56);
+export class SquareGroup {
+  name: string;
+  squarePool: Array<string> = [];
+  constructor(name: string, squarePool: Array<string>) {
+    this.name = name;
+    this.squarePool = squarePool;
   }
 }

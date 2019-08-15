@@ -1,12 +1,10 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import * as Chess from 'chess.js';
-import { Howl, Howler } from 'howler';
-import { Subscription } from 'rxjs';
+import { random } from 'lodash';
 import { ChessHeader } from '../models/chess-header';
 import { Configuration, ConfigurationService } from '../shared';
-import { sampleSize, shuffle, random } from 'lodash';
 
 declare var ChessBoard: any;
 declare var $: any;
@@ -16,7 +14,7 @@ declare var $: any;
   templateUrl: 'chessboard.component.html',
   styleUrls: ['chessboard.component.scss']
 })
-export class ChessboardComponent implements OnInit, OnDestroy {
+export class ChessboardComponent {
   private configuration: Configuration;
   private board: any;
   private chess: Chess = new Chess();

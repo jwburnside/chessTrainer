@@ -13,9 +13,8 @@
     <ion-list>
       <ion-item>
         <ion-label>Exercise Type</ion-label>
-        <ion-select placeholder="Select One">
-          <ion-select-option value="f">Bottom Only</ion-select-option>
-          <ion-select-option value="m">Top Only</ion-select-option>
+        <ion-select (ionChange)="handleSquareGroupSelected($event)" multiple="true" placeholder="Select One" cancelText="Dismiss" okText="OK">
+          <ion-select-option *ngFor="let squareGroup of squareGroups;" value="{{squareGroup.name}}">{{squareGroup.name}}</ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -46,8 +45,8 @@
       <ion-card-header>Square</ion-card-header>
       <div class="current-square">{{currentSquare}}</div>
       <div class="wrapper-buttons">
-        <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer(0)">White</ion-button>
-        <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer(1)">Black</ion-button>
+        <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer('light')">Light</ion-button>
+        <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer('dark')">Dark</ion-button>
       </div>
     </ion-card>
 
