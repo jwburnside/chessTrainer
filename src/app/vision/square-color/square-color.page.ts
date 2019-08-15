@@ -58,16 +58,20 @@ export class SquareColorPage {
   }
 
   toggleExercise() {
-    this.exerciseStarted = true;
-    this.selectRandomSquareFromSquareGroups();
-    this.countdownSubscription = this.countdownTimer$.subscribe(result => {
-      if (this.totalExerciseTimeInSeconds !== 0) {
-        this.totalExerciseTimeInSeconds--;
-      } else {
-        this.countdownSubscription.unsubscribe();
-        this.endExercise();
-      }
-    });
+    this.exerciseStarted = !this.exerciseStarted;
+    if (this.exerciseStarted) {
+      this.selectRandomSquareFromSquareGroups();
+      this.countdownSubscription = this.countdownTimer$.subscribe(result => {
+        if (this.totalExerciseTimeInSeconds !== 0) {
+          this.totalExerciseTimeInSeconds--;
+        } else {
+          this.countdownSubscription.unsubscribe();
+          this.endExercise();
+        }
+      });
+    } else {
+      this.endExercise();
+    }
   }
 
   handleSquareGroupSelected(event: any) {
@@ -110,6 +114,8 @@ export class SquareColorPage {
 
   async endExercise() {
     this.countdownSubscription.unsubscribe();
+
+    // TODO: Need to force a button press on this (disable close on click-outside)
     const alert = await this.alertController.create({
       header: 'Game Over',
       message: 'You got ' + this.rightAnswerCount.toString() + ' right!',
@@ -131,6 +137,7 @@ export class SquareColorPage {
     this.exerciseStarted = false;
     this.buttonsDisabled = false;
     this.totalAnsweredCount = 0;
+    this.rightAnswerCount = 0;
     this.totalExerciseTimeInSeconds = 60;
   }
 }
