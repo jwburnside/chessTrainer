@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import * as Chess from 'chess.js';
 import { sample } from 'lodash';
 import { Observable, Subscription, timer } from 'rxjs';
+import { SquareGroup } from '../../models/square-group';
 
 @Component({
   selector: 'app-square-color',
@@ -10,7 +11,10 @@ import { Observable, Subscription, timer } from 'rxjs';
   styleUrls: ['./square-color.page.scss']
 })
 export class SquareColorPage {
-  readonly squareColors: Array<string> = ['light', 'dark'];
+  readonly SQUARE_COLOR_MODES: Array<string> = ['Training', 'Test'];
+  readonly SQUARE_COLORS: Array<string> = ['light', 'dark'];
+
+  selectedMode: string = this.SQUARE_COLOR_MODES[0];
 
   chess: Chess = new Chess();
   exerciseStarted = false;
@@ -18,7 +22,6 @@ export class SquareColorPage {
   currentSquare: string;
   totalAnsweredCount = 0;
   rightAnswerCount = 0;
-  wrongAnswerCount = 0;
 
   nextQuestionInterval = 1000;
   totalExerciseTimeInSeconds = 60;
@@ -55,6 +58,10 @@ export class SquareColorPage {
     this.squareGroups.push(new SquareGroup('f1-f8', ['f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8']));
     this.squareGroups.push(new SquareGroup('g1-g8', ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8']));
     this.squareGroups.push(new SquareGroup('h1-h8', ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8']));
+
+    // Openings
+    this.squareGroups.push(new SquareGroup('e4 Openings', ['e4', 'e5', 'c3', 'c6', 'f6', 'f3', 'b5', 'c4']));
+    this.squareGroups.push(new SquareGroup('d4 Openings', ['d4', 'd5', 'c4', 'c6', 'e6']));
   }
 
   toggleExercise() {
@@ -73,6 +80,8 @@ export class SquareColorPage {
       this.endExercise();
     }
   }
+
+  handleModeSelected(event: any) {}
 
   handleSquareGroupSelected(event: any) {
     const squareGroupNames: Array<string> = event.detail.value;
@@ -114,11 +123,10 @@ export class SquareColorPage {
 
   async endExercise() {
     this.countdownSubscription.unsubscribe();
-
-    // TODO: Need to force a button press on this (disable close on click-outside)
     const alert = await this.alertController.create({
       header: 'Game Over',
       message: 'You got ' + this.rightAnswerCount.toString() + ' right!',
+      backdropDismiss: false,
       buttons: [
         {
           text: 'Ok',
@@ -139,14 +147,5 @@ export class SquareColorPage {
     this.totalAnsweredCount = 0;
     this.rightAnswerCount = 0;
     this.totalExerciseTimeInSeconds = 60;
-  }
-}
-
-export class SquareGroup {
-  name: string;
-  squarePool: Array<string> = [];
-  constructor(name: string, squarePool: Array<string>) {
-    this.name = name;
-    this.squarePool = squarePool;
   }
 }

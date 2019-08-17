@@ -9,6 +9,19 @@
 
 <ion-content padding>
 
+  <div class="wrapper-select-mode">
+    <ion-list>
+      <ion-item>
+        <ion-label>Mode</ion-label>
+        <ion-select (ionChange)="handleModeSelected($event)">
+          <ion-select-option value="{{SQUARE_COLOR_MODES[0]}}"><span text-capitalize>{{SQUARE_COLOR_MODES[0]}}</span></ion-select-option>
+          <ion-select-option value="{{SQUARE_COLOR_MODES[1]}}"><span text-capitalize>{{SQUARE_COLOR_MODES[1]}}</span></ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+  </div>
+
   <div class="wrapper-select-exercise">
     <ion-list>
       <ion-item>
@@ -45,13 +58,11 @@
       <ion-card-header>Square</ion-card-header>
       <div class="current-square">{{currentSquare}}</div>
       <div class="wrapper-buttons">
-        <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer('light')">Light</ion-button>
-        <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer('dark')">Dark</ion-button>
+        <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer(SQUARE_COLORS[0])"><span text-capitalize>{{SQUARE_COLORS[0]}}</span></ion-button>
+        <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer(SQUARE_COLORS[1])"><span text-capitalize>{{SQUARE_COLORS[1]}}</span></ion-button>
       </div>
     </ion-card>
 
   </div>
-
-
 
 </ion-content>
