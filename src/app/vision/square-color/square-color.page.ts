@@ -109,7 +109,7 @@ export class SquareColorPage {
     return selectedSquareGroups;
   }
 
-  setCurrentSquare(): string {
+  setCurrentSquare() {
     this.currentSquare = this.selectRandomSquareFromSquareGroup(this.selectRandomSquareGroup());
   }
 
