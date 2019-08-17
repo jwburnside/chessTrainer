@@ -9,11 +9,11 @@
 
 <ion-content padding>
 
-  <div class="wrapper-select-mode">
+    <div class="wrapper-select-mode">
     <ion-list>
       <ion-item>
         <ion-label>Mode</ion-label>
-        <ion-select (ionChange)="handleModeSelected($event)">
+        <ion-select [(ngModel)]="selectedMode" (ionChange)="handleModeSelected()">
           <ion-select-option value="{{SQUARE_COLOR_MODES[0]}}"><span text-capitalize>{{SQUARE_COLOR_MODES[0]}}</span></ion-select-option>
           <ion-select-option value="{{SQUARE_COLOR_MODES[1]}}"><span text-capitalize>{{SQUARE_COLOR_MODES[1]}}</span></ion-select-option>
         </ion-select>
@@ -22,7 +22,7 @@
     </ion-list>
   </div>
 
-  <div class="wrapper-select-exercise">
+  <div *ngIf="!isTestMode" class="wrapper-select-exercise">
     <ion-list>
       <ion-item>
         <ion-label>Exercise Type</ion-label>
@@ -34,21 +34,20 @@
     </ion-list>
   </div>
 
-  <ion-button (click)="toggleExercise()" class="button-toggle-exercise">
+  <ion-button [disabled]="isExerciseModeButtonDisabled" (click)="toggleExercise()" class="button-toggle-exercise">
     <span *ngIf="!exerciseStarted">Start Exercise</span>
     <span *ngIf="exerciseStarted">End Exercise</span>
   </ion-button>
-  <div style="clear: both"></div>
 
 
-  <div *ngIf="exerciseStarted">
+  <div *ngIf="exerciseStarted" class="wrapper-answer-container">
 
     <div class="wrapper-progress">
       <ion-icon class="icon-answer-right" name="checkmark-circle-outline"></ion-icon>
       <span class="right-answer-count">{{rightAnswerCount}}</span>
       &nbsp; &nbsp; &nbsp;
       <ion-icon class="icon-answer-wrong" name="close-circle-outline"></ion-icon>
-      <span class="wrong-answer-count">{{wrongAnswerCount}}</span>
+      <span class="wrong-answer-count">0</span>
       &nbsp; &nbsp; &nbsp;
       <ion-icon class="icon-countdown" name="alarm"></ion-icon>
       <span class="countdown">{{totalExerciseTimeInSeconds}}</span>
@@ -58,8 +57,8 @@
       <ion-card-header>Square</ion-card-header>
       <div class="current-square">{{currentSquare}}</div>
       <div class="wrapper-buttons">
-        <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer(SQUARE_COLORS[0])"><span text-capitalize>{{SQUARE_COLORS[0]}}</span></ion-button>
-        <ion-button [disabled]="buttonsDisabled" (click)="evaluateAnswer(SQUARE_COLORS[1])"><span text-capitalize>{{SQUARE_COLORS[1]}}</span></ion-button>
+        <ion-button [disabled]="answerButtonsDisabled" (click)="evaluateAnswer(SQUARE_COLORS[0])"><span text-capitalize>{{SQUARE_COLORS[0]}}</span></ion-button>
+        <ion-button [disabled]="answerButtonsDisabled" (click)="evaluateAnswer(SQUARE_COLORS[1])"><span text-capitalize>{{SQUARE_COLORS[1]}}</span></ion-button>
       </div>
     </ion-card>
 

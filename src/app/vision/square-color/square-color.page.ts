@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import * as Chess from 'chess.js';
 import { sample } from 'lodash';
 import { Observable, Subscription, timer } from 'rxjs';
+import { isNullOrUndefined } from 'util';
 import { SquareGroup } from '../../models/square-group';
 
 @Component({
@@ -14,11 +15,11 @@ export class SquareColorPage {
   readonly SQUARE_COLOR_MODES: Array<string> = ['Training', 'Test'];
   readonly SQUARE_COLORS: Array<string> = ['light', 'dark'];
 
-  selectedMode: string = this.SQUARE_COLOR_MODES[0];
-
   chess: Chess = new Chess();
+  selectedMode: string = this.SQUARE_COLOR_MODES[0];
   exerciseStarted = false;
-  buttonsDisabled = false;
+  answerButtonsDisabled = false;
+  exerciseButtonDisabled = true;
   currentSquare: string;
   totalAnsweredCount = 0;
   rightAnswerCount = 0;
@@ -37,6 +38,9 @@ export class SquareColorPage {
   constructor(private alertController: AlertController) {
     this.loadSquareGroups();
   }
+
+  // TODO: Rewrite ion-select https://stackoverflow.com/questions/41146350/how-to-set-default-selected-value-of-ion-option
+  // TODO: I want to do wrong answers on training with no time.
 
   loadSquareGroups() {
     // The 8 ranks
@@ -60,14 +64,13 @@ export class SquareColorPage {
     this.squareGroups.push(new SquareGroup('h1-h8', ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8']));
 
     // Openings
-    this.squareGroups.push(new SquareGroup('e4 Openings', ['e4', 'e5', 'c3', 'c6', 'f6', 'f3', 'b5', 'c4']));
-    this.squareGroups.push(new SquareGroup('d4 Openings', ['d4', 'd5', 'c4', 'c6', 'e6']));
+    this.squareGroups.push(new SquareGroup('Opening Squares', ['b5', 'c3', 'c4', 'c6', 'd4', 'd5', 'e4', 'e5', 'e6', 'f3', 'f6']));
   }
 
   toggleExercise() {
     this.exerciseStarted = !this.exerciseStarted;
     if (this.exerciseStarted) {
-      this.selectRandomSquareFromSquareGroups();
+      this.setCurrentSquare();
       this.countdownSubscription = this.countdownTimer$.subscribe(result => {
         if (this.totalExerciseTimeInSeconds !== 0) {
           this.totalExerciseTimeInSeconds--;
@@ -81,7 +84,17 @@ export class SquareColorPage {
     }
   }
 
-  handleModeSelected(event: any) {}
+  handleModeSelected() {
+    this.resetGame();
+  }
+
+  get isTestMode() {
+    return this.selectedMode === this.SQUARE_COLOR_MODES[1];
+  }
+
+  get isExerciseModeButtonDisabled() {
+    return this.selectedSquareGroups.length === 0;
+  }
 
   handleSquareGroupSelected(event: any) {
     const squareGroupNames: Array<string> = event.detail.value;
@@ -96,26 +109,33 @@ export class SquareColorPage {
     return selectedSquareGroups;
   }
 
-  selectRandomSquareFromSquareGroups() {
-    const selectedSquareGroup: SquareGroup = sample(this.selectedSquareGroups);
-    this.currentSquare = sample(selectedSquareGroup.squarePool);
+  setCurrentSquare(): string {
+    this.currentSquare = this.selectRandomSquareFromSquareGroup(this.selectRandomSquareGroup());
+  }
+
+  selectRandomSquareGroup(): SquareGroup {
+    return this.isTestMode ? sample(this.squareGroups) : sample(this.selectedSquareGroups);
+  }
+
+  selectRandomSquareFromSquareGroup(squareGroup: SquareGroup): string {
+    return sample(squareGroup.squarePool);
   }
 
   evaluateAnswer(answer: string) {
-    this.buttonsDisabled = true;
+    this.answerButtonsDisabled = true;
     this.totalAnsweredCount++;
 
     const squareColor: string = this.chess.square_color(this.currentSquare);
     if (squareColor === answer) {
       this.rightAnswerCount++;
-      this.buttonsDisabled = false;
-      this.selectRandomSquareFromSquareGroups();
+      this.answerButtonsDisabled = false;
+      this.setCurrentSquare();
     } else {
       this.endExercise();
     }
 
     this.loadSquareSubscription = this.loadSquareTimer$.subscribe(result => {
-      this.buttonsDisabled = false;
+      this.answerButtonsDisabled = false;
 
       this.loadSquareSubscription.unsubscribe();
     });
@@ -143,7 +163,7 @@ export class SquareColorPage {
   resetGame() {
     this.countdownSubscription = null;
     this.exerciseStarted = false;
-    this.buttonsDisabled = false;
+    this.answerButtonsDisabled = false;
     this.totalAnsweredCount = 0;
     this.rightAnswerCount = 0;
     this.totalExerciseTimeInSeconds = 60;
