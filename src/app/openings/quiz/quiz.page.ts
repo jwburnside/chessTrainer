@@ -13,7 +13,7 @@ import { MultipleChoiceItem } from '../../models/multiple-choice-item';
   templateUrl: './quiz.page.html',
   styleUrls: ['./quiz.page.scss']
 })
-export class QuizPage implements OnInit {
+export class QuizPage {
   orientation = 'flip';
   moveInterval = 1000;
   multipleChoiceItemCount = 4;
@@ -33,8 +33,9 @@ export class QuizPage implements OnInit {
     this.multipleChoiceForm = this.formBuilder.group({});
   }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.loadPgns();
+    console.log('ionViewDidLoad');
     this.chessboard.buildStartPosition();
   }
 
@@ -118,5 +119,4 @@ export class QuizPage implements OnInit {
   onOrientationChangedHandler() {
     this.loadOpening();
   }
-
 }

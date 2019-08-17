@@ -32,6 +32,7 @@ export class ChessboardComponent {
     public modalController: ModalController
   ) {
     this.configurationService.initialize().then(config => {
+      console.log('config: ' + JSON.stringify(config));
       this.configuration = config;
     });
   }
@@ -52,6 +53,7 @@ export class ChessboardComponent {
   }
 
   buildStartPosition() {
+    console.log('buildStartPosition');
     const startingFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
     const self = this;
     this.initializing = true;
@@ -61,7 +63,9 @@ export class ChessboardComponent {
     this.board = ChessBoard('__chessboard__', {
       position: startingFen,
       pieceTheme: function(piece) {
-        return '/assets/pieces/' + self.configuration.pieceTheme + '/' + piece + '.svg';
+        // TODO: self.configuration was null for some reason
+        // return '/assets/pieces/' + self.configuration.pieceTheme + '/' + piece + '.svg';
+        return '/assets/pieces/cburnett/' + piece + '.svg';
       },
       draggable: false
     });
