@@ -1,5 +1,4 @@
 ion-card {
-  width: 500px;
   text-align: center;
   padding: 20px;
 }
@@ -10,7 +9,6 @@ ion-card {
 
 .wrapper-select-mode,
 .wrapper-select-exercise {
-
 }
 
 .wrapper-answer-container {
@@ -31,36 +29,27 @@ ion-card {
   padding: 10px;
 }
 
-.icon-answer-right {
+.progress-icon {
   position: relative;
   top: 7px;
   margin-right: 5px;
-  color: green;
-  font-size: 40px;
+  font-size: 30px;
 }
 
-.right-answer-count {
-  font-size: 40px;
+.progress-text {
+  font-size: 30px;
+}
+
+.icon-answer-right {
+  color: green;
 }
 
 .icon-countdown {
-  position: relative;
-  top: 7px;
-  margin-right: 5px;
   color: lightgray;
-  font-size: 40px;
-}
-
-.countdown {
-  font-size: 40px;
 }
 
 .icon-answer-wrong {
-  position: relative;
-  top: 7px;
-  margin-right: 5px;
   color: red;
-  font-size: 40px;
 }
 
 .wrong-answer-count {

@@ -43,18 +43,17 @@
   <div *ngIf="exerciseStarted" class="wrapper-answer-container">
 
     <div class="wrapper-progress">
-      <ion-icon class="icon-answer-right" name="checkmark-circle-outline"></ion-icon>
-      <span class="right-answer-count">{{rightAnswerCount}}</span>
+      <ion-icon class="progress-icon icon-answer-right" name="checkmark-circle-outline"></ion-icon>
+      <span class="progress-text">{{rightAnswerCount}}</span>
       &nbsp; &nbsp; &nbsp;
-      <ion-icon class="icon-answer-wrong" name="close-circle-outline"></ion-icon>
-      <span class="wrong-answer-count">0</span>
+      <ion-icon class="progress-icon icon-answer-wrong" name="close-circle-outline"></ion-icon>
+      <span class="progress-text">0</span>
       &nbsp; &nbsp; &nbsp;
-      <ion-icon class="icon-countdown" name="alarm"></ion-icon>
-      <span class="countdown">{{totalExerciseTimeInSeconds}}</span>
+      <ion-icon class="progress-icon icon-countdown" name="alarm"></ion-icon>
+      <span class="progress-text">{{totalExerciseTimeInSeconds}}</span>
     </div>
 
     <ion-card>
-      <ion-card-header>Square</ion-card-header>
       <div class="current-square">{{currentSquare}}</div>
       <div class="wrapper-buttons">
         <ion-button [disabled]="answerButtonsDisabled" (click)="evaluateAnswer(SQUARE_COLORS[0])"><span text-capitalize>{{SQUARE_COLORS[0]}}</span></ion-button>

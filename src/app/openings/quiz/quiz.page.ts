@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as Chess from 'chess.js';
-import { sampleSize, shuffle, random } from 'lodash';
+import { sampleSize } from 'lodash';
 import { Observable, Subscription, timer } from 'rxjs';
 import { ChessboardComponent } from '../../chessboard';
 import { ChessHeader } from '../../models/chess-header';
@@ -19,7 +19,7 @@ export class QuizPage {
   multipleChoiceItemCount = 4;
   selectedIndex: number;
   pgns: Array<Array<string>> = [];
-  shouldDisplayStartButton = true;
+  shouldDisableStartButton = false;
   isFirstOpeningLoaded = false;
   multipleChoiceCard: MultipleChoiceCard;
   multipleChoiceForm: FormGroup;
@@ -35,18 +35,20 @@ export class QuizPage {
 
   ionViewDidEnter() {
     this.loadPgns();
-    console.log('ionViewDidLoad');
     this.chessboard.buildStartPosition();
   }
 
   loadPgns() {
     this.pgns.push(['[OpeningName "Ruy Lopez Opening"]', '1.e4 e5 2.Nf3 Nc6 3.Bb5']);
     this.pgns.push(['[OpeningName "Italian Game"]', '1.e4 e5 2.Nf3 Nc6 3.Bc4']);
-    this.pgns.push(['[OpeningName "Four Knights Opening"]', '1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6']);
-    this.pgns.push(['[OpeningName "Italian Game: Two Knights Defense (Fried Liver)"]', '1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6']);
+    this.pgns.push(['[OpeningName "Four Knights Game"]', '1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6']);
+    this.pgns.push(['[OpeningName "Italian Game: Two Knights Defense (Fried Liver)"]', '1.e4 e5 2.Nf3 Nc6 3.Bc4 Nf6']);
+
     this.pgns.push(['[OpeningName "Queen\'s Gambit Accepted"]', '1.d4 d5 2.c4 dxc4']);
     this.pgns.push(['[OpeningName "Queen\'s Gambit Declined"]', '1.d4 d5 2.c4 e6']);
     this.pgns.push(['[OpeningName "Slav Defense"]', '1.d4 d5 2.c4 c6']);
+    this.pgns.push(['[OpeningName "Petroff Defense"]', '1.e4 e5 2.Nf3 Nf6']);
+    this.pgns.push(['[OpeningName "French Defense"]', '1.e4 e6 2.d4 d5']);
   }
 
   buildBoardForPgn(pgn: Array<string>) {
@@ -96,7 +98,7 @@ export class QuizPage {
   }
 
   startMoving() {
-    this.shouldDisplayStartButton = false;
+    this.shouldDisableStartButton = true;
     this.subscription = this.timer$.subscribe(result => {
       if (!this.chessboard.isShowingLastPosition()) {
         this.showNextPosition();
@@ -108,7 +110,7 @@ export class QuizPage {
 
   stopMoving() {
     this.subscription.unsubscribe();
-    this.shouldDisplayStartButton = true;
+    this.shouldDisableStartButton = false;
     this.isFirstOpeningLoaded = true;
   }
 

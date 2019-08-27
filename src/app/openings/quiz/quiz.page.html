@@ -11,16 +11,19 @@
   <div padding class="container">
 
     <div class="board_wrapper" id="board-wrapper">
-      <ion-select [(ngModel)]="orientation" (ionChange)="onOrientationChangedHandler()" okText="OK" cancelText="Dismiss">
-        <ion-select-option value="flip">Random</ion-select-option>
-        <ion-select-option value="white">White</ion-select-option>
-        <ion-select-option value="black">Black</ion-select-option>
-      </ion-select>
       <chessboard #chessboard></chessboard>
-      <button *ngIf="shouldDisplayStartButton" class="load-next-button" (click)="loadOpening()">
-        <span *ngIf="!isFirstOpeningLoaded"> Start </span>
-        <span *ngIf="isFirstOpeningLoaded"> Next </span>
-      </button>
+    </div>
+<!--      <ion-select [(ngModel)]="orientation" (ionChange)="onOrientationChangedHandler()" okText="OK" cancelText="Dismiss">-->
+<!--        <ion-select-option value="flip">Random</ion-select-option>-->
+<!--        <ion-select-option value="white">White</ion-select-option>-->
+<!--        <ion-select-option value="black">Black</ion-select-option>-->
+<!--      </ion-select>-->
+
+      <div class="wrapper-controls">
+        <button [disabled]="shouldDisableStartButton" class="button-control">
+          <ion-icon class="icon-control icon-start" name="arrow-dropright-circle" (click)="loadOpening()"></ion-icon>
+        </button>
+      </div>
 
       <div class="info_wrapper">
         <div class="info">
@@ -47,7 +50,7 @@
         </div>
       </div>
 
-    </div>
+
 
 
 
