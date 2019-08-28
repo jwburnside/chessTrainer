@@ -1,17 +1,16 @@
 {
-  "name": "chessendgames",
-  "version": "2.2.0",
-  "author": "supertorpe@hotmail.com",
+  "name": "chesstrainer",
+  "version": "1.0.0",
+  "author": "jwburnside@gmail.com",
   "homepage": "https://github.com/supertorpe/chessendgametraining",
   "scripts": {
     "ng": "ng",
-    "start": "ionic serve --devapp",
     "build-icons": "ionic cordova resources",
     "build": "ng build",
-    "build-android-debug": "ionic cordova build android",
-    "build-android-prod": "ionic cordova build android --prod --release",
-    "emul-android": "ionic cordova emulate android -lc",
-    "run-android": "ionic cordova run android",
+    "build:android:debug": "ionic cordova build android",
+    "build:android:prod": "ionic cordova build android --prod --release",
+    "emulate:android": "ionic cordova emulate android -lc",
+    "run:android": "ionic cordova run android",
     "test": "ng test",
     "lint": "ionic-app-scripts lint",
     "e2e": "ng e2e"
@@ -91,7 +90,7 @@
     "tslint-config-prettier": "^1.17.0",
     "typescript": "~3.4.5"
   },
-  "description": "Chess Endgame Training",
+  "description": "Custom Chess Trainer",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
