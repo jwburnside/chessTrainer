@@ -14,9 +14,10 @@ import { MultipleChoiceItem } from '../../models/multiple-choice-item';
   styleUrls: ['./quiz.page.scss']
 })
 export class QuizPage {
+  readonly MULTIPLE_CHOICE_ITEM_COUNT = 4;
+  readonly MOVE_INTERVAL = 1000;
+
   orientation = 'flip';
-  moveInterval = 1000;
-  multipleChoiceItemCount = 4;
   selectedIndex: number;
   pgns: Array<Array<string>> = [];
   shouldDisableStartButton = false;
@@ -25,7 +26,7 @@ export class QuizPage {
   multipleChoiceForm: FormGroup;
 
   private subscription: Subscription;
-  private timer$: Observable<number> = timer(0, this.moveInterval);
+  private timer$: Observable<number> = timer(0, this.MOVE_INTERVAL);
 
   @ViewChild('chessboard', { static: true }) chessboard: ChessboardComponent;
 
@@ -80,7 +81,7 @@ export class QuizPage {
     const chess: Chess = new Chess();
     const multipleChoiceItems: Array<MultipleChoiceItem> = [];
 
-    sampleSize(this.pgns, this.multipleChoiceItemCount).forEach(pgn => {
+    sampleSize(this.pgns, this.MULTIPLE_CHOICE_ITEM_COUNT).forEach(pgn => {
       chess.load_pgn(pgn.join('\n'));
       const multipleChoiceItem: MultipleChoiceItem = new MultipleChoiceItem();
       multipleChoiceItem.answer = new ChessHeader(chess.header()).openingName;
