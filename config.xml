@@ -3,7 +3,7 @@
     <name>Chess Endgame Training</name>
     <description>Chess Endgame Training</description>
     <author email="supertorpe@hotmail.com" href="https://github.com/supertorpe/chessendgametraining">supertorpe</author>
-    <content original-src="index.html" src="http://192.168.1.12:8100" />
+    <content original-src="index.html" src="http://localhost:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -85,4 +85,5 @@
     <plugin name="cordova-plugin-insomnia" spec="4.3.0" />
     <engine name="browser" spec="~5.0.4" />
     <allow-navigation href="http://192.168.1.12:8100" sessionid="a9575aa0" />
+    <allow-navigation href="http://localhost:8100" sessionid="6b61fca9" />
 </widget>

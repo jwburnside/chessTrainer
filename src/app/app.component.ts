@@ -46,8 +46,18 @@ export class AppComponent implements OnInit, OnDestroy {
       icon: 'home'
     },
     {
+      title: 'logicalChess',
+      url: '/logical-chess/explorer',
+      icon: 'home'
+    },
+    {
       title: 'squareColors',
       url: '/vision/square-color',
+      icon: 'home'
+    },
+    {
+      title: 'osmosis',
+      url: '/vision/osmosis',
       icon: 'home'
     },
     {
@@ -61,7 +71,7 @@ export class AppComponent implements OnInit, OnDestroy {
       icon: 'help'
     }
   ];
-e
+
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   private lastTimeBackPress = 0;
   private timePeriodToExit = 2000;

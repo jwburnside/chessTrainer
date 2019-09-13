@@ -19,7 +19,6 @@ export class SquareColorPage {
   selectedMode: string = this.SQUARE_COLOR_MODES[0];
   exerciseStarted = false;
   answerButtonsDisabled = false;
-  exerciseButtonDisabled = true;
   currentSquare: string;
   totalAnsweredCount = 0;
   rightAnswerCount = 0;

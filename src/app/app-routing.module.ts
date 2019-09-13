@@ -15,13 +15,18 @@ const routes: Routes = [
     path: 'openings/quiz',
     loadChildren: './openings/quiz/quiz.module#QuizPageModule'
   },
+
   {
-    path: 'openings/explorer',
-    loadChildren: './openings/explorer/explorer.module#ExplorerPageModule'
+    path: 'logical-chess/explorer',
+    loadChildren: './logical-chess/explorer/explorer.module#ExplorerPageModule'
   },
   {
     path: 'vision/square-color',
     loadChildren: './vision/square-color/square-color.module#SquareColorPageModule'
+  },
+  {
+    path: 'vision/osmosis',
+    loadChildren: './vision/osmosis/osmosis.module#OsmosisPageModule'
   },
   {
     path: 'preferences',

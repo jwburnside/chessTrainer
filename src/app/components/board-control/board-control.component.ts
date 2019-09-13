@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as Chess from 'chess.js';
 import { sampleSize } from 'lodash';
@@ -9,11 +9,11 @@ import { MultipleChoiceCard } from '../../models/multiple-choice-card';
 import { MultipleChoiceItem } from '../../models/multiple-choice-item';
 
 @Component({
-  selector: 'explorer-quiz',
-  templateUrl: './explorer.page.html',
-  styleUrls: ['./explorer.page.scss']
+  selector: 'app-board-control',
+  templateUrl: './board-control.component.html',
+  styleUrls: ['./board-control.component.scss'],
 })
-export class ExplorerPage {
+export class BoardControlComponent implements OnInit{
   orientation = 'flip';
   moveInterval = 1000;
   multipleChoiceItemCount = 4;
@@ -33,22 +33,17 @@ export class ExplorerPage {
     this.multipleChoiceForm = this.formBuilder.group({});
   }
 
-  ionViewDidEnter() {
+  ngOnInit(): void {
     this.loadPgns();
     this.chessboard.buildStartPosition();
   }
 
   loadPgns() {
     this.pgns.push(['[OpeningName "Petrov Defense"]', '1. e4 e5 2. Nf3 Nf6 {This is the main line in the Petrov defense.} 3. Nxe5 Nxe4 {Blacks worst move.} 4. Qe2 {...Nd6 or Nf6 loses to 5 Nc6} 4... d5 5. d3 Nf6 {Same thing here, 6 Nc6 loses for black.}']);
-    // this.pgns.push(['[OpeningName "Italian Game"]', '1.e4 e5 2.Nf3 Nc6 3.Bc4']);
-    // this.pgns.push(['[OpeningName "Four Knights Opening"]', '1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6']);
-    // this.pgns.push(['[OpeningName "Italian Game: Two Knights Defense (Fried Liver)"]', '1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6']);
-    // this.pgns.push(['[OpeningName "Queen\'s Gambit Accepted"]', '1.d4 d5 2.c4 dxc4']);
-    // this.pgns.push(['[OpeningName "Queen\'s Gambit Declined"]', '1.d4 d5 2.c4 e6']);
-    // this.pgns.push(['[OpeningName "Slav Defense"]', '1.d4 d5 2.c4 c6']);
   }
 
   buildBoardForPgn(pgn: Array<string>) {
+    console.log('buildBoardForPgn');
     this.chessboard.buildPgn(pgn);
   }
 
