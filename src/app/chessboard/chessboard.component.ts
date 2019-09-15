@@ -32,7 +32,6 @@ export class ChessboardComponent {
     public modalController: ModalController
   ) {
     this.configurationService.initialize().then(config => {
-      console.log('config: ' + JSON.stringify(config));
       this.configuration = config;
     });
   }
@@ -53,7 +52,6 @@ export class ChessboardComponent {
   }
 
   buildStartPosition() {
-    console.log('buildStartPosition');
     const startingFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
     const self = this;
     this.initializing = true;
@@ -140,6 +138,8 @@ export class ChessboardComponent {
     this.uglyForceBoardRedraw();
   }
 
+
+
   getMovesAsFENs() {
     const chessObj: Chess = new Chess();
     const fens: Array<string> = this.chess.history().map(function(move) {
@@ -214,6 +214,10 @@ export class ChessboardComponent {
 
   isShowingLastPosition() {
     return this.fenPointer === this.fenHistory.length - 1;
+  }
+
+  getCommentForPosition() {
+    return this.chess.comments();
   }
 
   fen() {

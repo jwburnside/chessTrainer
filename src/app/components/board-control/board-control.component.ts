@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 import * as Chess from 'chess.js';
 import { sampleSize } from 'lodash';
 import { Observable, Subscription, timer } from 'rxjs';
@@ -24,12 +25,15 @@ export class BoardControlComponent implements OnInit{
   multipleChoiceCard: MultipleChoiceCard;
   multipleChoiceForm: FormGroup;
 
+  shouldDisplayCorrectAnswer: boolean;
+  correctAnswer: string;
+
   private subscription: Subscription;
   private timer$: Observable<number> = timer(0, this.moveInterval);
 
   @ViewChild('chessboard', { static: true }) chessboard: ChessboardComponent;
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder, private toastCtrl: ToastController) {
     this.multipleChoiceForm = this.formBuilder.group({});
   }
 
@@ -39,15 +43,51 @@ export class BoardControlComponent implements OnInit{
   }
 
   loadPgns() {
-    this.pgns.push(['[OpeningName "Petrov Defense"]', '1. e4 e5 2. Nf3 Nf6 {This is the main line in the Petrov defense.} 3. Nxe5 Nxe4 {Blacks worst move.} 4. Qe2 {...Nd6 or Nf6 loses to 5 Nc6} 4... d5 5. d3 Nf6 {Same thing here, 6 Nc6 loses for black.}']);
+    // e4
+    // this.pgns.push(['[OpeningName "Sicilian Defense"]', '1.e4 {This is a comment} c5']);
+    // this.pgns.push(['[OpeningName "French Defense"]', '1.e4 e6']);
+    // this.pgns.push(['[OpeningName "Ruy Lopez Opening"]', '1.e4 e5 2.Nf3 Nc6 3.Bb5']);
+    // this.pgns.push(['[OpeningName "Caro-Kann Defense"]', '1.e4 c6']);
+    // this.pgns.push(['[OpeningName "Italian Game"]', '1.e4 e5 2.Nf3 Nc6 3.Bc4']);
+    // this.pgns.push(['[OpeningName "Sicilian Defense: Closed"]', '1.e4 c5 2.Nc3']);
+    // this.pgns.push(['[OpeningName "Scandinavian Defense"]', '1.e4 d5']);
+    // this.pgns.push(['[OpeningName "Pirc Defense: 2.d4 Nf6"]', '1.e4 d6 2.d4 Nf6']);
+    // this.pgns.push(['[OpeningName "Sicilian Defense: Alapin Variation"]', '1.e4 c5 2.c3']);
+    // this.pgns.push(['[OpeningName "Alekhine Defense"]', '1.e4 Nf6']);
+    // this.pgns.push(['[OpeningName "King\'s Gambit"]', '1.e4 e5 2.f4']);
+    // this.pgns.push(['[OpeningName "Scotch Game"]', '1.e4 e5 2.Nf3 Nc6 3.d4']);
+    //
+    // this.pgns.push(['[OpeningName "Queen\'s Gambit"]', '1.d4 d5 2.c4']);
+    // this.pgns.push(['[OpeningName "Slav Defense"]', '1.d4 d5 2.c4 c6']);
+    // this.pgns.push(['[OpeningName "King\'s Indian Defense"]', '1.d4 Nf6 2.c4 g6']);
+    // this.pgns.push(['[OpeningName "Nimzo-Indian Defense"]', '1.d4 Nf6 2.c4 e6 3.Nc3 Bb4']);
+    // this.pgns.push(['[OpeningName "Queen\'s Indian Defense"]', '1.d4 Nf6 2.c4 e6 3.Nf3 b6']);
+    // this.pgns.push(['[OpeningName "Bogo-Indian Defense"]', '1.d4 Nf6 2.c4 e6 3.Nf3 Bb4+']);
+    // this.pgns.push(['[OpeningName "Gruenfeld Defense"]', '1.d4 Nf6 2.c4 g6 3.Nc3 d5']);
+    // this.pgns.push(['[OpeningName "Dutch Defense"]', '1.d4 f5']);
+    // this.pgns.push(['[OpeningName "Trompowsky Attack"]', '1.d4 Nf6 2.Bg5']);
+    // this.pgns.push(['[OpeningName "Benko Gambit"]', '1.d4 Nf6 2.c4 c5 3.d5 b5']);
+    // this.pgns.push(['[OpeningName "Queen\'s Pawn Opening: London System"]', '1.d4 d5 2.Nf3 Nf6 3.Bf4']);
+    this.pgns.push(['[OpeningName "Benoni Defense: Modern Variation, 4.Nc3 exd5 5.cxd5 d6"]', '1.d4 {the first move was just made} Nf6 2.c4 c5 {2nd move for black} 3.d5 {third move for white} e6 4.Nc3 exd5 5.cxd5 {second to last} d6 {this is the last move}']);
+    //
+    // this.pgns.push(['[OpeningName "Catalan Opening"]', '1.d4 Nf6 2.c4 e6 3.g3']);
+    // this.pgns.push(['[OpeningName "Reti Opening"]', '1.Nf3']);
+    // this.pgns.push(['[OpeningName "English Opening"]', '1.c4']);
+    // this.pgns.push(['[OpeningName "Bird\'s Opening"]', '1.f4']);
+    // this.pgns.push(['[OpeningName "King\'s Indian Attack"]', '1.Nf3 d5 2.g3']);
+    // this.pgns.push(['[OpeningName "Hungarian Opening"]', '1.g3']);
+    // this.pgns.push(['[OpeningName "Nimzowitsch-Larsen Attack"]', '1.b3']);
+    // this.pgns.push(['[OpeningName "Polish Opening"]', '1.b4']);
+    // this.pgns.push(['[OpeningName "Grob Opening"]', '1.g4']);
+
   }
 
   buildBoardForPgn(pgn: Array<string>) {
-    console.log('buildBoardForPgn');
     this.chessboard.buildPgn(pgn);
   }
 
   loadOpening() {
+    console.log('loadOpening');
     this.selectedIndex = null;
     this.buildMultipleChoiceCard();
     const correctMultipleChoiceCard = this.multipleChoiceCard.multipleChoiceItems.find(mci => {
@@ -61,7 +101,9 @@ export class BoardControlComponent implements OnInit{
       this.chessboard.setOrientation(this.orientation);
     }
 
-    this.startMoving();
+    // this.startMoving();
+    console.log('comments: ' + this.chessboard.getCommentForPosition());
+
   }
 
   buildMultipleChoiceCard() {
@@ -81,6 +123,7 @@ export class BoardControlComponent implements OnInit{
     });
 
     multipleChoiceItems[0].isCorrectAnswer = true;
+    this.correctAnswer = multipleChoiceItems[0].answer;
 
     return multipleChoiceItems;
   }
@@ -89,7 +132,12 @@ export class BoardControlComponent implements OnInit{
     this.chessboard.showNextPosition();
   }
 
+  showPreviousPosition() {
+    this.chessboard.showPreviousPosition();
+  }
+
   startMoving() {
+    this.shouldDisplayCorrectAnswer = false;
     this.shouldDisableStartButton = true;
     this.subscription = this.timer$.subscribe(result => {
       if (!this.chessboard.isShowingLastPosition()) {
@@ -98,6 +146,19 @@ export class BoardControlComponent implements OnInit{
         this.stopMoving();
       }
     });
+  }
+
+  async displayAnswer() {
+    const toast = await this.toastCtrl.create({
+      message: this.correctAnswer,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  reload() {
+    this.chessboard.showFirstPosition();
+    this.startMoving();
   }
 
   stopMoving() {
