@@ -102,7 +102,7 @@ export class BoardControlComponent implements OnInit{
     }
 
     // this.startMoving();
-    console.log('comments: ' + this.chessboard.getCommentForPosition());
+
 
   }
 
@@ -136,6 +136,10 @@ export class BoardControlComponent implements OnInit{
     this.chessboard.showPreviousPosition();
   }
 
+  get comment(): string {
+    return this.chessboard.getCommentForPosition();
+  }
+
   startMoving() {
     this.shouldDisplayCorrectAnswer = false;
     this.shouldDisableStartButton = true;
@@ -158,7 +162,6 @@ export class BoardControlComponent implements OnInit{
 
   reload() {
     this.chessboard.showFirstPosition();
-    this.startMoving();
   }
 
   stopMoving() {

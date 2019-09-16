@@ -217,7 +217,8 @@ export class ChessboardComponent {
   }
 
   getCommentForPosition() {
-    return this.chess.comments();
+    const comment = this.chess.comments()[this.fenPointer - 1];
+    return comment === ',' ? null : comment;
   }
 
   fen() {

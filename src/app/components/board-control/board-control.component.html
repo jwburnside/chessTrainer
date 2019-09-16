@@ -20,8 +20,8 @@
 <!--      <ion-button>-->
 <!--        <ion-icon slot="icon-only" name="skip-forward"></ion-icon>-->
 <!--      </ion-button>-->
-      <ion-button>
-        <ion-icon slot="icon-only" name="refresh" (click)="reload()"></ion-icon>
+      <ion-button (click)="reload()">
+        <ion-icon slot="icon-only" name="refresh"></ion-icon>
       </ion-button>
       <ion-button (click)="displayAnswer()">
         <ion-icon slot="icon-only" name="help"></ion-icon>
@@ -31,6 +31,11 @@
   <div class="board_wrapper" id="board-wrapper">
     <chessboard #chessboard></chessboard>
   </div>
+  <ion-content margin-top>
+    <span class="comment">
+      {{comment}}
+    </span>
+  </ion-content>
 <!--    <button (click)="displayAnswer()">Display Answer</button>-->
 
   <!--      <ion-select [(ngModel)]="orientation" (ionChange)="onOrientationChangedHandler()" okText="OK" cancelText="Dismiss">-->
