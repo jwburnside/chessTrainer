@@ -1,6 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
+import { Http } from '@angular/http';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { Platform, ToastController } from '@ionic/angular';
 import * as Chess from 'chess.js';
 import { sampleSize } from 'lodash';
 import { Observable, Subscription, timer } from 'rxjs';
@@ -8,13 +11,14 @@ import { ChessboardComponent } from '../../chessboard';
 import { ChessHeader } from '../../models/chess-header';
 import { MultipleChoiceCard } from '../../models/multiple-choice-card';
 import { MultipleChoiceItem } from '../../models/multiple-choice-item';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-board-control',
   templateUrl: './board-control.component.html',
-  styleUrls: ['./board-control.component.scss'],
+  styleUrls: ['./board-control.component.scss']
 })
-export class BoardControlComponent implements OnInit{
+export class BoardControlComponent implements OnInit {
   orientation = 'flip';
   moveInterval = 1000;
   multipleChoiceItemCount = 4;
@@ -33,13 +37,48 @@ export class BoardControlComponent implements OnInit{
 
   @ViewChild('chessboard', { static: true }) chessboard: ChessboardComponent;
 
-  constructor(public formBuilder: FormBuilder, private toastCtrl: ToastController) {
+  constructor(public formBuilder: FormBuilder, private toastCtrl: ToastController, private file: File) {
     this.multipleChoiceForm = this.formBuilder.group({});
   }
 
   ngOnInit(): void {
     this.loadPgns();
     this.chessboard.buildStartPosition();
+    this.readPgn();
+  }
+
+  readPgn() {
+    const fileName = 'logical_chess.pgn';
+    const ROOT_DIRECTORY = this.file.applicationStorageDirectory;
+    const downloadDirectoryName = 'tempDownloadDirectory';
+
+    // Create a folder in memory location
+    this.file
+      .createDir(ROOT_DIRECTORY, downloadDirectoryName, true)
+      .then(entry => {
+        this.file.resolveDirectoryUrl(entry.toURL()).then(
+          directoryEntry => {
+            directoryEntry.getFile(fileName, { create: true, exclusive: false }, function(fileEntry) {
+              console.log('fileEntry: ' + JSON.stringify(fileEntry));
+
+              fileEntry.file(function(file) {
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                  console.log('Successful file read: ' + this.result);
+                };
+
+                reader.readAsText(file);
+              }); // Need error handler
+            }); // Need error handler
+          },
+          err => {
+            // Handle error
+          }
+        );
+      })
+      .catch(error => {
+        alert('2 error' + JSON.stringify(error));
+      });
   }
 
   loadPgns() {
@@ -68,7 +107,10 @@ export class BoardControlComponent implements OnInit{
     // this.pgns.push(['[OpeningName "Trompowsky Attack"]', '1.d4 Nf6 2.Bg5']);
     // this.pgns.push(['[OpeningName "Benko Gambit"]', '1.d4 Nf6 2.c4 c5 3.d5 b5']);
     // this.pgns.push(['[OpeningName "Queen\'s Pawn Opening: London System"]', '1.d4 d5 2.Nf3 Nf6 3.Bf4']);
-    this.pgns.push(['[OpeningName "Benoni Defense: Modern Variation, 4.Nc3 exd5 5.cxd5 d6"]', '1.d4 {the first move was just made} Nf6 2.c4 c5 {2nd move for black} 3.d5 {third move for white} e6 4.Nc3 exd5 5.cxd5 {second to last} d6 {this is the last move}']);
+    this.pgns.push([
+      '[OpeningName "Benoni Defense: Modern Variation, 4.Nc3 exd5 5.cxd5 d6"]',
+      '1.d4 {the first move was just made} Nf6 2.c4 c5 {2nd move for black} 3.d5 {third move for white} e6 4.Nc3 exd5 5.cxd5 {second to last} d6 {this is the last move}'
+    ]);
     //
     // this.pgns.push(['[OpeningName "Catalan Opening"]', '1.d4 Nf6 2.c4 e6 3.g3']);
     // this.pgns.push(['[OpeningName "Reti Opening"]', '1.Nf3']);
@@ -79,8 +121,9 @@ export class BoardControlComponent implements OnInit{
     // this.pgns.push(['[OpeningName "Nimzowitsch-Larsen Attack"]', '1.b3']);
     // this.pgns.push(['[OpeningName "Polish Opening"]', '1.b4']);
     // this.pgns.push(['[OpeningName "Grob Opening"]', '1.g4']);
-
   }
+
+  process() {}
 
   buildBoardForPgn(pgn: Array<string>) {
     this.chessboard.buildPgn(pgn);
@@ -102,8 +145,6 @@ export class BoardControlComponent implements OnInit{
     }
 
     // this.startMoving();
-
-
   }
 
   buildMultipleChoiceCard() {

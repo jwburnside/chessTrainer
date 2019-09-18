@@ -1,18 +1,18 @@
 <div padding class="container">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="primary" style="visibility: hidden">
     <ion-buttons slot="start">
       <ion-button [disabled]="shouldDisableStartButton" (click)="loadOpening()">
         <ion-icon slot="icon-only" name="play"></ion-icon>
       </ion-button>
-      <ion-button>
-        <ion-icon slot="icon-only" name="pause"></ion-icon>
-      </ion-button>
+<!--      <ion-button>-->
+<!--        <ion-icon slot="icon-only" name="pause"></ion-icon>-->
+<!--      </ion-button>-->
 <!--      <ion-button>-->
 <!--        <ion-icon slot="icon-only" name="skip-backward"></ion-icon>-->
 <!--      </ion-button>-->
-<!--      <ion-button>-->
-<!--        <ion-icon slot="icon-only" name="rewind" (click)="showPreviousPosition()"></ion-icon>-->
-<!--      </ion-button>-->
+      <ion-button (click)="showPreviousPosition()">
+        <ion-icon slot="icon-only" name="rewind"></ion-icon>
+      </ion-button>
 
       <ion-button  (click)="showNextPosition()">
         <ion-icon slot="icon-only" name="fastforward"></ion-icon>
@@ -23,13 +23,13 @@
       <ion-button (click)="reload()">
         <ion-icon slot="icon-only" name="refresh"></ion-icon>
       </ion-button>
-      <ion-button (click)="displayAnswer()">
-        <ion-icon slot="icon-only" name="help"></ion-icon>
-      </ion-button>
+<!--      <ion-button (click)="displayAnswer()">-->
+<!--        <ion-icon slot="icon-only" name="help"></ion-icon>-->
+<!--      </ion-button>-->
     </ion-buttons>
   </ion-toolbar>
   <div class="board_wrapper" id="board-wrapper">
-    <chessboard #chessboard></chessboard>
+    <chessboard #chessboard style="visibility: hidden"></chessboard>
   </div>
   <ion-content margin-top>
     <span class="comment">
