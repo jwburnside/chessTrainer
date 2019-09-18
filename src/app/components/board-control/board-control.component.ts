@@ -29,6 +29,7 @@ export class BoardControlComponent implements OnInit {
   multipleChoiceCard: MultipleChoiceCard;
   multipleChoiceForm: FormGroup;
 
+
   shouldDisplayCorrectAnswer: boolean;
   correctAnswer: string;
 
@@ -62,13 +63,27 @@ export class BoardControlComponent implements OnInit {
               fileEntry.file(function(file) {
                 const reader = new FileReader();
                 reader.onloadend = function() {
-                  const resultArrayBuffer: ArrayBuffer = this.result as ArrayBuffer;
                   const resultString: string = this.result as string;
-                  // console.log('typeOf: ' + typeof this.result);
-                  // const lines = resultString.split(' \n ');
-                  // lines.forEach(line => {
-                  //   console.log('line: ' + line);
-                  // });
+                  const lines = resultString.split('\n');
+                  let gameCount = 0;
+                  const loadedGames: Array<string> = [];
+                  let doesNextEmptyLineRepresentEndOfPgn = false;
+
+                  for (let i = 0; i < lines.length; i++) {
+                    if (loadedGames[gameCount] === undefined) {
+                      loadedGames[gameCount] = '';
+                      doesNextEmptyLineRepresentEndOfPgn = false;
+                    }
+                    loadedGames[gameCount] = loadedGames[gameCount].concat(lines[i]);
+                    if (lines[i] === '\r') {
+                      if (doesNextEmptyLineRepresentEndOfPgn) {
+                        gameCount++;
+                      } else {
+                        doesNextEmptyLineRepresentEndOfPgn = true;
+                      }
+                    }
+                  }
+
                 };
 
                 reader.readAsText(file);
