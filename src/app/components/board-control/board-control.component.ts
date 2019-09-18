@@ -59,12 +59,16 @@ export class BoardControlComponent implements OnInit {
         this.file.resolveDirectoryUrl(entry.toURL()).then(
           directoryEntry => {
             directoryEntry.getFile(fileName, { create: true, exclusive: false }, function(fileEntry) {
-              console.log('fileEntry: ' + JSON.stringify(fileEntry));
-
               fileEntry.file(function(file) {
                 const reader = new FileReader();
                 reader.onloadend = function() {
-                  console.log('Successful file read: ' + this.result);
+                  const resultArrayBuffer: ArrayBuffer = this.result as ArrayBuffer;
+                  const resultString: string = this.result as string;
+                  // console.log('typeOf: ' + typeof this.result);
+                  // const lines = resultString.split(' \n ');
+                  // lines.forEach(line => {
+                  //   console.log('line: ' + line);
+                  // });
                 };
 
                 reader.readAsText(file);
