@@ -97,8 +97,6 @@ export class ChessboardComponent {
     if (this.board) {
       this.board.destroy();
     }
-    console.log('pgn: ' + pgn);
-
     const loadPgnSuccess: boolean = this.chess.load_pgn(pgn);
     const movesAsFens = this.getMovesAsFENs();
 
@@ -135,7 +133,6 @@ export class ChessboardComponent {
       });
 
     this.showFirstPosition();
-
     this.uglyForceBoardRedraw();
   }
 

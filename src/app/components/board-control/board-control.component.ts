@@ -28,7 +28,8 @@ export class BoardControlComponent implements OnInit {
   isFirstOpeningLoaded = false;
   multipleChoiceCard: MultipleChoiceCard;
   multipleChoiceForm: FormGroup;
-  loadedFileText: string;
+
+  currentGameIndex = 0;
   loadedGames: Array<string> = [];
 
   shouldDisplayCorrectAnswer: boolean;
@@ -46,13 +47,11 @@ export class BoardControlComponent implements OnInit {
   ngOnInit(): void {
     this.readPgnFile().subscribe(loadedGames => {
       this.loadedGames = loadedGames;
-      this.chessboard.buildStartPosition();
+      this.buildBoardForPgn(loadedGames[this.currentGameIndex]);
     });
   }
 
   readPgnFile(): ReplaySubject<Array<string>> {
-    const self = this;
-
     const obs: ReplaySubject<Array<string>> = new ReplaySubject(1);
     const fileName = 'logical_chess.pgn';
     const ROOT_DIRECTORY = this.file.applicationStorageDirectory;
@@ -72,7 +71,6 @@ export class BoardControlComponent implements OnInit {
                     const reader = new FileReader();
                     reader.onloadend = function() {
                       const resultString: string = this.result as string;
-                      self.loadedFileText = resultString;
                       const lines = resultString.split('\n');
                       let gameCount = 0;
                       const loadedGames: Array<string> = [];
@@ -174,9 +172,6 @@ export class BoardControlComponent implements OnInit {
   }
 
   loadOpening() {
-
-    // console.log('loadedGames0: ' + this.loadedGames[0]);
-
     this.buildBoardForPgn(this.loadedGames[0]);
 
     // this.selectedIndex = null;
@@ -223,6 +218,20 @@ export class BoardControlComponent implements OnInit {
 
   showPreviousPosition() {
     this.chessboard.showPreviousPosition();
+  }
+
+  showPreviousGame() {
+    if (this.currentGameIndex > 0) {
+      this.currentGameIndex--;
+      this.buildBoardForPgn(this.loadedGames[this.currentGameIndex]);
+    }
+  }
+
+  showNextGame() {
+    if (this.currentGameIndex < this.loadedGames.length) {
+      this.currentGameIndex++;
+      this.buildBoardForPgn(this.loadedGames[this.currentGameIndex]);
+    }
   }
 
   get comment(): string {

@@ -7,9 +7,9 @@
 <!--      <ion-button>-->
 <!--        <ion-icon slot="icon-only" name="pause"></ion-icon>-->
 <!--      </ion-button>-->
-<!--      <ion-button>-->
-<!--        <ion-icon slot="icon-only" name="skip-backward"></ion-icon>-->
-<!--      </ion-button>-->
+      <ion-button (click)="showPreviousGame()">
+        <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
+      </ion-button>
       <ion-button (click)="showPreviousPosition()">
         <ion-icon slot="icon-only" name="rewind"></ion-icon>
       </ion-button>
@@ -17,9 +17,9 @@
       <ion-button (click)="showNextPosition()">
         <ion-icon slot="icon-only" name="fastforward"></ion-icon>
       </ion-button>
-<!--      <ion-button>-->
-<!--        <ion-icon slot="icon-only" name="skip-forward"></ion-icon>-->
-<!--      </ion-button>-->
+      <ion-button (click)="showNextGame()">
+        <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
+      </ion-button>
       <ion-button (click)="reload()">
         <ion-icon slot="icon-only" name="refresh"></ion-icon>
       </ion-button>
