@@ -1,5 +1,5 @@
 <div padding class="container">
-  <ion-toolbar color="primary" style="visibility: hidden">
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button [disabled]="shouldDisableStartButton" (click)="loadOpening()">
         <ion-icon slot="icon-only" name="play"></ion-icon>
@@ -14,7 +14,7 @@
         <ion-icon slot="icon-only" name="rewind"></ion-icon>
       </ion-button>
 
-      <ion-button  (click)="showNextPosition()">
+      <ion-button (click)="showNextPosition()">
         <ion-icon slot="icon-only" name="fastforward"></ion-icon>
       </ion-button>
 <!--      <ion-button>-->
@@ -29,7 +29,7 @@
     </ion-buttons>
   </ion-toolbar>
   <div class="board_wrapper" id="board-wrapper">
-    <chessboard #chessboard style="visibility: hidden"></chessboard>
+    <chessboard #chessboard></chessboard>
   </div>
   <ion-content margin-top>
     <span class="comment">

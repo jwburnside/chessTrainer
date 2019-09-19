@@ -90,15 +90,16 @@ export class ChessboardComponent {
     this.uglyForceBoardRedraw();
   }
 
-  buildPgn(pgn: Array<string>) {
+  buildPgn(pgn: string) {
+
     const self = this;
     this.initializing = true;
     if (this.board) {
       this.board.destroy();
     }
+    console.log('pgn: ' + pgn);
 
-    this.chess.load_pgn(pgn.join('\n'));
-
+    const loadPgnSuccess: boolean = this.chess.load_pgn(pgn);
     const movesAsFens = this.getMovesAsFENs();
 
     this.originalFen = movesAsFens[0];
@@ -194,6 +195,7 @@ export class ChessboardComponent {
 
   showNextPosition() {
     if (this.fenPointer === this.fenHistory.length - 1) {
+      console.log('returning');
       return;
     }
     this.fenPointer++;

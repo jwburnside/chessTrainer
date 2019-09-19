@@ -6,7 +6,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { Platform, ToastController } from '@ionic/angular';
 import * as Chess from 'chess.js';
 import { sampleSize } from 'lodash';
-import { Observable, Subscription, timer } from 'rxjs';
+import { Observable, ReplaySubject, Subscription, timer } from 'rxjs';
 import { ChessboardComponent } from '../../chessboard';
 import { ChessHeader } from '../../models/chess-header';
 import { MultipleChoiceCard } from '../../models/multiple-choice-card';
@@ -28,7 +28,8 @@ export class BoardControlComponent implements OnInit {
   isFirstOpeningLoaded = false;
   multipleChoiceCard: MultipleChoiceCard;
   multipleChoiceForm: FormGroup;
-
+  loadedFileText: string;
+  loadedGames: Array<string> = [];
 
   shouldDisplayCorrectAnswer: boolean;
   correctAnswer: string;
@@ -43,61 +44,85 @@ export class BoardControlComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadPgns();
-    this.chessboard.buildStartPosition();
-    this.readPgn();
+    this.readPgnFile().subscribe(loadedGames => {
+      this.loadedGames = loadedGames;
+      this.chessboard.buildStartPosition();
+    });
   }
 
-  readPgn() {
+  readPgnFile(): ReplaySubject<Array<string>> {
+    const self = this;
+
+    const obs: ReplaySubject<Array<string>> = new ReplaySubject(1);
     const fileName = 'logical_chess.pgn';
     const ROOT_DIRECTORY = this.file.applicationStorageDirectory;
     const downloadDirectoryName = 'tempDownloadDirectory';
 
     // Create a folder in memory location
-    this.file
-      .createDir(ROOT_DIRECTORY, downloadDirectoryName, true)
-      .then(entry => {
+    this.file.createDir(ROOT_DIRECTORY, downloadDirectoryName, true).then(
+      entry => {
         this.file.resolveDirectoryUrl(entry.toURL()).then(
           directoryEntry => {
-            directoryEntry.getFile(fileName, { create: true, exclusive: false }, function(fileEntry) {
-              fileEntry.file(function(file) {
-                const reader = new FileReader();
-                reader.onloadend = function() {
-                  const resultString: string = this.result as string;
-                  const lines = resultString.split('\n');
-                  let gameCount = 0;
-                  const loadedGames: Array<string> = [];
-                  let doesNextEmptyLineRepresentEndOfPgn = false;
+            directoryEntry.getFile(
+              fileName,
+              { create: true, exclusive: false },
+              fileEntry => {
+                fileEntry.file(
+                  file => {
+                    const reader = new FileReader();
+                    reader.onloadend = function() {
+                      const resultString: string = this.result as string;
+                      self.loadedFileText = resultString;
+                      const lines = resultString.split('\n');
+                      let gameCount = 0;
+                      const loadedGames: Array<string> = [];
+                      let doesNextEmptyLineRepresentEndOfPgn = false;
 
-                  for (let i = 0; i < lines.length; i++) {
-                    if (loadedGames[gameCount] === undefined) {
-                      loadedGames[gameCount] = '';
-                      doesNextEmptyLineRepresentEndOfPgn = false;
-                    }
-                    loadedGames[gameCount] = loadedGames[gameCount].concat(lines[i]);
-                    if (lines[i] === '\r') {
-                      if (doesNextEmptyLineRepresentEndOfPgn) {
-                        gameCount++;
-                      } else {
-                        doesNextEmptyLineRepresentEndOfPgn = true;
+                      for (let i = 0; i < lines.length; i++) {
+                        if (loadedGames[gameCount] === undefined) {
+                          loadedGames[gameCount] = '';
+                          doesNextEmptyLineRepresentEndOfPgn = false;
+                        }
+                        loadedGames[gameCount] = loadedGames[gameCount].concat(lines[i]).concat('\n');
+                        if (lines[i] === '\r') {
+                          if (doesNextEmptyLineRepresentEndOfPgn) {
+                            gameCount++;
+                          } else {
+                            doesNextEmptyLineRepresentEndOfPgn = true;
+                          }
+                        }
                       }
-                    }
+
+                      obs.next(loadedGames);
+                      obs.complete();
+                    };
+                    reader.readAsText(file);
+                  },
+                  err => {
+                    obs.error(err);
+                    obs.complete();
                   }
-
-                };
-
-                reader.readAsText(file);
-              }); // Need error handler
-            }); // Need error handler
+                );
+              },
+              err => {
+                obs.error(err);
+                obs.complete();
+              }
+            );
           },
           err => {
-            // Handle error
+            obs.error(err);
+            obs.complete();
           }
         );
-      })
-      .catch(error => {
-        alert('2 error' + JSON.stringify(error));
-      });
+      },
+      err => {
+        obs.error(err);
+        obs.complete();
+      }
+    );
+
+    return obs;
   }
 
   loadPgns() {
@@ -144,24 +169,28 @@ export class BoardControlComponent implements OnInit {
 
   process() {}
 
-  buildBoardForPgn(pgn: Array<string>) {
+  buildBoardForPgn(pgn: string) {
     this.chessboard.buildPgn(pgn);
   }
 
   loadOpening() {
-    console.log('loadOpening');
-    this.selectedIndex = null;
-    this.buildMultipleChoiceCard();
-    const correctMultipleChoiceCard = this.multipleChoiceCard.multipleChoiceItems.find(mci => {
-      return mci.isCorrectAnswer;
-    });
-    this.buildBoardForPgn(correctMultipleChoiceCard.pgn);
 
-    if (this.orientation === 'flip') {
-      this.chessboard.flipRandom();
-    } else {
-      this.chessboard.setOrientation(this.orientation);
-    }
+    // console.log('loadedGames0: ' + this.loadedGames[0]);
+
+    this.buildBoardForPgn(this.loadedGames[0]);
+
+    // this.selectedIndex = null;
+    // this.buildMultipleChoiceCard();
+    // const correctMultipleChoiceCard = this.multipleChoiceCard.multipleChoiceItems.find(mci => {
+    //   return mci.isCorrectAnswer;
+    // });
+    // this.buildBoardForPgn(correctMultipleChoiceCard.pgn);
+    //
+    // if (this.orientation === 'flip') {
+    //   this.chessboard.flipRandom();
+    // } else {
+    //   this.chessboard.setOrientation(this.orientation);
+    // }
 
     // this.startMoving();
   }
