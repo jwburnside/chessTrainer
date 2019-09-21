@@ -37,22 +37,22 @@ export class PgnLoaderService {
                         // TODO: Returns a different type when I use an error function in its place.
                         reader.onloadend = function() {
                           const resultString: string = this.result as string;
-                          const lines = resultString.split('\n');
-                          let gameCount = 0;
+                          const linesArray = resultString.split('\n');
+                            let gameCount = 0;
                           const loadedGames: Array<string> = [];
-                          let doesNextEmptyLineRepresentEndOfPgn = false;
+                          let doesNextEmptyLineRepresentEndOfGame = false;
 
-                          for (let i = 0; i < lines.length; i++) {
+                          for (let i = 0; i < linesArray.length; i++) {
                             if (loadedGames[gameCount] === undefined) {
                               loadedGames[gameCount] = '';
-                              doesNextEmptyLineRepresentEndOfPgn = false;
+                              doesNextEmptyLineRepresentEndOfGame = false;
                             }
-                            loadedGames[gameCount] = loadedGames[gameCount].concat(lines[i]).concat('\n');
-                            if (lines[i] === '\r') {
-                              if (doesNextEmptyLineRepresentEndOfPgn) {
+                            loadedGames[gameCount] = loadedGames[gameCount].concat(linesArray[i]).concat('\n');
+                            if (linesArray[i] === '\r' || linesArray[i] === '') {
+                              if (doesNextEmptyLineRepresentEndOfGame) {
                                 gameCount++;
                               } else {
-                                doesNextEmptyLineRepresentEndOfPgn = true;
+                                doesNextEmptyLineRepresentEndOfGame = true;
                               }
                             }
                           }
@@ -60,28 +60,33 @@ export class PgnLoaderService {
                           obs.complete();
                         };
                         reader.readAsText(file);
-                      }, err => {
+                      },
+                      err => {
                         obs.error(err);
                         obs.complete();
                       }
                     );
-                  }, err => {
+                  },
+                  err => {
                     obs.error(err);
                     obs.complete();
                   }
                 );
-              }, err => {
+              },
+              err => {
                 obs.error(err);
                 obs.complete();
               }
             );
-          }).catch(err => {
-              obs.error(err);
-              obs.complete();
+          })
+          .catch(err => {
+            obs.error(err);
+            obs.complete();
           });
-      }).catch(err => {
-          obs.error(err);
-          obs.complete();
+      })
+      .catch(err => {
+        obs.error(err);
+        obs.complete();
       });
     return obs;
   }

@@ -40,24 +40,24 @@ export class BoardControlComponent implements OnInit {
   constructor(private toastCtrl: ToastController, private pgnLoaderService: PgnLoaderService) {}
 
   ngOnInit(): void {
-
-      // this.pgnLoaderService.test(PgnFilenameConstants.LOGICAL_CHESS);
-        // this.pgnLoaderService.loadPgnFromAssets(PgnFilenameConstants.LOGICAL_CHESS);
-      this.pgnLoaderService.loadPgnFromAssets(PgnFilenameConstants.LOGICAL_CHESS).subscribe(loadedGames => {
-
-      this.loadedGames = loadedGames;
-      console.log('loadedGames: ' + JSON.stringify(this.loadedGames));
-      this.loadGameAndHeader();
-    }, err => {
-      console.log('err: ' + JSON.stringify(err.message));
-    });
+    this.pgnLoaderService.loadPgnFromAssets(PgnFilenameConstants.LOGICAL_CHESS).subscribe(
+      loadedGames => {
+        this.loadedGames = loadedGames;
+        this.loadGameAndHeader();
+      },
+      err => {
+        console.log('err: ' + JSON.stringify(err.message));
+      }
+    );
   }
-
 
   loadGameAndHeader() {
     this.chessboard.buildPgn(this.loadedGames[this.currentGameIndex]);
-    this.currentGameHeader = JSON.stringify(this.chessboard.getHeader()['Event']);
-    console.log('currentGameHeader: ' + this.currentGameHeader);
+
+    this.currentGameHeader = JSON.stringify(this.chessboard.getHeader()['OpeningName']);
+    if (this.currentGameHeader === undefined) {
+      this.currentGameHeader = JSON.stringify(this.chessboard.getHeader()['Event']);
+    }
   }
 
   // TODO: These behaviors should be modified based on the exercise.
@@ -89,7 +89,6 @@ export class BoardControlComponent implements OnInit {
   handleReloadClicked() {
     this.chessboard.showFirstPosition();
   }
-
 
   getHeader(): string {
     return this.chessboard.getHeader();
