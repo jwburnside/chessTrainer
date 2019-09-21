@@ -1,26 +1,29 @@
 <div padding class="container">
+      <span *ngIf="currentGameHeader" class="header">
+      {{currentGameHeader}}
+    </span>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button [disabled]="shouldDisableStartButton" (click)="loadOpening()">
-        <ion-icon slot="icon-only" name="play"></ion-icon>
-      </ion-button>
+<!--      <ion-button [disabled]="shouldDisableStartButton" (click)="loadOpening()">-->
+<!--        <ion-icon slot="icon-only" name="play"></ion-icon>-->
+<!--      </ion-button>-->
 <!--      <ion-button>-->
 <!--        <ion-icon slot="icon-only" name="pause"></ion-icon>-->
 <!--      </ion-button>-->
-      <ion-button (click)="showPreviousGame()">
+      <ion-button (click)="handleSkipBackwardClicked()">
         <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
       </ion-button>
-      <ion-button (click)="showPreviousPosition()">
+      <ion-button (click)="handleRewindClicked()">
         <ion-icon slot="icon-only" name="rewind"></ion-icon>
       </ion-button>
 
-      <ion-button (click)="showNextPosition()">
+      <ion-button (click)="handleFastForwardClicked()">
         <ion-icon slot="icon-only" name="fastforward"></ion-icon>
       </ion-button>
-      <ion-button (click)="showNextGame()">
+      <ion-button (click)="handleSkipForwardClicked()">
         <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
       </ion-button>
-      <ion-button (click)="reload()">
+      <ion-button (click)="handleReloadClicked()">
         <ion-icon slot="icon-only" name="refresh"></ion-icon>
       </ion-button>
 <!--      <ion-button (click)="displayAnswer()">-->
@@ -32,8 +35,9 @@
     <chessboard #chessboard></chessboard>
   </div>
   <ion-content margin-top>
+
     <span class="comment">
-      {{comment}}
+      {{currentComment}}
     </span>
   </ion-content>
 <!--    <button (click)="displayAnswer()">Display Answer</button>-->

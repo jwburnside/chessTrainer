@@ -1,0 +1,131 @@
+[OpeningName "Sicilian Defense"]
+
+1.e4 {This is a comment} c5
+
+[OpeningName "French Defense"]
+
+1.e4 e6
+
+[OpeningName "Ruy Lopez Opening"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bb5
+
+[OpeningName "Caro-Kann Defense"]
+
+1.e4 c6
+
+[OpeningName "Italian Game"]
+
+1.e4 e5 2.Nf3 Nc6 3.Bc4
+
+[OpeningName "Sicilian Defense: Closed"]
+
+1.e4 c5 2.Nc3
+
+[OpeningName "Scandinavian Defense"]
+
+1.e4 d5
+
+[OpeningName "Pirc Defense: 2.d4 Nf6"]
+
+1.e4 d6 2.d4 Nf6
+
+[OpeningName "Sicilian Defense: Alapin Variation"]
+
+1.e4 c5 2.c3
+
+[OpeningName "Alekhine Defense"]
+
+1.e4 Nf6
+
+[OpeningName "King\s Gambit"]
+
+1.e4 e5 2.f4
+
+[OpeningName "Scotch Game"]
+
+1.e4 e5 2.Nf3 Nc6 3.d4
+
+[OpeningName "Queen\s Gambit"]
+
+1.d4 d5 2.c4
+
+[OpeningName "Slav Defense"]
+
+1.d4 d5 2.c4 c6
+
+[OpeningName "King\s Indian Defense"]
+
+1.d4 Nf6 2.c4 g6
+
+[OpeningName "Nimzo-Indian Defense"]
+
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4
+
+[OpeningName "Queen\s Indian Defense"]
+
+1.d4 Nf6 2.c4 e6 3.Nf3 b6
+
+[OpeningName "Bogo-Indian Defense"]
+
+1.d4 Nf6 2.c4 e6 3.Nf3 Bb4+
+
+[OpeningName "Gruenfeld Defense"]
+
+1.d4 Nf6 2.c4 g6 3.Nc3 d5
+
+[OpeningName "Dutch Defense"]
+
+1.d4 f5
+
+[OpeningName "Trompowsky Attack"]
+
+1.d4 Nf6 2.Bg5
+
+[OpeningName "Benko Gambit"]
+
+1.d4 Nf6 2.c4 c5 3.d5 b5
+
+[OpeningName "Queen\s Pawn Opening: London System"]
+
+1.d4 d5 2.Nf3 Nf6 3.Bf4
+
+[OpeningName "Benoni Defense: Modern Variation 4.Nc3 exd5 5.cxd5 d6"]
+
+1.d4 {the first move was just made} Nf6 2.c4 c5 {2nd move for black} 3.d5 {third move for white} e6 4.Nc3 exd5 5.cxd5 {second to last} d6 {this is the last move}
+
+[OpeningName "Catalan Opening"]
+
+1.d4 Nf6 2.c4 e6 3.g3
+
+[OpeningName "Reti Opening"]
+
+1.Nf3
+
+[OpeningName "English Opening"]
+
+1.c4
+
+[OpeningName "Bird\s Opening"]
+
+1.f4
+
+[OpeningName "King\s Indian Attack"]
+
+1.Nf3 d5 2.g3
+
+[OpeningName "Hungarian Opening"]
+
+1.g3
+
+[OpeningName "Nimzowitsch-Larsen Attack"]
+
+1.b3
+
+[OpeningName "Polish Opening"]
+
+1.b4
+
+[OpeningName "Grob Opening"]
+
+1.g4

@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared';
 import { RequestCacheService, RequestCacheWithMap } from './core/request-cache.service';
 import { CacheInterceptor } from './core/cache.interceptor';
+import { File } from '@ionic-native/file/ngx';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -42,9 +43,10 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [
     StatusBar,
     SplashScreen,
+      File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: RequestCacheService, useClass: RequestCacheWithMap },
-    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

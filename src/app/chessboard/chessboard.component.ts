@@ -26,17 +26,18 @@ export class ChessboardComponent {
   private initializing = false;
   public literales: any;
 
+
+
   constructor(
     private configurationService: ConfigurationService,
-    public translate: TranslateService,
-    public modalController: ModalController
+    public translate: TranslateService
   ) {
     this.configurationService.initialize().then(config => {
       this.configuration = config;
     });
   }
 
-  private uglyForceBoardRedraw() {
+  private redrawBoard() {
     window.setTimeout(function() {
       window.dispatchEvent(new Event('resize'));
     }, 100);
@@ -51,47 +52,7 @@ export class ChessboardComponent {
     }
   }
 
-  buildStartPosition() {
-    const startingFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
-    const self = this;
-    this.initializing = true;
-    if (this.board) {
-      this.board.destroy();
-    }
-    this.board = ChessBoard('__chessboard__', {
-      position: startingFen,
-      pieceTheme: function(piece) {
-        // TODO: self.configuration was null for some reason
-        // return '/assets/pieces/' + self.configuration.pieceTheme + '/' + piece + '.svg';
-        return '/assets/pieces/cburnett/' + piece + '.svg';
-      },
-      draggable: false
-    });
-    this.chess.load(startingFen);
-    this.translate
-      .get([
-        'chessboard.stalemate',
-        'chessboard.insufficent-material',
-        'chessboard.three-repetition',
-        'chessboard.rule-fifty',
-        'chessboard.game-over',
-        'chessboard.mate-in',
-        'chessboard.receive-mate-in',
-        'chessboard.unfeasible-mate',
-        'chessboard.white-advantage',
-        'chessboard.black-advantage',
-        'chessboard.querying-syzygy',
-        'chessboard.syzygy-error'
-      ])
-      .subscribe(async res => {
-        this.literales = res;
-      });
-
-    this.uglyForceBoardRedraw();
-  }
-
   buildPgn(pgn: string) {
-
     const self = this;
     this.initializing = true;
     if (this.board) {
@@ -133,10 +94,8 @@ export class ChessboardComponent {
       });
 
     this.showFirstPosition();
-    this.uglyForceBoardRedraw();
+    this.redrawBoard();
   }
-
-
 
   getMovesAsFENs() {
     const chessObj: Chess = new Chess();
@@ -191,20 +150,17 @@ export class ChessboardComponent {
   }
 
   showNextPosition() {
-    if (this.fenPointer === this.fenHistory.length - 1) {
-      console.log('returning');
-      return;
+    if (!this.isShowingLastPosition()) {
+      this.fenPointer++;
+      this.showFenPointer();
     }
-    this.fenPointer++;
-    this.showFenPointer();
   }
 
   showLastPosition() {
-    if (this.fenPointer === this.fenHistory.length - 1) {
-      return;
+    if (!this.isShowingLastPosition()) {
+      this.fenPointer = this.fenHistory.length - 1;
+      this.showFenPointer();
     }
-    this.fenPointer = this.fenHistory.length - 1;
-    this.showFenPointer();
   }
 
   isShowingFirstPosition() {
@@ -217,10 +173,11 @@ export class ChessboardComponent {
 
   getCommentForPosition() {
     const comment = this.chess.comments()[this.fenPointer - 1];
+    console.log('comment: ' + comment);
     return comment === ',' ? null : comment;
   }
 
-  fen() {
+  getFen() {
     return this.chess.fen();
   }
 
