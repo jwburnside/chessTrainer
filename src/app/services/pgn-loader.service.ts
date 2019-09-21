@@ -7,8 +7,7 @@ import { ReplaySubject } from 'rxjs';
 })
 export class PgnLoaderService {
   private DOWNLOAD_DIRECTORY_NAME = 'tempDownloadDirectory';
-  private ROOT_DIRECTORY = 'file:///sdcard//';
-  // private ROOT_DIRECTORY = this.file.applicationStorageDirectory;
+  private ROOT_DIRECTORY = this.file.applicationStorageDirectory;
 
   constructor(private file: File) {}
 
@@ -22,7 +21,7 @@ export class PgnLoaderService {
           .copyFile(
             this.file.applicationDirectory + 'www/assets/pgns/',
             filename,
-            this.ROOT_DIRECTORY + this.DOWNLOAD_DIRECTORY_NAME + '//',
+            this.ROOT_DIRECTORY + this.DOWNLOAD_DIRECTORY_NAME,
             filename
           )
           .then(copyEntry => {
@@ -61,31 +60,28 @@ export class PgnLoaderService {
                           obs.complete();
                         };
                         reader.readAsText(file);
-                      },
-                      err => {
+                      }, err => {
                         obs.error(err);
                         obs.complete();
                       }
                     );
-                  },
-                  err => {
+                  }, err => {
                     obs.error(err);
                     obs.complete();
                   }
                 );
-              },
-              err => {
+              }, err => {
                 obs.error(err);
                 obs.complete();
               }
             );
-          })
-          .catch(error => {
-            alert('error ' + JSON.stringify(error));
+          }).catch(err => {
+              obs.error(err);
+              obs.complete();
           });
-      })
-      .catch(error => {
-        alert('error ' + JSON.stringify(error));
+      }).catch(err => {
+          obs.error(err);
+          obs.complete();
       });
     return obs;
   }
