@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 import { ToastController } from '@ionic/angular';
 import { Observable, Subscription, timer } from 'rxjs';
 import { ChessboardComponent } from '../../chessboard';
 import { PgnFilenameConstants } from '../../constants/pgn-filename-constants';
 import { PgnLoaderService } from '../../services/pgn-loader.service';
+import { random } from 'lodash';
 
 /**
  * Manages the display of the appropriate controls required for the selected exercise. For example:
@@ -40,7 +40,7 @@ export class BoardControlComponent implements OnInit {
   constructor(private toastCtrl: ToastController, private pgnLoaderService: PgnLoaderService) {}
 
   ngOnInit(): void {
-    this.pgnLoaderService.loadPgnFromAssets(PgnFilenameConstants.LOGICAL_CHESS).subscribe(
+    this.pgnLoaderService.loadPgnFromAssets(PgnFilenameConstants.OPENINGS_LEVEL_1).subscribe(
       loadedGames => {
         this.loadedGames = loadedGames;
         this.loadGameAndHeader();
@@ -71,6 +71,7 @@ export class BoardControlComponent implements OnInit {
     if (this.currentGameIndex > 0) {
       this.currentGameIndex--;
       this.loadGameAndHeader();
+      this.shouldDisplayCorrectAnswer = false;
     }
   }
 
@@ -83,7 +84,14 @@ export class BoardControlComponent implements OnInit {
     if (this.currentGameIndex < this.loadedGames.length) {
       this.currentGameIndex++;
       this.loadGameAndHeader();
+      this.shouldDisplayCorrectAnswer = false;
     }
+  }
+
+  handleShuffleClicked() {
+    this.currentGameIndex = random(0, this.loadedGames.length - 1);
+    this.loadGameAndHeader();
+    this.startMoving();
   }
 
   handleReloadClicked() {
@@ -116,11 +124,7 @@ export class BoardControlComponent implements OnInit {
   }
 
   async displayAnswer() {
-    const toast = await this.toastCtrl.create({
-      message: this.correctAnswer,
-      duration: 2000
-    });
-    toast.present();
+   this.shouldDisplayCorrectAnswer = true;
   }
 
   stopMoving() {

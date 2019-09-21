@@ -1,5 +1,5 @@
 <div padding class="container">
-      <span *ngIf="currentGameHeader" class="header">
+      <span *ngIf="currentGameHeader && shouldDisplayCorrectAnswer" class="header">
       {{currentGameHeader}}
     </span>
   <ion-toolbar color="primary">
@@ -26,9 +26,12 @@
       <ion-button (click)="handleReloadClicked()">
         <ion-icon slot="icon-only" name="refresh"></ion-icon>
       </ion-button>
-<!--      <ion-button (click)="displayAnswer()">-->
-<!--        <ion-icon slot="icon-only" name="help"></ion-icon>-->
-<!--      </ion-button>-->
+        <ion-button (click)="handleShuffleClicked()">
+            <ion-icon slot="icon-only" name="shuffle"></ion-icon>
+        </ion-button>
+      <ion-button (click)="displayAnswer()">
+        <ion-icon slot="icon-only" name="help"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <div class="board_wrapper" id="board-wrapper">
@@ -39,6 +42,7 @@
     <span class="comment">
       {{currentComment}}
     </span>
+
   </ion-content>
 <!--    <button (click)="displayAnswer()">Display Answer</button>-->
 
