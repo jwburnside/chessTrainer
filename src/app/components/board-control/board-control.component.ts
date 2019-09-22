@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ToastController } from '@ionic/angular';
+import { random } from 'lodash';
 import { Observable, Subscription, timer } from 'rxjs';
 import { ChessboardComponent } from '../../chessboard';
 import { PgnFilenameConstants } from '../../constants/pgn-filename-constants';
 import { PgnLoaderService } from '../../services/pgn-loader.service';
-import { random } from 'lodash';
 
 /**
  * Manages the display of the appropriate controls required for the selected exercise. For example:
@@ -43,7 +43,8 @@ export class BoardControlComponent implements OnInit {
     this.pgnLoaderService.loadPgnFromAssets(PgnFilenameConstants.OPENINGS_LEVEL_1).subscribe(
       loadedGames => {
         this.loadedGames = loadedGames;
-        this.loadGameAndHeader();
+        this.loadRandomGame();
+        this.startMoving();
       },
       err => {
         console.log('err: ' + JSON.stringify(err.message));
@@ -51,9 +52,14 @@ export class BoardControlComponent implements OnInit {
     );
   }
 
-  loadGameAndHeader() {
-    this.chessboard.buildPgn(this.loadedGames[this.currentGameIndex]);
+  loadRandomGame() {
+    this.randomizeCurrentGameIndex();
+    this.loadGameAtCurrentIndex();
+    this.randomizeBoardOrientation();
+  }
 
+  loadGameAtCurrentIndex() {
+    this.chessboard.buildPgn(this.loadedGames[this.currentGameIndex]);
     this.currentGameHeader = JSON.stringify(this.chessboard.getHeader()['OpeningName']);
     if (this.currentGameHeader === undefined) {
       this.currentGameHeader = JSON.stringify(this.chessboard.getHeader()['Event']);
@@ -68,10 +74,10 @@ export class BoardControlComponent implements OnInit {
   }
 
   handleSkipBackwardClicked() {
+    this.shouldDisplayCorrectAnswer = false;
     if (this.currentGameIndex > 0) {
       this.currentGameIndex--;
-      this.loadGameAndHeader();
-      this.shouldDisplayCorrectAnswer = false;
+      this.loadGameAtCurrentIndex();
     }
   }
 
@@ -81,21 +87,29 @@ export class BoardControlComponent implements OnInit {
   }
 
   handleSkipForwardClicked() {
+    this.shouldDisplayCorrectAnswer = false;
     if (this.currentGameIndex < this.loadedGames.length) {
       this.currentGameIndex++;
-      this.loadGameAndHeader();
-      this.shouldDisplayCorrectAnswer = false;
+      this.loadGameAtCurrentIndex();
     }
   }
 
-  handleShuffleClicked() {
+  randomizeCurrentGameIndex() {
     this.currentGameIndex = random(0, this.loadedGames.length - 1);
-    this.loadGameAndHeader();
+  }
+
+  randomizeBoardOrientation() {
+    this.chessboard.flipRandom();
+  }
+
+  handleShuffleClicked() {
+    this.loadRandomGame();
     this.startMoving();
   }
 
   handleReloadClicked() {
     this.chessboard.showFirstPosition();
+    this.startMoving();
   }
 
   getHeader(): string {
@@ -106,7 +120,6 @@ export class BoardControlComponent implements OnInit {
     return this.chessboard.getCommentForPosition();
   }
 
-  // TODO: Need a flip board button
   flipBoard() {
     this.chessboard.flip();
   }
@@ -124,7 +137,7 @@ export class BoardControlComponent implements OnInit {
   }
 
   async displayAnswer() {
-   this.shouldDisplayCorrectAnswer = true;
+    this.shouldDisplayCorrectAnswer = true;
   }
 
   stopMoving() {

@@ -1,7 +1,4 @@
 <div padding class="container">
-      <span *ngIf="currentGameHeader && shouldDisplayCorrectAnswer" class="header">
-      {{currentGameHeader}}
-    </span>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
 <!--      <ion-button [disabled]="shouldDisableStartButton" (click)="loadOpening()">-->
@@ -42,6 +39,9 @@
     <span class="comment">
       {{currentComment}}
     </span>
+      <div padding *ngIf="currentGameHeader && shouldDisplayCorrectAnswer" class="header">
+      {{currentGameHeader}}
+    </div>
 
   </ion-content>
 <!--    <button (click)="displayAnswer()">Display Answer</button>-->
