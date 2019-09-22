@@ -35,10 +35,7 @@
     <chessboard #chessboard></chessboard>
   </div>
   <ion-content margin-top>
-
-    <span class="comment">
-      {{currentComment}}
-    </span>
+    <div  padding class="comment">{{commentForPosition}}</div>
       <div padding *ngIf="currentGameHeader && shouldDisplayCorrectAnswer" class="header">
       {{currentGameHeader}}
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 
 import { ToastController } from '@ionic/angular';
 import { random } from 'lodash';
@@ -27,17 +27,16 @@ export class BoardControlComponent implements OnInit {
   currentGameIndex = 0;
   // TODO: This can probably be string.
   currentGameHeader: any;
-  currentComment: string;
+
   loadedGames: Array<string> = [];
   shouldDisplayCorrectAnswer: boolean;
   correctAnswer: string;
-
   private subscription: Subscription;
   private timer$: Observable<number> = timer(0, this.moveInterval);
 
   @ViewChild('chessboard', { static: true }) chessboard: ChessboardComponent;
 
-  constructor(private toastCtrl: ToastController, private pgnLoaderService: PgnLoaderService) {}
+  constructor(private toastCtrl: ToastController, private pgnLoaderService: PgnLoaderService, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.pgnLoaderService.loadPgnFromAssets(PgnFilenameConstants.OPENINGS_LEVEL_1).subscribe(
@@ -53,7 +52,7 @@ export class BoardControlComponent implements OnInit {
   }
 
   loadRandomGame() {
-    this.randomizeCurrentGameIndex();
+    // this.randomizeCurrentGameIndex();
     this.loadGameAtCurrentIndex();
     this.randomizeBoardOrientation();
   }
@@ -69,8 +68,7 @@ export class BoardControlComponent implements OnInit {
   // TODO: These behaviors should be modified based on the exercise.
   handleRewindClicked() {
     this.chessboard.showPreviousPosition();
-    // TODO: This can be moved to chessboard
-    this.setCurrentComment();
+    this.cdRef.detectChanges();
   }
 
   handleSkipBackwardClicked() {
@@ -83,7 +81,7 @@ export class BoardControlComponent implements OnInit {
 
   handleFastForwardClicked() {
     this.chessboard.showNextPosition();
-    // this.setCurrentComment();
+    this.cdRef.detectChanges();
   }
 
   handleSkipForwardClicked() {
@@ -116,10 +114,6 @@ export class BoardControlComponent implements OnInit {
     return this.chessboard.getHeader();
   }
 
-  setCurrentComment(): string {
-    return this.chessboard.getCommentForPosition();
-  }
-
   flipBoard() {
     this.chessboard.flip();
   }
@@ -133,7 +127,12 @@ export class BoardControlComponent implements OnInit {
       } else {
         this.stopMoving();
       }
+
     });
+  }
+
+  get commentForPosition() {
+    return this.chessboard.getCommentForPosition();
   }
 
   async displayAnswer() {

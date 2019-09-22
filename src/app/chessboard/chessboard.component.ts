@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import * as Chess from 'chess.js';
@@ -25,12 +25,13 @@ export class ChessboardComponent {
   private player: string;
   private initializing = false;
   public literales: any;
-
+  private commentForPosition: string;
 
 
   constructor(
     private configurationService: ConfigurationService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private cdr: ChangeDetectorRef
   ) {
     this.configurationService.initialize().then(config => {
       this.configuration = config;
@@ -171,10 +172,15 @@ export class ChessboardComponent {
     return this.fenPointer === this.fenHistory.length - 1;
   }
 
-  getCommentForPosition() {
+  private setCommentForPosition() {
     const comment = this.chess.comments()[this.fenPointer - 1];
-    console.log('comment: ' + comment);
-    return comment === ',' ? null : comment;
+    this.commentForPosition = comment === ',' ? null : comment;
+
+  }
+
+  getCommentForPosition() {
+    this.cdr.detectChanges();
+    return this.commentForPosition;
   }
 
   getFen() {
@@ -182,6 +188,9 @@ export class ChessboardComponent {
   }
 
   private showFenPointer() {
+    this.setCommentForPosition();
     this.board.position(this.fenHistory[this.fenPointer], true);
+
+    console.log('showFenPointer: ' + this.getCommentForPosition());
   }
 }
