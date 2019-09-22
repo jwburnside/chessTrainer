@@ -1,11 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import { ToastController } from '@ionic/angular';
 import { random } from 'lodash';
 import { Observable, Subscription, timer } from 'rxjs';
 import { ChessboardComponent } from '../../chessboard';
-import { PgnFilenameConstants } from '../../constants/pgn-filename-constants';
+import { ExerciseTypeConstants } from '../../constants/exercise-type-constants';
 import { PgnLoaderService } from '../../services/pgn-loader.service';
+import ExerciseType = ExerciseTypeConstants.ExerciseType;
 
 /**
  * Manages the display of the appropriate controls required for the selected exercise. For example:
@@ -20,14 +21,18 @@ import { PgnLoaderService } from '../../services/pgn-loader.service';
   styleUrls: ['./board-control.component.scss']
 })
 export class BoardControlComponent implements OnInit {
-  moveInterval = 1000;
+  @Input()
+  filename: string;
 
+  @Input()
+  exerciseType: ExerciseType;
+
+  readonly exerciseTypeEnums = ExerciseTypeConstants.ExerciseType;
+  moveInterval = 1000;
   shouldDisableStartButton = false;
   isFirstOpeningLoaded = false;
   currentGameIndex = 0;
-  // TODO: This can probably be string.
   currentGameHeader: any;
-
   loadedGames: Array<string> = [];
   shouldDisplayCorrectAnswer: boolean;
   correctAnswer: string;
@@ -39,11 +44,10 @@ export class BoardControlComponent implements OnInit {
   constructor(private toastCtrl: ToastController, private pgnLoaderService: PgnLoaderService, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.pgnLoaderService.loadPgnFromAssets(PgnFilenameConstants.OPENINGS_LEVEL_1).subscribe(
+    this.pgnLoaderService.loadPgnFromAssets(this.filename).subscribe(
       loadedGames => {
         this.loadedGames = loadedGames;
         this.loadRandomGame();
-        this.startMoving();
       },
       err => {
         console.log('err: ' + JSON.stringify(err.message));
@@ -52,9 +56,10 @@ export class BoardControlComponent implements OnInit {
   }
 
   loadRandomGame() {
-    // this.randomizeCurrentGameIndex();
+    this.randomizeCurrentGameIndex();
     this.loadGameAtCurrentIndex();
     this.randomizeBoardOrientation();
+    this.startMoving();
   }
 
   loadGameAtCurrentIndex() {
@@ -65,7 +70,7 @@ export class BoardControlComponent implements OnInit {
     }
   }
 
-  // TODO: These behaviors should be modified based on the exercise.
+  // TODO: These methods should fire outputs, let the container handle the behavior.
   handleRewindClicked() {
     this.chessboard.showPreviousPosition();
     this.cdRef.detectChanges();
@@ -102,7 +107,6 @@ export class BoardControlComponent implements OnInit {
 
   handleShuffleClicked() {
     this.loadRandomGame();
-    this.startMoving();
   }
 
   handleReloadClicked() {
@@ -127,7 +131,6 @@ export class BoardControlComponent implements OnInit {
       } else {
         this.stopMoving();
       }
-
     });
   }
 

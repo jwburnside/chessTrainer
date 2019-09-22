@@ -4,8 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-import { ChessboardComponent } from '../../chessboard';
-
+import { BoardControlModule } from '../../components/board-control/board-control.module';
 
 import { QuizPage } from './quiz.page';
 
@@ -17,8 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, IonicModule, RouterModule.forChild(routes), ReactiveFormsModule],
+  imports: [CommonModule, IonicModule, RouterModule.forChild(routes), ReactiveFormsModule, BoardControlModule],
   declarations: [QuizPage]
-
 })
 export class QuizPageModule {}

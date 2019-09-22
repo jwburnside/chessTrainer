@@ -3,51 +3,55 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Opening Quiz</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
+<ion-content>
+  <app-board-control [filename]="pgnFilenameConstants.OPENINGS_LEVEL_1" [exerciseType]="exerciseTypeEnums.OPENING_QUIZ"></app-board-control>
+</ion-content>
+
 <!--<ion-content>-->
 <!--  <div padding class="container">-->
-
 <!--    <div class="board_wrapper" id="board-wrapper">-->
 <!--      <chessboard #chessboard></chessboard>-->
 <!--    </div>-->
-<!--&lt;!&ndash;      <ion-select [(ngModel)]="orientation" (ionChange)="onOrientationChangedHandler()" okText="OK" cancelText="Dismiss">&ndash;&gt;-->
-<!--&lt;!&ndash;        <ion-select-option value="flip">Random</ion-select-option>&ndash;&gt;-->
-<!--&lt;!&ndash;        <ion-select-option value="white">White</ion-select-option>&ndash;&gt;-->
-<!--&lt;!&ndash;        <ion-select-option value="black">Black</ion-select-option>&ndash;&gt;-->
-<!--&lt;!&ndash;      </ion-select>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <ion-select [(ngModel)]="orientation" (ionChange)="onOrientationChangedHandler()" okText="OK" cancelText="Dismiss">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <ion-select-option value="flip">Random</ion-select-option>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <ion-select-option value="white">White</ion-select-option>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <ion-select-option value="black">Black</ion-select-option>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </ion-select>&ndash;&gt;-->
 
-<!--      <div class="wrapper-controls">-->
-<!--        <button [disabled]="shouldDisableStartButton" class="button-control">-->
-<!--          <ion-icon class="icon-control icon-start" name="arrow-dropright-circle" (click)="loadOpening()"></ion-icon>-->
-<!--        </button>-->
-<!--      </div>-->
+<!--    <div class="wrapper-controls">-->
+<!--      <button [disabled]="shouldDisableStartButton" class="button-control">-->
+<!--        <ion-icon class="icon-control icon-start" name="arrow-dropright-circle" (click)="loadOpening()"></ion-icon>-->
+<!--      </button>-->
+<!--    </div>-->
 
-<!--      <div class="info_wrapper">-->
-<!--        <div class="info">-->
-<!--          <div *ngIf="multipleChoiceCard">-->
-<!--            <form [formGroup]="multipleChoiceForm">-->
-<!--              <ion-list>-->
-<!--                <ion-radio-group>-->
-<!--                  <ion-item-->
-<!--                          *ngFor="let multipleChoiceItem of multipleChoiceCard.multipleChoiceItems; let i = index"-->
-<!--                          (click)="multipleChoiceItemSelected(multipleChoiceItem, i)"-->
-<!--                          text-wrap-->
-<!--                  >-->
-<!--                    <ion-label>{{multipleChoiceItem.answer}}</ion-label>-->
-<!--                    <ion-radio slot="start"></ion-radio>-->
-<!--                    <span *ngIf="selectedIndex === i">-->
-<!--                      <ion-icon *ngIf="!multipleChoiceItem.isCorrectAnswer" class="wrong-icon" name="close-circle-outline"></ion-icon>-->
-<!--                      <ion-icon *ngIf="multipleChoiceItem.isCorrectAnswer" class="right-icon" name="checkmark-circle-outline"></ion-icon>-->
+<!--    <div class="info_wrapper">-->
+<!--      <div class="info">-->
+<!--        <div *ngIf="multipleChoiceCard">-->
+<!--          <form [formGroup]="multipleChoiceForm">-->
+<!--            <ion-list>-->
+<!--              <ion-radio-group>-->
+<!--                <ion-item-->
+<!--                        *ngFor="let multipleChoiceItem of multipleChoiceCard.multipleChoiceItems; let i = index"-->
+<!--                        (click)="multipleChoiceItemSelected(multipleChoiceItem, i)"-->
+<!--                        text-wrap-->
+<!--                >-->
+<!--                  <ion-label>{{multipleChoiceItem.answer}}</ion-label>-->
+<!--                  <ion-radio slot="start"></ion-radio>-->
+<!--                  <span *ngIf="selectedIndex === i">-->
+<!--                    <ion-icon *ngIf="!multipleChoiceItem.isCorrectAnswer" class="wrong-icon" name="close-circle-outline"></ion-icon>-->
+<!--                    <ion-icon *ngIf="multipleChoiceItem.isCorrectAnswer" class="right-icon" name="checkmark-circle-outline"></ion-icon>-->
 <!--                  </span>-->
-<!--                  </ion-item>-->
-<!--                </ion-radio-group>-->
-<!--              </ion-list>-->
-<!--            </form>-->
-<!--          </div>-->
+<!--                </ion-item>-->
+<!--              </ion-radio-group>-->
+<!--            </ion-list>-->
+<!--          </form>-->
 <!--        </div>-->
 <!--      </div>-->
+<!--    </div>-->
+
 <!--  </div>-->
 <!--</ion-content>-->
