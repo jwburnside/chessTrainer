@@ -23,6 +23,12 @@
       <ion-button (click)="handleShuffleClicked()">
           <ion-icon slot="icon-only" name="shuffle"></ion-icon>
       </ion-button>
+      <ion-button (click)="handleSkipForwardClicked()">
+          <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
+      </ion-button>
+      <ion-button (click)="handlePlayClicked()">
+          <ion-icon slot="icon-only" name="play"></ion-icon>
+      </ion-button>
       <ion-button (click)="handleReloadClicked()">
           <ion-icon slot="icon-only" name="refresh"></ion-icon>
       </ion-button>
@@ -34,7 +40,7 @@
   <div class="board_wrapper" id="board-wrapper">
     <chessboard #chessboard></chessboard>
   </div>
-  <ion-content margin-top>
+  <ion-content>
     <div padding class="comment">{{ commentForPosition }}</div>
     <div padding *ngIf="currentGameHeader && shouldDisplayCorrectAnswer" class="header">
       {{ currentGameHeader }}

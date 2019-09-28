@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 
 import { ToastController } from '@ionic/angular';
 import { random } from 'lodash';
@@ -21,6 +21,7 @@ import ExerciseType = ExerciseTypeConstants.ExerciseType;
   styleUrls: ['./board-control.component.scss']
 })
 export class BoardControlComponent implements OnInit {
+
   @Input()
   filename: string;
 
@@ -47,7 +48,17 @@ export class BoardControlComponent implements OnInit {
     this.pgnLoaderService.loadPgnFromAssets(this.filename).subscribe(
       loadedGames => {
         this.loadedGames = loadedGames;
-        this.loadRandomGame();
+        this.loadGameAtCurrentIndex();
+        this.randomizeBoardOrientation();
+        this.startMoving();
+
+        // switch (this.exerciseType) {
+        //   case ExerciseTypeConstants.ExerciseType.EXPLORER:
+        //     this.loadGameAtCurrentIndex();
+        //     break;
+        //   case ExerciseType.OPENING_QUIZ:
+        //     this.loadRandomGame();
+        // }
       },
       err => {
         console.log('err: ' + JSON.stringify(err.message));
@@ -68,6 +79,11 @@ export class BoardControlComponent implements OnInit {
     if (this.currentGameHeader === undefined) {
       this.currentGameHeader = JSON.stringify(this.chessboard.getHeader()['Event']);
     }
+  }
+
+  handlePlayClicked() {
+    this.chessboard.showFirstPosition();
+    this.startMoving();
   }
 
   // TODO: These methods should fire outputs, let the container handle the behavior.
@@ -91,10 +107,14 @@ export class BoardControlComponent implements OnInit {
 
   handleSkipForwardClicked() {
     this.shouldDisplayCorrectAnswer = false;
-    if (this.currentGameIndex < this.loadedGames.length) {
+    if (this.currentGameIndex < this.loadedGames.length - 1) {
       this.currentGameIndex++;
-      this.loadGameAtCurrentIndex();
+    } else {
+      this.currentGameIndex = 0;
     }
+    this.loadGameAtCurrentIndex();
+    this.randomizeBoardOrientation();
+    this.startMoving();
   }
 
   randomizeCurrentGameIndex() {
@@ -122,6 +142,7 @@ export class BoardControlComponent implements OnInit {
     this.chessboard.flip();
   }
 
+  // TODO: Need to stop moving once a new pgn is loaded.
   startMoving() {
     this.shouldDisplayCorrectAnswer = false;
     this.shouldDisableStartButton = true;

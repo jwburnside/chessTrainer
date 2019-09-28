@@ -1,6 +1,6 @@
 [OpeningName "Sicilian Defense"]
 
-1.e4 {This is a comment} c5
+1.e4 c5
 
 [OpeningName "French Defense"]
 
@@ -92,7 +92,7 @@
 
 [OpeningName "Benoni Defense: Modern Variation 4.Nc3 exd5 5.cxd5 d6"]
 
-1.d4 {the first move was just made} Nf6 2.c4 c5 {2nd move for black} 3.d5 {third move for white} e6 4.Nc3 exd5 5.cxd5 {second to last} d6 {this is the last move}
+1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6
 
 [OpeningName "Catalan Opening"]
 

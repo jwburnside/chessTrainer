@@ -7,10 +7,41 @@
 [Result "0-1"]
 [ECO "C53"]
 [PlyCount "34"]
+[URL "https://www.chess.com/a/2d7on9ZDGvsne"]
 
-1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Qe7 5. O-O d6 6. d4 Bb6 7. a4 a6 8. a5 Ba7
-9. h3 Nf6 10. dxe5 Nxe5 11. Nxe5 Qxe5 12. Nd2 Bxh3 13. gxh3 Qg3+ 14. Kh1 Qxh3+
-15. Kg1 Ng4 16. Nf3 Qg3+ 17. Kh1 Bxf2 0-1
+1. e4 {Anchors a pawn in the center, opens lines for queen and bishop. Black must fight for an equal share of the good squares}
+e5
+2. Nf3 {Develops toward the center with threat. Exerts pressure on two key strategic squares, e5 and d4. Knights should be developed first as it is easier to determine their optimal placement this early in the game.}
+Nc6 {Protects the e-pawn without a loss of time}
+3. Bc4 {Seizes a valuable diagonal and puts pressure on f7. It is not unusual this early in the game to sacrifice a piece for this pawn.}
+Bc5 {Similar to white's last move, it secures a diagonal and puts pressure on a weak square.}
+4. c3 {Intends to support the advance of the d-pawn in order to have two center pawns, and bring the queen to b3 to increase pressure on f7.}
+Qe7 { Parries the threat, as 5...exd4 6 cxd4 Qxe4+ wins a pawn.}
+5. O-O d6 {Strengthens the center, supports the e-pawn and bishop, and light-square bishop can now get into the game.}
+6. d4 {Hoping that black will exchange pawns, as 6...exd4 7 cxd4 Qexd4 8 Re1 wins the black queen.}
+Bb6 {Black need not capture. The e-pawn is secure, so the bishop can retreat while still bearing down from its new position.}
+7. a4
+a6
+8. a5
+Ba7
+9. h3
+Nf6
+10. dxe5
+Nxe5
+11. Nxe5
+Qxe5
+12. Nd2
+Bxh3
+13. gxh3
+Qg3+
+14. Kh1
+Qxh3+
+15. Kg1
+Ng4
+16. Nf3
+Qg3+
+17. Kh1
+Bxf2 0-1
 
 [Event "Logical Chess, Move by Move #02"]
 [Site "Liege BEL"]

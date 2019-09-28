@@ -190,7 +190,5 @@ export class ChessboardComponent {
   private showFenPointer() {
     this.setCommentForPosition();
     this.board.position(this.fenHistory[this.fenPointer], true);
-
-    console.log('showFenPointer: ' + this.getCommentForPosition());
   }
 }
