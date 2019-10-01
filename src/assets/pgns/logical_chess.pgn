@@ -9,39 +9,50 @@
 [PlyCount "34"]
 [URL "https://www.chess.com/a/2d7on9ZDGvsne"]
 
-1. e4 {Anchors a pawn in the center, opens lines for queen and bishop. Black must fight for an equal share of the good squares}
-e5
-2. Nf3 {Develops toward the center with threat. Exerts pressure on two key strategic squares, e5 and d4. Knights should be developed first as it is easier to determine their optimal placement this early in the game.}
-Nc6 {Protects the e-pawn without a loss of time}
-3. Bc4 {Seizes a valuable diagonal and puts pressure on f7. It is not unusual this early in the game to sacrifice a piece for this pawn.}
-Bc5 {Similar to white's last move, it secures a diagonal and puts pressure on a weak square.}
-4. c3 {Intends to support the advance of the d-pawn in order to have two center pawns, and bring the queen to b3 to increase pressure on f7.}
-Qe7 { Parries the threat, as 5...exd4 6 cxd4 Qxe4+ wins a pawn.}
-5. O-O d6 {Strengthens the center, supports the e-pawn and bishop, and light-square bishop can now get into the game.}
-6. d4 {Hoping that black will exchange pawns, as 6...exd4 7 cxd4 Qexd4 8 Re1 wins the black queen.}
-Bb6 {Black need not capture. The e-pawn is secure, so the bishop can retreat while still bearing down from its new position.}
-7. a4
-a6
-8. a5
-Ba7
-9. h3
-Nf6
-10. dxe5
-Nxe5
-11. Nxe5
-Qxe5
-12. Nd2
-Bxh3
-13. gxh3
-Qg3+
-14. Kh1
-Qxh3+
-15. Kg1
-Ng4
-16. Nf3
-Qg3+
-17. Kh1
-Bxf2 0-1
+1. e4 {Anchors a pawn in the center, opens lines for queen and bishop. Black
+must fight for an equal share of the good squares} 1... e5 2. Nf3 {Develops
+toward the center with threat. Exerts pressure on two key strategic squares, e5
+and d4. Knights should be developed first as it is easier to determine their
+optimal placement this early in the game.} 2... Nc6 {Protects the e-pawn without
+a loss of time} 3. Bc4 {Seizes a valuable diagonal and puts pressure on f7. It
+is not unusual this early in the game to sacrifice a piece for this pawn.} 3...
+Bc5 {Similar to white's last move, it secures a diagonal and puts pressure on a
+weak square.} 4. c3 {Intends to support the advance of the d-pawn in order to
+have two center pawns, and bring the queen to b3 to increase pressure on f7.}
+4... Qe7 {Parries the threat, as 5...exd4 6 cxd4 Qxe4+ wins a pawn.} 5. O-O d6
+{Strengthens the center, supports the e-pawn and bishop, and light-square bishop
+can now get into the game.} 6. d4 {Hoping that black will exchange pawns, as
+6...exd4 7 cxd4 Qexd4 8 Re1 wins the black queen.} 6... Bb6 {Black need not
+capture. The e-pawn is secure, so the bishop can retreat while still bearing
+down from its new position.} 7. a4 {Tricky, but illogical. White is attempting
+to move to a5 on the next move. If 8...Bxf5, 9 d5 strikes at the knight guarding
+the bishop. After 9...Nxa5, white captures by 10 Rxa5, winning a piece. If
+8...Nxa5, 9 Rxa5 Bxa5 Qa4+ nets white two pieces for a rook. White should not,
+however, be attempting such combinations when his development is so backwards.}
+7... a6 {Preparing a retreat for the bishop. Protecting your pieces takes
+precedence over development.} 8. a5 {Hoping black will take the bait.} 8... Ba7
+{Black does not bite.} 9. h3 {A useless move that weakens the position of the
+pawns defending the king, which can never be remedied. The h3 pawn is now a
+target, and g3 is a landing field for enemy pieces. Capturing h3 will tear open
+the g-file and expose the king.} 9... Nf6 {Knight develops with a threat.} 10.
+dxe5 {White forgot a pivotal rule: Always open lines that are to the advantage
+of the player whose development is superior. Now blacks dark-squared bishop is
+bearing down on f2} 10... Nxe5 {Stronger than taking with the pawn. The knight
+is centralized and radiates power in all directions.} 11. Nxe5 {The f3 knight
+was white's best defender of the castled position, and is lost on the next
+move.} 11... Qxe5 {And the knight is also replaced by a powerful piece at a very
+good post, and the e-pawn is threatened.} 12. Nd2 {Hoping for 12...Nxe4 13 Nxd4
+Nxd4 14 Qxd4 Re1 pinning the queen. But white is not interested in grabbing
+pawns, they are looking for a tactic as a reward for their patient positional
+play.} 12... Bxh3 {And black takes the h-pawn to expose the g-file.} 13. gxh3
+{White must capture the bishop or be down a pawn.} 13... Qg3+ {Black has exposed
+the two main defects of 9 h3. He captured the h-pawn itself and utilized the g3
+square, weaked by its advance, as a point of invasion.} 14. Kh1 Qxh3+ {Black
+destroys another defending pawn.} 15. Kg1 Ng4 {Threatens mate by 16 Re1 Bxf2#}
+16. Nf3 {Guard h2 and stop mate by the queen. If black can remove the third
+kingside pawn it will remove the last bit of protection. He must either drive
+off one of the defenders or attack the pawn a third time.} 16... Qg3+ 17. Kh1
+Bxf2 {18 Kh1 Qh3+ 19 Nh2 Qxh2# or 18 Rxf2 Nxf2#} 0-1
 
 [Event "Logical Chess, Move by Move #02"]
 [Site "Liege BEL"]
@@ -53,9 +64,59 @@ Bxf2 0-1
 [ECO "C53"]
 [PlyCount "32"]
 
-1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Bb6 5. d4 Qe7 6. O-O Nf6 7. d5 Nb8 8. Bd3
-d6 9. h3 h6 10. Qe2 g5 11. Nh2 g4 12. hxg4 Rg8 13. Bxh6 Nxg4 14. Be3 Nxh2 15.
-Kxh2 Qh4+ 16. Kg1 Qh3 0-1
+1. e4 {Releases two pieces, the queen and the light squared bishop.} 1... e5 2.
+Nf3 {Knight comes into play with attack, cutting out blacks choice of reply.}
+2... Nc6 {Protecting the pawn and developing the Knight to its best position.}
+3. Bc4 {Bishop seizes and important diagonal, and strikes at f7, black's weakest
+point.} 3... Bc5 {Black countering by attacking f2, whites weak point.} 4. c3
+{To support the pawn advance in the center. 5d4 will attack pawn and bishop.
+Black will be forced to play 5...exd4. Recapture by 6 cxd4 will give white a
+strong formation of pawns in the center. If white's plan fails, however, the b1
+knight will be deprived of its most useful square.} 4... Bb6 {Threats must be
+parried before continuing development. The bishop retreats in order to pre-empt
+white's contemplated attack 5 d4, which attacks pawn and bishop.} 5. d4 {Hoping
+to induce black to exchange pawns.} 5... Qe7 {Since black moved his bishop, he
+is no longer compelled to exchange pawns. He defends the e-pawn while developing
+another piece. Also sets up the possible scenario 6...exd4 7 cxd4 Qxe4+ winning
+a pawn.} 6. O-O {Indirectly protects his e-pawn, if 6...exd4 7 cxd4 Qxe4 8 Re1
+wins the queen.} 6... Nf6 {Develops with threat to the e-pawn.} 7. d5
+{Attempting to dislodge the c6 knight from its post, but it would have been
+better to develop another piece. This move: 1). Blocks the path of the c4
+bishop, limiting its action 2). Increases the range of black's b6 bishop,
+leading straight to whites king.} 7... Nb8 {Retreat is safer than moving the
+knight to the side of the board. After 7...Na5, whites response is 8 Bd3, after
+which he threatens to win the awkwardly placed knight by 9 b4.} 8. Bd3 {Defends
+the e-pawn, but but Nbd2 or Qe2 would develop a piece and protect the pawn.}
+8... d6 {Strengthens the center, opens a path for the c8-bishop, and relieves
+the queen of the burden of defending the e-pawn.} 9. h3 {To prevent black from
+pinning the knight with Bg4, but unfortunately sets the h-pawn as a convenient
+target for black.} 9... h6 {While this move seems similar to white's previous,
+in this case it is a gesture of attack instead of to ward off a pin. Black
+intends to follow up with g5 and eventually march to g4, where white will have
+to either capture or move his knight and let black capture the h3 pawn, or take
+with h3. Either will open up a file on the castled king.} 10. Qe2 {A developing
+move, but may be too late.} 10... g5 {A bayonet thrust to break up white's
+position at g4.} 11. Nh2 {To protect g5 with the idea that he has more defenders
+(3) than black has attackers (2).} 11... g4 {But black doesn't mind sacrificing
+a pawn for the sake of ripping away the defensive screen around white's king.}
+12. hxg4 {Practically forced, as black was threatening 12...gxh3, as well as
+12...g3.} 12... Rg8 {Now black attacks the g-pawn 3 times, while white only
+defends twice. White cannot bring a pawn to defend as the f-pawn is pinned.} 13.
+Bxh6 {Desperately snatching a loose pawn, a risky policy considering his
+lackluster development and the plight of his king. Be3 would have been better,
+as it brings a piece into play and neutralizes the pressure of black's dark
+squared bishop. Don't grab pawns at the expense of development or positions.}
+13... Nxg4 {Gaining time by threatening the bishop. Can white save the game? If
+14 Nxg4 Bxg4 15 Qc2 Bf3 (threatening Rxg2+ 17 Kh1 Qh4#) 16 g3 Qh4 and mate will
+come at h1.} 14. Be3 {The bishop flees and attempts to repel one of the
+assailants.} 14... Nxh2 {Black takes a piece and threatens a rook.} 15. Kxh2 {On
+the alternative 15 Bxb6 axb6 16 kxh2 Qh4+ 17 Kg1 Rxg2+ 18 Kxg2 Bh3+ and white
+must either walk into mate by 19 Kg1 Qg5+ 20 Kh2 Qg2# or into a discovered check
+by 19 Kh2 Bxf1+ 20 Kg1 Bxe2, when the loss of material is ruinous.} 15... Qh4+
+{Black has two major pieces operating with full force on the two open files near
+the enemy king. The attack plays itself.} 16. Kg1 Qh3 {No defense that will
+postpone mate for long. 17 g3 Rh8 18 f3 Bxe3+ 19 Qxe3 (or Rf2 Qh1#) 19 Qxg3#. Or
+if 17 f3 Bxe3+ 18 Rf2 Qxg2#} *
 
 [Event "Logical Chess, Move by Move #03"]
 [Site "Ghent BEL"]

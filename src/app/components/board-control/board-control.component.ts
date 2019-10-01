@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import { ToastController } from '@ionic/angular';
 import { random } from 'lodash';
@@ -49,8 +49,10 @@ export class BoardControlComponent implements OnInit {
       loadedGames => {
         this.loadedGames = loadedGames;
         this.loadGameAtCurrentIndex();
-        this.randomizeBoardOrientation();
-        this.startMoving();
+        if (this.exerciseType === ExerciseType.OPENING_QUIZ) {
+          this.startMoving();
+          this.randomizeBoardOrientation();
+        }
 
         // switch (this.exerciseType) {
         //   case ExerciseTypeConstants.ExerciseType.EXPLORER:
@@ -113,8 +115,11 @@ export class BoardControlComponent implements OnInit {
       this.currentGameIndex = 0;
     }
     this.loadGameAtCurrentIndex();
-    this.randomizeBoardOrientation();
-    this.startMoving();
+
+    if (this.exerciseType === ExerciseType.OPENING_QUIZ) {
+      this.randomizeBoardOrientation();
+      this.startMoving();
+    }
   }
 
   randomizeCurrentGameIndex() {

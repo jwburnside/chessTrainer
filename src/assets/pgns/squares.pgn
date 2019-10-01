@@ -3,6 +3,22 @@
 
 1. a2
 
-[Event "Logical Chess, Move by Move #01"]
+[Square "e4"]
+[Color "light"]
+[Notes "Releases the light square bishop and the queen, which are both on light squares"]
 
 1. a2
+
+[Square "e5"]
+[Color "dark"]
+[Notes "Releases the dark square bishop and the queen, which are both on dark squares"]
+
+1. a2
+
+[Square "c5"]
+[Color "dark"]
+[Notes "Black's first move in the Sicilian"]
+
+1. a2
+
+
