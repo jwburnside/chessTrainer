@@ -1,131 +1,164 @@
 [OpeningName "Sicilian Defense"]
+[History ""]
 
 1.e4 c5
 
 [OpeningName "French Defense"]
+[History ""]
 
 1.e4 e6
 
 [OpeningName "Ruy Lopez Opening"]
+[History ""]
 
 1.e4 e5 2.Nf3 Nc6 3.Bb5
 
 [OpeningName "Caro-Kann Defense"]
+[History ""]
 
 1.e4 c6
 
 [OpeningName "Italian Game"]
+[History ""]
 
 1.e4 e5 2.Nf3 Nc6 3.Bc4
 
 [OpeningName "Sicilian Defense: Closed"]
+[History ""]
 
 1.e4 c5 2.Nc3
 
 [OpeningName "Scandinavian Defense"]
+[History ""]
 
 1.e4 d5
 
 [OpeningName "Pirc Defense: 2.d4 Nf6"]
+[History ""]
 
 1.e4 d6 2.d4 Nf6
 
 [OpeningName "Sicilian Defense: Alapin Variation"]
+[History ""]
 
 1.e4 c5 2.c3
 
 [OpeningName "Alekhine Defense"]
+[History ""]
 
 1.e4 Nf6
 
 [OpeningName "King\s Gambit"]
+[History ""]
 
 1.e4 e5 2.f4
 
 [OpeningName "Scotch Game"]
+[History ""]
 
 1.e4 e5 2.Nf3 Nc6 3.d4
 
 [OpeningName "Queen\s Gambit"]
+[History ""]
 
 1.d4 d5 2.c4
 
 [OpeningName "Slav Defense"]
+[History ""]
 
 1.d4 d5 2.c4 c6
 
 [OpeningName "King\s Indian Defense"]
+[History ""]
 
 1.d4 Nf6 2.c4 g6
 
 [OpeningName "Nimzo-Indian Defense"]
+[History ""]
 
 1.d4 Nf6 2.c4 e6 3.Nc3 Bb4
 
 [OpeningName "Queen\s Indian Defense"]
+[History ""]
 
 1.d4 Nf6 2.c4 e6 3.Nf3 b6
 
 [OpeningName "Bogo-Indian Defense"]
+[History ""]
 
 1.d4 Nf6 2.c4 e6 3.Nf3 Bb4+
 
 [OpeningName "Gruenfeld Defense"]
+[History ""]
 
 1.d4 Nf6 2.c4 g6 3.Nc3 d5
 
 [OpeningName "Dutch Defense"]
+[History ""]
 
 1.d4 f5
 
 [OpeningName "Trompowsky Attack"]
+[History ""]
 
 1.d4 Nf6 2.Bg5
 
 [OpeningName "Benko Gambit"]
+[History ""]
 
 1.d4 Nf6 2.c4 c5 3.d5 b5
 
 [OpeningName "Queen\s Pawn Opening: London System"]
+[History ""]
 
 1.d4 d5 2.Nf3 Nf6 3.Bf4
 
 [OpeningName "Benoni Defense: Modern Variation 4.Nc3 exd5 5.cxd5 d6"]
+[History ""]
 
 1.d4 Nf6 2.c4 c5 3.d5 e6 4.Nc3 exd5 5.cxd5 d6
 
 [OpeningName "Catalan Opening"]
+[History ""]
 
 1.d4 Nf6 2.c4 e6 3.g3
 
 [OpeningName "Reti Opening"]
+[History ""]
 
 1.Nf3
 
 [OpeningName "English Opening"]
+[History ""]
 
 1.c4
 
 [OpeningName "Bird\s Opening"]
+[History ""]
 
 1.f4
 
 [OpeningName "King\s Indian Attack"]
+[History ""]
 
 1.Nf3 d5 2.g3
 
 [OpeningName "Hungarian Opening"]
+[History ""]
 
 1.g3
 
 [OpeningName "Nimzowitsch-Larsen Attack"]
+[History ""]
 
 1.b3
 
 [OpeningName "Polish Opening"]
+[History ""]
 
 1.b4
 
 [OpeningName "Grob Opening"]
+[History ""]
 
 1.g4
