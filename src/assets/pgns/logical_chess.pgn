@@ -128,10 +128,69 @@ if 17 f3 Bxe3+ 18 Rf2 Qxg2#} *
 [ECO "D05"]
 [PlyCount "43"]
 
-1. d4 d5 2. Nf3 Nf6 3. e3 e6 4. Bd3 c5 5. c3 Nc6 6. Nbd2 Be7 7. O-O c4 8. Bc2
-b5 9. e4 dxe4 10. Nxe4 O-O 11. Qe2 Bb7 12. Nfg5 h6 13. Nxf6+ Bxf6 14. Qe4 g6
-15. Nxe6 fxe6 16. Qxg6+ Bg7 17. Qh7+ Kf7 18. Bg6+ Kf6 19. Bh5 Ne7 20. Bxh6 Rg8
-21. h4 Bxh6 22. Qf7# 1-0
+1. d4 d5 2. Nf3 Nf6 3. e3 {Shuts in the dark square bishop, but white's opening
+strategy is one of storing of dynamic energy, possibly by Bd3, Nbe2 and Qe2
+targeting e4. Development in the Colle system is on positional lines, but the
+objective is a kingside attack.} 3... e6 {Doesn't do anything to thwart white's
+plans. Better would have been c5 or Bf5 which challenges white's valuable light
+square bishop.} 4. Bd3 {White now controls two diagonals, while blacks light
+square bishop is hemmed in by the e-pawn.} 4... c5 {Black strikes at the pawn
+formation in the center and gives his queen access to the queenside. This
+freeing move is of great importance in queen's pawn openings.} 5. c3 {Permits
+white to meet the advance ...c4 by Bc2, keeping the bishop lined up against
+black's kingside. In the event that pawns are exchanged, white can recapture
+with the e-pawn and free his c1-bishop.} 5... Nc6 {Increase pressure on the
+d-pawn.} 6. Nbd2 {Add pressure to the e4 square, the springboard for the coming
+attack. It can hop out of the way of the queen and bishop when it is expedient
+to do so.} 6... Be7 {Brings a piece into play and prepares for castling.} 7. O-O
+c4 {Intent is to chase the light square bishop from a favorable post, but
+instead it weakens the pressure on white's center. Tension must be maintained if
+black is to have something to say about the affairs in this vital area.
+Counterplay in the center is the best means of opposing a kingside attack and to
+secure counterplay, the pawn position must be kept fluid.} 8. Bc2 {Retreats, but
+keeps its sights set on e4.} 8... b5 {To make room for the bishop at b7, but
+also to make trouble with a possible advance of his queenside pawns.} 9. e4 {The
+key move in this opening. It will open up lines for attack for whites pent-up
+pieces.} 9... dxe4 {Not an attractive choice for black, but required to prevent
+the push to e5 where it will displace his knight.} 10. Nxe4 {Whites pieces that
+were crouched in the background spring into play. White has the initiative and
+commanding position with which to exercise it. If no immediate attacking
+opportunities present themselves, he can do Qe2, Re1, Bf4, Bg5, and Rad1, and
+wait for blacks game to crack.} 10... O-O {Might have been better to postpone
+castling, as white is attacking in that direction. Better to counterplay with
+10...Qc7 11...Bb7 and 12...Rd8.} 11. Qe2 {A developing move that threatens to
+win a piece by 12 Nxf6+ Bxf6 13 Qe4 threatening mate wins the knight on f6.}
+11... Bb7 {Guards the knight while developing another piece.} 12. Nfg5
+{Threatening 13 Nxf6+ Bxf6 14 Bxf7+ Kh8 15 Qh5. Compels black to move a pawn
+guarding his king, causing a permanent weakness.} 12... h6 {Had he tried
+12...Nxe4, 13 Qxe4 threatens mate and compels 13...g6} 13. Nxf6+ {Removes the
+best defender black's castled position.} 13... Bxf6 {The alternative of
+13...gxf6 loses by 14 Nxe6 fxe6 15 Qg4+ Kh8 (15...Kf7 16 Qg6#) 16 Qg6 f5 17 Qxh6
+Kg8 18 Qxe6+ and f-pawn falls next, or with 14 Nh3 (threatening 15 Bxh6)
+14...Kg7 15 Bxh6+ Kxh6 16 Qe3+ Kg7 17 Qg3+ Kh8 18 Qh4+ 19 Qh7#} 14. Qe4
+{Threatening mate.} 14... g6 {Better but still dangerous would have been Rc8 to
+allow the king an escape. The book move saddles black with a permanent weakness.
+White must now decide how to proceed with the attack. 15 Nxf7 Kxf7 (or
+15...Rxf7) 16 Qxg6+ and white has two pawns for a knight with a third in sight
+and blacks position broken up. But after 15 Nxf7 Rxf7 16 Qxg6+ Rg7 17 Qxh6 Nxd4,
+black is suddenly the aggressor. Threatens mate in two by 18...Ne2+ 19 Kh1 Bxg2#
+White must figure out a better way to break through without letting black's rook
+into the game. In this case, the f-pawn is overworked, and must be lured away.}
+15. Nxe6 {Attacks the queen and rook.} 15... fxe6 {Black must accept the
+sacrifice or lose rook and pawn for the knight.} 16. Qxg6+ {Stronger than taking
+the e-pawn, which leaves black with four ways to get out of check. Attack the
+enemy with blows that leave him with fewer choices of reply.} 16... Bg7 {Only
+move that doesn't walk into mate.} 17. Qh7+ {White has other choices, as in Bxh6
+or Qxe6+, but this forces the king into the open where white's other pieces can
+get at him.} 17... Kf7 {Only move.} 18. Bg6+ {Stronger than 18 Bxh6 where
+18...Qf6 followed by 19...Rh8. The text move keeps him on the run.} 18... Kf6
+{Better than Ke7, where Qxg7+ picks up a couple of bishops.} 19. Bh5 {White is
+still angling for 20 Qg6+ pickup up both bishops.} 19... Ne7 {Only way to
+prevent the queen check.} 20. Bxh6 {Bringing another piece into the attack. The
+captured pawn is incidental.} 20... Rg8 {To parry 21 Qxg7+ Kf5 22 Qe5#. Could
+have been 20...Bxh6+ Kf5 22 Rae1 where the threat of mate by either by rook or
+g-pawn is decisive.} 21. h4 {New threat is 22 Bg5#} 21... Bxh6 {Loses on the
+spot, but 21...e5 22 Bxg7+ Rxg7 23 dxe5+ and the rook is lost.} 22. Qf7# 1-0
 
 [Event "Logical Chess, Move by Move #04"]
 [Site "London ENG"]
