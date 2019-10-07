@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular
 import { ToastController } from '@ionic/angular';
 import { random } from 'lodash';
 import { Observable, Subscription, timer } from 'rxjs';
-import { ChessboardComponent } from '../../chessboard';
+import { ChessboardComponent } from '../chessboard';
 import { ExerciseTypeConstants } from '../../constants/exercise-type-constants';
 import { PgnLoaderService } from '../../services/pgn-loader.service';
 import ExerciseType = ExerciseTypeConstants.ExerciseType;

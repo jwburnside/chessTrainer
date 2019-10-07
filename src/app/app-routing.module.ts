@@ -13,34 +13,30 @@ const routes: Routes = [
   },
   {
     path: 'openings/quiz',
-    loadChildren: './openings/quiz/quiz.module#QuizPageModule'
+    loadChildren: './pages/openings/quiz/quiz.module#QuizPageModule'
   },
 
   {
-    path: 'logical-chess/explorer',
-    loadChildren: './logical-chess/explorer/explorer.module#ExplorerPageModule'
+    path: 'pages/logical-chess/explorer/:filename',
+    loadChildren: './pages/logical-chess/explorer/explorer.module#ExplorerPageModule'
   },
-  {
-    path: 'vision/square-color',
-    loadChildren: './vision/square-color/square-color.module#SquareColorPageModule'
-  },
-  {
-    path: 'vision/osmosis',
-    loadChildren: './vision/osmosis/osmosis.module#OsmosisPageModule'
-  },
-  {
-    path: 'preferences',
-    loadChildren: './preferences/preferences.module#PreferencesPageModule'
-  },
-  {
-    path: 'about',
-    loadChildren: './about/about.module#AboutPageModule'
-  },
-  {
-    path: 'list/:idxcategory/:idxsubcategory',
-    loadChildren: './list/list.module#ListPageModule'
-  },
-  { path: 'traps', loadChildren: './traps/traps.module#TrapsPageModule' }
+  // {
+  //   path: 'vision/square-color',
+  //   loadChildren: './vision/square-color/square-color.module#SquareColorPageModule'
+  // },
+  // {
+  //   path: 'vision/osmosis',
+  //   loadChildren: './vision/osmosis/osmosis.module#OsmosisPageModule'
+  // },
+  // {
+  //   path: 'preferences',
+  //   loadChildren: './preferences/preferences.module#PreferencesPageModule'
+  // },
+  // {
+  //   path: 'about',
+  //   loadChildren: './about/about.module#AboutPageModule'
+  // },
+  // { path: 'traps', loadChildren: './traps/traps.module#TrapsPageModule' }
 ];
 
 @NgModule({

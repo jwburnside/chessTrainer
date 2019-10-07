@@ -9,7 +9,7 @@
       <ion-content [lazy-load-images]="{ rootMargin: '50px' }">
         <ion-list>
           <ion-menu-toggle auto-hide="false">
-            <ion-item *ngFor="let p of prePages; trackBy: trackFunc" lines="full" [routerDirection]="'root'" [routerLink]="[p.url]">
+            <ion-item *ngFor="let p of prePages; trackBy: trackFunc" lines="full" [routerDirection]="'root'" (click)="handleMenuItemClicked(p)">
               <ion-icon *ngNoCheck slot="start" [name]="p.icon" color="dark"></ion-icon>
               <ion-label>
                 {{'app.' + p.title | translate}}

@@ -5,13 +5,19 @@
 
 [Square "e4"]
 [Color "light"]
-[Notes "Releases the light square bishop and the queen, which are both on light squares"]
+[Notes "Releases light square bishop and the light square queen. Queen has access to h5, which targets f7. Bishop has access to c4, which targets f7."]
 
 1. a2
 
 [Square "e5"]
 [Color "dark"]
-[Notes "Releases the dark square bishop and the queen, which are both on dark squares"]
+[Notes "Releases dark square bishop and dark square queen. Queen has access to h4, which targets f2. Bishop has access to c5, which targets f2."]
+
+1. a2
+
+[Square "d4"]
+[Color "dark"]
+[Notes "Releases the dark square bishop on c1. Dark squared bishop can post at f4 as in the London System."]
 
 1. a2
 

@@ -4,7 +4,7 @@ import * as Chess from 'chess.js';
 import { sample } from 'lodash';
 import { Observable, Subscription, timer } from 'rxjs';
 import { isNullOrUndefined } from 'util';
-import { SquareGroup } from '../../models/square-group';
+import { SquareGroup } from '../../../models/square-group';
 
 @Component({
   selector: 'app-square-color',

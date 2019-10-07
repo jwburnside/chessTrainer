@@ -28,7 +28,6 @@ export class AppComponent implements OnInit, OnDestroy {
     count: 0
   };
 
-  // JW: These are pages before the categories.
   public prePages = [
     {
       title: 'home',
@@ -37,39 +36,47 @@ export class AppComponent implements OnInit, OnDestroy {
     },
     {
       title: 'openingsQuiz',
-      url: '/openings/quiz',
+      url: '/pages/openings/quiz',
       icon: 'home'
     },
-    {
-      title: 'openingsExplorer',
-      url: '/openings/explorer',
-      icon: 'home'
-    },
+    // {
+    //   title: 'scotchLevelOne',
+    //   url: 'pages/openings/quiz',
+    //   filename: 'scotch_level_1.pgn',
+    //   icon: 'home'
+    // },
+    // {
+    //   title: 'openingsExplorer',
+    //   url: '/openings/explorer',
+    //   icon: 'home'
+    // },
     {
       title: 'logicalChess',
-      url: '/logical-chess/explorer',
+      url: 'pages/logical-chess/explorer',
+      filename: 'logical_chess.pgn',
       icon: 'home'
     },
-    {
-      title: 'squareColors',
-      url: '/vision/square-color',
-      icon: 'home'
-    },
-    {
-      title: 'osmosis',
-      url: '/vision/osmosis',
-      icon: 'home'
-    },
-    {
-      title: 'preferences',
-      url: '/preferences',
-      icon: 'options'
-    },
-    {
-      title: 'about',
-      url: '/about',
-      icon: 'help'
-    }
+      
+    // {
+    //   title: 'squareColors',
+    //   url: 'pages/vision/square-color',
+    //   icon: 'home'
+    // },
+    // {
+    //   title: 'osmosis',
+    //   url: 'pages/vision/osmosis',
+    //   icon: 'home'
+    // },
+    // {
+    //   title: 'preferences',
+    //   url: '/preferences',
+    //   icon: 'options'
+    // },
+    // {
+    //   title: 'about',
+    //   url: '/about',
+    //   icon: 'help'
+    // }
   ];
 
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
@@ -155,6 +162,11 @@ export class AppComponent implements OnInit, OnDestroy {
         });
       }
     );
+  }
+
+
+  handleMenuItemClicked(item: any) {
+    this.navCtrl.navigateForward(`${item.url}/${item.filename}`);
   }
 
   trackFunc(index: number, obj: any) {

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { BoardControlModule } from '../../components/board-control/board-control.module';
+import { BoardControlModule } from '../../../components/board-control/board-control.module';
 
 import { ExplorerPage } from './explorer.page';
 

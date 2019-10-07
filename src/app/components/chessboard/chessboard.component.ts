@@ -3,8 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import * as Chess from 'chess.js';
 import { random } from 'lodash';
-import { ChessHeader } from '../models/chess-header';
-import { Configuration, ConfigurationService } from '../shared';
+import { ChessHeader } from '../../models/chess-header';
+import { Configuration, ConfigurationService } from '../../shared';
 
 declare var ChessBoard: any;
 declare var $: any;
