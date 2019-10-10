@@ -235,9 +235,57 @@ Ng6 {No other defense. 14...Nf5 (to interfere with the bishop) 15 Bxf5 Bxf5 Qxc6
 [ECO "C54"]
 [PlyCount "33"]
 
-1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d4 exd4 6. cxd4 Bb4+ 7. Nc3 O-O 8.
-d5 Ne7 9. e5 Ne4 10. Qc2 Nxc3 11. bxc3 Bc5 12. Ng5 Ng6 13. h4 h6 14. d6 hxg5
-15. hxg5 Re8 16. Qxg6 Rxe5+ 17. Kf1 1-0
+1.
+e4 {White fixes a pawn in the center, releasing his light-square bishop and queen.}
+e5 {Black responds in turn, releasing his dark-square bishop and queen. }
+2.
+Nf3 {White develops with threat. Against passive 2 Nc3, which attacks nothing, black can repond with 2...Nf6, 2...Nc6, 2...c5. If white's second move is 2 Bc4, black can respond with 2...Nf6, 2...Bc5 and 2...c6 (with a view to an early ...d5)}
+Nc6 {Black saves his e-pawn and develops a piece, defending the e5 pawn and attacking d4.}
+3.
+Bc4 {The bishop attacks the diagonal leading towards the pawn that is only defended by blacks king. It does not mean that the bishop will necessarily capture this pawn in the next few moves, but the threat is always there. Often a bishop is sacrificed for this pawn in order to bring the king into the open where the other pieces may attack him. }
+Bc5 {Black follows suit, attacking the pawn at f2, protected by only the king. In the opening, the bishop is best placed for attack when it controls a diagonal passing through the center or when it pins a hostile knight and renders it immobile. Defensively, the bishop would do a fine job at e7, where it radiates power in several directions, making the intrusion by an enemy piece difficult. }
+4.
+c3 {Supporting the advance of the d-pawn with a view to controlling the center. White postpones castling as his king is no danger. }
+Nf6 {Black develops a piece and attacks a pawn.}
+5.
+d4 {White meets this by attacking a piece. }
+exd4 {Practically forced, since Bd6 guarding the e-pawn is clumsy, since it blocks the d-pawn, while 5...Bb6 permits 6dxe5 Nxe4 7 Bxf7+ Kxf7 8 Qd5+ and white regains his piece, remaining a pawn ahead. White could also play 7 Qd5, attacking the knight white threatening mate, instead of 7 Bxf7+.}
+6.
+cxd4 {White's array of pawns looks impressive, but can the center be maintained?}
+Bb4+ {Superior to Bb6, where 7 d5 Nb8 8e5 Ng8 9 O-O Ne7 10 d6 Ng6 11 Ng5 O-O (Black's king is protected by three pawns and the knight; in four moves the knight and one pawn disappear, while the remaining two pawns are pinned and helpless) 12 Qh5 (threatening 13 Qxh7#) 12...h6 13 Qxg6 (again threatening mate) 13...hxg5 14 Bxg5 Qe8 15 Bf6 and white, exploiting two pins, forces mate within two moves. After the text move, white must get his king out of check, and if possible save the threatened pawn. )}
+7. Nc3 {White prefers this, which offers a pawn, to 7 Bd2 Bxd2+ 8 Nbxd2, when the e-pawn is protected.}
+O-O {In this case, inappropriate, as white's center is formidable and must be destroyed. Black must play 7...Nxe4, accepting the offer of a pawn, and take his chances of surviving whatever attack may follow. It cannot be worse than passive castling, which results in both his knights being evicted from their fine posts. }
+8.
+d5 {Ordinarily such moves are suspect, as d5 should be occupied by a piece, but here the pawn dislodges the knight and prevents black forever from freeing his game by ...d5.}
+Ne7 {As good as there is. The shift to a5 is countered by 9 Bd3, and the knight is stranded at the side of the board. }
+9.
+e5 {Now a shot at the other knight.}
+Ne4 {Retreating to e8 does not look attractive, so black plays to exchange knights. }
+10.
+Qc2 {Protects his own knight, which was twice attacked, and threaten's the enemy's.}
+Nxc3 {Practically forced, as defending the knight by 10...f5 allows 11 d6+ and the other knight falls.}
+11.
+bxc3 {This recapture gains a tempo: Black's bishop move lost a move retreating, white white's advantages multiply. Now he enjoys an open b-file for his rook and an extra diagonal for his dark-squared bishop. }
+Bc5 {Offers better chances than moving to a5, the only other flight square. Whites position is superior. He has more pieces in play, and they have more mobility than black's. He also has better prospects for bringing more pieces into the battle. The recommended approach is to occupy black with threats - keep him on the run and allow him no time to put up effective resistance. }
+12.
+Ng5 {Ostensibly to scare black by force of mate; actually, the purpose is to induce a weakening advance of one of the king's retunue of pawns. If one of these pawns does move, black is done for. If 12...f5 13 d6+ winds a piece. If 12...g6, then 13 Ne4 forces 13...Bb6, when 14 Bh6 drives the rook to e8, and 15 Nf6+ wins the exchange. }
+Ng6 {The only defense. The kingside pawns remain intact, but black has been compelled to place his pieces where white wants them. Under such circumstances the chances of black putting up a good fight are not too bright. White must avoid black's error of castling as a matter of routine development. Such a quiet course would give black time to play 13...d6 or 13...h6, beating the knight back. White must not give his opponent a moment to catch his breath. He must attack. }
+13.
+h4 {Threatening to move on h5, dislodging the knight, and then mate with the queen.}
+h6 {Where else is there? Black tries to drive off the menacing knight. He cannot do this by 13...f6 as 14 d6+ Kh8 15 Nf7+ wins the exchange. }
+14.
+d6 {A powerful stroke. Black's bishop is cut off from the defense, while a line is opened for white's bishop. White now threatens Qxg6, as the pinned f-pawn could not capture the queen.}
+hxg5 {Black might as well take whatever material he can. }
+15.
+hxg5 {The knight will not run away (the penalty being Qh7#) Meanwhile, the rook has a lovely open file, and the queen still threatens to capture the knight. }
+Re8 {The king needs more room}
+16.
+Qxg6 {Regaining the piede without relaxing the pressure. White threatens one mate in one, and two mates in two. }
+Rxe5+ {Black consoles himself by equalizing the material and gives one dispairing check before he yields. }
+17.
+Kf1 {Simplest, as the mate threats are still on tap. There was little chance that white would blunder by 17 Kd2 Qxg5+ 18 Qxg5 Rxg5, when all the good work has gone for naught. Black can avoid mate on the move by 17...e8 (incidentally threatening mate himself), only to fall into 18 Qh7+ Kf8 19 Qh8#} 1-0
+
+
 
 [Event "Logical Chess, Move by Move #06"]
 [Site "Vienna AUT"]
