@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: './home/home.module#HomePageModule'
   },
   {
-    path: 'openings/quiz',
+    path: 'pages/openings/quiz/:filename',
     loadChildren: './pages/openings/quiz/quiz.module#QuizPageModule'
   },
 

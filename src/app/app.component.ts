@@ -37,6 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
     {
       title: 'openingsQuiz',
       url: '/pages/openings/quiz',
+      filename: 'openings_level_1.pgn',
       icon: 'home'
     },
     // {
@@ -56,7 +57,14 @@ export class AppComponent implements OnInit, OnDestroy {
       filename: 'logical_chess.pgn',
       icon: 'home'
     },
-      
+
+    {
+      title: 'londonSystem',
+      url: 'pages/logical-chess/explorer',
+      filename: 'london_illustrative_games.pgn',
+      icon: 'home'
+    },
+
     // {
     //   title: 'squareColors',
     //   url: 'pages/vision/square-color',
