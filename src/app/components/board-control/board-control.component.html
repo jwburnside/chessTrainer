@@ -40,7 +40,7 @@
   <div class="board_wrapper" id="board-wrapper">
     <chessboard #chessboard></chessboard>
   </div>
-  <ion-content>
+  <ion-content class="wrapper-comment">
     <div padding class="comment">{{ commentForPosition }}</div>
     <div padding *ngIf="currentGameHeader && shouldDisplayCorrectAnswer" class="header">
       {{ currentGameHeader }}
