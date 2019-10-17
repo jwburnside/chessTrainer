@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { IonRouterOutlet, NavController, Platform, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+
 import {
   BoardThemeSwitcherService,
   Category,
@@ -14,6 +15,7 @@ import {
   EndgameDatabaseService,
   ThemeSwitcherService
 } from './shared';
+import { isNullOrUndefined } from './utils';
 
 @Component({
   selector: 'app-root',
@@ -63,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
       url: 'pages/logical-chess/explorer',
       filename: 'london_illustrative_games.pgn',
       icon: 'home'
-    },
+    }
 
     // {
     //   title: 'squareColors',
@@ -172,7 +174,6 @@ export class AppComponent implements OnInit, OnDestroy {
     );
   }
 
-
   handleMenuItemClicked(item: any) {
     this.navCtrl.navigateForward(`${item.url}/${item.filename}`);
   }
@@ -217,5 +218,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   exit() {
     navigator['app'].exitApp();
+  }
+
+  onActivate(event) {
+    if (!isNullOrUndefined(this.router)) {
+      console.log('currentRoute: ' + this.router.url);
+    }
   }
 }

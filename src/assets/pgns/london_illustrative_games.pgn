@@ -5,177 +5,98 @@
 2... Nf6 3. e3 e6 { We shall see a lot of games with 3... c5 4 c3, generally leading to the same kind of position. We shall also return to the optimistic 3... Bf5, just noting in passing that it does not give Black an easy life as 4 c4! followed by Qb3 allows White to attack the unprotected b-pawn.}
 4. c3 {This may not be White’s most precise move, but still the diagram displays the London formation in its most basic form. White develops his dark-squared bishop and then goes on to fortify his pawn-centre so that he will be able to concentrate on a kingside initiative.}
 4... Be7 {This is the ambitious approach. The dark-squared bishop is no doubt Black’s ‘good’ bishop and – at least in theory – the f4-bishop is White’s ‘bad’ one, as his central pawns are on dark squares. In practical play, however, matters are not so clear.}
-
 5. Nd2 O-O {Young players are usually taught to castle kingside at the first opportunity. That is excellent advice in 1 e4 e5 openings, but in many closed or semi-closed openings it can be better just to be ready to castle at short notice, should there be any sign that the centre might open up.}
-
 6. Bd3 {Note how harmoniously White’s pieces can be developed between his central pawns. Finding, or remembering, the optimal move-order may be difficult, but finding the best squares for your pieces generally isn’t.}
-
 6... c5 {White’s modest central formation allows Black to take the initiative on the queenside with this move. Actually most players would prefer to play it even earlier.}
-
 7. Ngf3 {We have reached a standard London position. We shall not go into any details at this stage; just note that White’s central pawn-wedge allows him to develop quickly and naturally. It should also be noted that in the London, White isn’t primarily striving for central superiority. Rather his basic strategy is to control the centre and neutralize any black activity there while seeking an initiative on the kingside.}
-
 7... Nc6
-
 8. Ne5 {Controlling, and later occupying, e5 is part of White’s standard plan in positions with an early ... d5.}
 8... Qb6 {A drawback of the early development of the dark-squared bishop is that b2 becomes vulnerable. However, here White can protect the pawn with a useful move:}
-
 9. Rb1 Rd8
-
 10. Qf3 {Generally White will try to transfer most of his pieces to the kingside – especially if the black king is already situated there.}
-
 10... Bd7 11. Qh3 {Black’s play so far has appeared sensible. However, it turns out he lacks counterplay while White’s kingside play is starting to look ominous.}
-
 11... Rac8 {White’s kingside ambitions allow Black some queenside initiative. However, this is not necessarily a bad thing. Actually it can be argued that everything that keeps Black’s attention [or pieces] distracted from the kingside increases White’s chances of a successful mating attack.}
-
 12. g4!? {It isn’t clear that this achieves much against cold-blooded defence. On the other hand White doesn’t risk much as it’s unlikely that Black can create a counter-attack on the kingside.}
-
 12... g6
-
 13. Ndf3 cxd4
 14. exd4 Ne8?? {A blunder in a difficult position. White was threatening Bg5 and Qh4, but Black’s position is holding up for the moment after 14... Be8! 15 Bg5 Rd6! 16 Qh4 Qd8, although it’s obvious that White enjoys a dangerous kingside initiative.}
-
 15. Nxf7! {Lessons to be learned: 1. The London System basically consists of the central pawn-wedge c3-d4-e3 and the dark-squared bishop developed outside it, at f4. 2. White’s basic strategy is central control, rather than central activity. 3. Normally White’s central control will allow him to concentrate on wing activity, primarily on the kingside.}
 
 [Event "Game 2"]
 
 1. d4 d5
-
 2. Nf3 e6
-
 3. Bf4 {By shutting in his light-squared bishop, Black gives White the opportunity to head for a favourable ending. White has developed his potentially weak dark-squared bishop functionally by placing it outside the c3-d4-e3 fortress while Black will have difficulties activating his c8-bishop.}
-
 3... c5 {The characteristic move 3... Bd6 is harder to meet. The text-move aims to destabilize d4, and prepares to attack the weakened b-pawn with ... Qb6.}
-
 4. c3 {This move should mainly be considered when facing a strong opponent who is unlikely to head for a draw, as 4... cxd4 5 cxd4 Nc6 would now create a symmetrical pawn-structure in which Black can more easily keep the balance. For winning opportunities 4 e3 with the idea 4... Qb6 5 b3!? is better: 5... cxd4 6 exd4 Nc6 7 Bd3 Bd7 8 c3 Nf6 9 0-0 reaching a rich position with a small but long-lasting advantage to White because the black queen is poorly placed.}
-
 4... Nc6
-
 5. e3 Nf6
-
 6. Nbd2 Be7 {This often is a preparation for ... Nh5, hunting down the dark-squared bishop.}
-
 7. Bd3 {We shall return to move-orders and refinements later. For the moment we just note that White has again achieved his standard London set-up.}
-
 7... c4? {This is a common error by weak players. Black hopes to gain time for a queenside pawn avalanche. In itself that isn’t such a bad idea but decreasing the pressure on the centre gives White a free hand on the kingside.}
-
 8. Bc2 O-O?! {With Black having no central pressure, it’s quite easy for White to create a raging kingside attack. Relatively often in the London System it’s best for Black just to prepare to castle but not actually to do so before he has created some kind of counterplay. 8... b5 9 Ne5 Nxe5 10 dxe5 Nd7 11 h4 b4, with queenside counterplay, is better.}
-
 9. Ne5 Nxe5 {This allows a dangerous kingside attack. However, Black’s position is now so difficult that after, e.g., 9... Bd7 10 h4! b5 11 g4 b4 12 g5 Ne8 13 Bxh7 +!! Kxh7 14 Nxf7! Rxf7 15 Qh5 + Kg8 16 g6 Nf6 17 gxf7 + Kf8 18 Qg6 there is no good defence.}
-
 10. dxe5! {It’s important to drive the black knight away from the defence of the kingside.}
 10... Nd7 11. h4!? {This is a relatively standard way to attack Black’s castled king in the London. The main idea is to support Ng5.}
-
 11... f5 {This stops White’s most direct attacking ideas, but from a longer perspective allows White to open the g-file against Black’s king. If Black unsuspectingly continues his queenside expansion with 11... b5?! White can win in a way very similar to Illustrative Game 5. As we shall return to this theme there, we only give the main lines: 12 Bxh7 +!! Kxh7 13 Qh5 + Kg8 14 Nf3 f6 [or 14... g6 15 Qh6 Re8 16 Ng5 Nf8 17 h5 +–] 15 Ng5!! fxg5 16 hxg5 Rf5 17 Qh7 + Kf7 18 g6 + Ke8 19 Qxg7 Bf8 20 Qg8! Nc5 21 g4 Nd3 + 22 Kd2 Rxf4 23 exf4 Kd7 24 Rh8 Qb6 25 Rf1 +–.}
-
 12. Nf3 {12 g4! is even better: 12... Qb6 13 gxf5 exf5 14 Rb1; e.g., 14... Nc5 15 Nf3 Qa5 16 Bg5 Bd8 17 Nd4 Qxa2 18 Qf3 Qa5 [18... Nd3 +? 19 Kd2 Nxe5 20 Qxd5 + Nf7 21 Ra1 Qxb2 22 Rhb1 +–] 19 Qxd5 + Be6 20 Qg2 +–.}
-
 12... Nc5 {12... Qb6, preventing White from castling queenside, is better.}
-
 13. Qe2 a5 14. Nd4 {This illustrates another potential drawback of an early ... c4: the d4-square may become a powerful outpost for a white knight.}
-
-
 14... h6? {Black prepares to snatch the h-pawn without having to worry too much about Qh5 and threats to h7. However, this is far too optimistic and creates permanent kingside weaknesses.}
-
 15. g4 Bxh4 {Opening the h-file in order to win a pawn seems rather suicidal, but Black isn’t able to keep the kingside closed for long anyway. We give just a sample line to illustrate Black’s problems: 15... Bd7 16 gxf5 exf5 17 Qf3 Ne4 18 0-0-0 Qb6 19 Rdg1 a4 20 a3 Kh8 21 Qg2 Rg8 22 e6 Be8 23 Bxh6! +–.}
-
 16. gxf5 exf5 17. O-O-O Ne4 18. Bxe4 fxe4 19. Rdg1 Bg5 {White was threatening Qh5 followed by Bxh6, and the seemingly sensible 19... Ra6 is met by 20 e6!, renewing the threat [20... Bxe6 21 Nxe6 Rxe6 22 Qg4 costs Black a piece].}
-
 20. Bxg5 hxg5
-
 21. Qh5 {Black resigned in view of variations like 21...Qe8 22 Qxg5 Rf7 23 e6 Re7 24 Qh4 Bxe6 25 Qh8+ Kf7 26 Qxg7#. Lessons to be learned: 1. Black should generally avoid ... c4 as it releases his pressure on the centre and allows White to pursue his kingside initiative at little risk. 2. Although ... f5 temporarily blocks White’s direct attack, it will later allow White to open the g-file with g4. 3. If Black’s kingside looks vulnerable, White should consider renouncing castling in favour of h4, preparing Ng5 and opening various paths for the h1-rook to enter the battle. }
 
 [Event "Game 3"]
 
 1. Nf3 {An attraction of the London System is that it can be reached via different move-orders; see Illustrative Game 18 for a more extreme example.}
 1... d5 {Here 1... c5 is the hardest reply to meet for a true London player. White then has many good replies, like 2 e4, 2 c4 and 2 g3, but none of them leads to London positions. So if White really wants to play the London, he must go for 2 c3, allowing Black to enter the relatively harmless Exchange Slav after 2... d5 3 d4 cxd4 4 cxd4.}
-
 2. d4 Nf6 3. Bf4 e6 4. e3 Be7
-
 5. Bd3 {This may be slightly inaccurate because the bishop is vulnerable in the variation 5... c5 6 c3 Qb6 7 Qb3?! (7 Qc1 =) 7... c4! 8 Qxb6 axb6 9 Bc2 b5, when Black has queenside pressure.}
-
 5... O-O 6. Nbd2 b6 7. Ne5 Bb7?! {An alternative is 7... Ba6 hoping to exchange light-squared bishops, thus diminishing White’s kingside attacking potential. After, e.g., 8 Nc6 Nxc6 (or 8... Qe8 9 Nxe7 + Qxe7 10 Bxa6 Nxa6 11 0-0) 9 Bxa6 Nb4 10 Be2 c5 11 c3 Nc6 chances are equal.}
-
 8. Qf3 {White is fighting for control over e4 while gradually transferring his pieces to the kingside.}
-
 8... c5 9. c3 Nbd7 10. Qh3 {Blackburne’s play has a remarkably modern look. This queen manoeuvre, which we also saw in Illustrative Game 1, is almost routine in the double d-pawn London.}
-
 10... Re8?! {This introduces the defensive possibility ... Nf8 but weakens f7. Neither does 10... Ne4 help because 11 f3 Nef6 12 Nxd7 Qxd7 13 g4 g6 14 Qg3 followed by h4 gives White strong pressure on the kingside.}
-
 11. Ndf3 Ne4?! {Surprisingly this comes close to losing by force. However, Black’s position is already difficult. More than a hundred years later a future women’s world champion got a won position from the opening in the same variation: 11... Nxe5 12 Nxe5 c4 13 Bc2 b5 14 a3 a5 15 Ng4 (this forces a crucial weakening of the dark kingside squares) 15... g6 16 Nh6 + Kf8 17 Be5 Qd7 18 f4 Bd8 19 Bxf6 Bxf6 20 Ng4 Ke7 21 Ne5 +– Stefanova-An.Rodriguez, Madrid 1997.}
-
 12. Nxd7 Qxd7 13. Ne5 Qd8 {Also after 13... Qa4 14 f3 Nf6 White can force a weakening of the dark squares with 15 Ng4!.}
-
 14. f3 Nf6 15. Ng4 {Blackburne isn’t distracted by 15 Bb5 Rf8 16 Nc6, when 16... Bxc6! 17 Bxc6 Rc8 18 Bb7 Rb8! 19 Bxb8 Qxb8 20 Bc6 cxd4 21 exd4 b5! gives Black excellent chances.}
-
 15... g6 {This loses material but actually 15... h6 16 Bxh6! is worse. Black must try to survive with 16... Nxg4 17 Qxg4 Bf6 as after 16... gxh6 17 Qxh6 he must play 17... Ne4 to avoid an immediate loss (e.g., 17... Nxg4 18 Qh7 + Kf8 19 Qh8# or 17... cxd4 18 Nxf6 + Bxf6 19 Bh7 + Kh8 20 Bg6 + Kg8 21 Qh7 + Kf8 22 Qxf7#).}
-
 16. Bb5! {White alertly spots a chance to disrupt the black pieces.}
-
 16... Nd7 {Black has no real compensation after 16... Rf8 17 Bh6 Nxg4 18 fxg4; for example, 18... Bh4 + 19 Ke2! a6 20 Ba4 cxd4 21 cxd4 b5 22 Bxf8 +–.}
-
 17. Nh6+ Kg7 18. Nxf7! {This doesn’t really take a lot of calculation. Admittedly some of the mating lines are rather long, but White’s material investment is small and Black’s king’s position is completely destroyed.}
-
 18... Bh4+ {White, of course, had to take this check into account. The variations after 18... Kxf7 are rather straightforward: 19 Qxh7 + Kf6 (19... Kf8 20 Bh6#) 20 g4 and now: a. 20... g5 21 Bxg5 + Kxg5 22 h4 + Kf6 23 g5#. b. 20... Nf8 21 Be5 + Kg5 22 h4#. c) 20... e5 21 Bxd7 exf4 (or 21... Qxd7 22 dxe5 + Ke6 23 Qxg6 + Bf6 24 Qxf6#) 22 g5 + Kxg5 23 Rg1 + Kf6 24 Rxg6#.}
-
 19. Bg3 Kxf7 {After 19... Bxg3+ 20 hxg3 Kxf7 White immediately wins back his material with interest after 21 Bxd7.}
-
 20. Bxh4? {This doesn’t spoil anything – White is material up with a better position. Nevertheless 20 Qxh4! is much stronger: 20... Kg7 (20... Qxh4 21 Bxh4 costs Black at least an exchange) 21 Bxd7 Qxd7 22 Be5 + Kf8 23 Qh6 +! Kg8 24 h4 Qf7 25 h5 Ba6 26 0-0-0 followed by Rh4 and an easy win.}
-
 20... Qc8 21. Bg3 {Now follows a consolidation phase.}
-
 21... Kg8 22. O-O a6 23. Bd3 e5 24. Rae1 Qc6
-
 25. e4 {White is fully developed and ready to open the centre.}
-
 25... cxd4 26. exd5 Qc8 {Obviously not 26... Qxd5 27 Be4 +–.}
-
 27. cxd4 Bxd5 28. dxe5 Qc5+ 29. Bf2 Qe7 30. f4 Bxa2
-
 31. Bh4 {Instead 31 Be4! would have won immediately: 31... Be6 (or 31... Rad8 32 b3! Nc5 33 Bh4) 32 Qg3 Rad8 33 f5 +–.}
-
 31... Qg7 32. Bc2 Rac8 33. Bb3+ Bxb3 34. Qxb3+ Kh8 35. Rd1 h6 36. Qh3 Rc7 37. Rd6 Kh7 38. Rfd1 Nf8 39. Bf6 Qf7 40. R6d3 {White has a specific idea in mind...}
-
 40... Qe6 41. g4 b5 {41... h5 would only have prolonged the game for a few moves.}
-
 42. Qxh6+! {Lessons to be learned: 1. 1 Nf3 is an alternative way to reach the London set-up. 2. The attacking idea Ne5 and Qf3-h3 (which you also saw in Game 1) is a reason to avoid h3. 3. When the white queen has arrived at h3, Nxf7 followed by Qxh7( +) becomes a tactical theme.}
 
 [Event "Game 5"]
 
 1. d4 Nf6 {Statistically this is slightly more common than 1... d5. It’s more flexible and often signals that Black is looking for counterplay rather than equality.}
-
 2. Nf3 {This is an excellent move for the flexible player – maybe even rivalling 2 c4 as the objectively best move. However, an insistent London player may find 2... c5 an irritating reply, as after 3 Bf4?! cxd4! 4 Nxd4?? e5! 5 Bxe5 Qa5 + White loses a piece. 3 d5 is naturally a better move, but normally not very London-like. Therefore in the analytical part of the book we advocate 2 Bf4!?.}
-
 2... d5 {2... e6, 2... c5 and 2... g6 are all more consistent with Black’s first move. However, Black is probably expecting a Queen’s Gambit where White’s king’s knight has been committed a bit early, depriving him of some of the more promising versions of the Exchange Variation.}
-
 3. Bf4 {But White has no intention of entering the Queen’s Gambit with 3 c4.}
-
 3... e6 4. Nbd2 {Quick development is a main characteristic of the London System, but for practical reasons we shall recommend immediate fortification of the centre with 4 e3 followed by c3 as soon as Black plays ... c5.}
-
 4... c5 5. e3 Be7 6. c3 O-O {A critical move is 6... Nh5!?, as 7 Bxb8 Rxb8 8 Ne5!? Nf6 9 Qa4 + Bd7 10 Qxa7?! seems to give Black more than enough for his pawn. Also 6... Nbd7 seems more precise than the text-move, as Black could then contemplate ... Nxg3 without opening the h-file as a direct attacking avenue against his king.}
-
 7. Bd3 {This completes the basic London set-up. There certainly are more standard moves, like 0-0, Ne5, Qf3 and h3, but they are less essential and more depending on Black’s play.}
-
 7... Nbd7 {This set-up is discussed in more detail in Line 5D. The knight development sometimes prepares the defensive move ... Nf8, protecting h7. Normally it also signals that Black will fight for e4, planning ... b6, ... Bb7 and eventually ... Ne4 followed by ... Ndf6 or ... f5. In this game, however, Black never finds the time to complete this development scheme. 7... Nh5 may still be considered, but after 8 Bg3 Black shouldn’t be too eager to open the h-file against his own king.}
-
 8. h4!? {White declares that he considers his development sufficient and his centre secure enough for an all-out kingside attack! A more restrictive strategy can be initiated by 8 Ne5.}
-
 8... b6 9. Ne5 Nxe5?! {As this leads Black into serious difficulties, the consistent 9... Bb7 should be considered. However, Black’s practical difficulties are well illustrated by S.Kovacevic-Vilar Lopez, Linares 1996: 10 Qf3 cxd4 11 exd4 Rc8 12 Rh3! (an additional point behind h4) 12... Re8? 13 Bb5? (White could have taken advantage of the restricted black queen with 13 Bxh7 +! Nxh7 13... Kxh7 14 Nxf7 14 Nxf7 Kxf7 15 Bc7 + +–) 13... Nxe5 14 Bxe5 Rf8 15 Rg3 Kh8 16 Bd3 Bd6 17 Qe2 Rg8 18 Nf3 h6 19 Ng5! Rc7 (19... Rf8 isn’t better: 20 Bxf6 Qxf6 21 Nh7), when White again missed an immediate win, this time by the straightforward 20 Bxf6! Qxf6 (20... gxf6 21 Qh5 Rxg5 22 Qxh6 + Kg8 23 hxg5 +–) 21 Rf3 Bf4, when White breaks through with 22 Nh3 g5 23 hxg5 hxg5 24 g3 +–.}
-
-
 10. dxe5! {Driving away the main defender of the kingside.} 10... Nd7 11. Bxh7+!? {This would have been a standard sacrifice, hardly requiring calculation at all, had the white knight already been on f3. With a tempo less, Black’s defensive resources are greatly increased.}
-
 11... Kxh7 12. Qh5+ {This demonstrates one advantage of not having the knight on f3. In similar positions after Ng5 + Black can often consider ... Kg6 (but with a white pawn already on h4, the king march would be unlikely to succeed).}
-
 12... Kg8 13. Nf3 f6? {Obviously Ng5 is a dangerous threat, but this doesn’t really help as now the rook enters the attack along with a very annoying pawn. With accurate defence Black can probably still hold the position: a) Simplest is 13... Ba6 14 Rd1 (14 0-0-0 Be2!) 14... Re8 (14... g6? 15 Qh6 Re8 16 Ng5 Nf8 17 h5 Bf6 18 hxg6 fxg6 19 exf6 +–) 15 Ng5 Nf8 16 Qxf7 + Kh8 17 b3 Qd7! and because of the threat of ... Bd8, White must be content with perpetual check. b) 13... Re8 14 Ng5 Nf8 (D) is probably also sufficient but much more complicated. However, it isn’t very tempting to allow White a certain draw should his mating attempts fail: b1) 15 Nxf7? g6 16 Nh6 + (16 Qh8 + Kxf7 17 h5 g5 18 h6 Bf6 19  exf6 Qxf6 20 Qxf6 + Kxf6  21 Bd6 Rd8 –+)  16... Kg7 17 Qg4 Nh7! 18 0-0-0 Rh8 19 e4 d4 –/+. b2) 15 Qxf7 + Kh8 and now: b21) White can take a draw by 16 Qh5 + Kg8, etc. b22) 16 h5!? Bxg5 17 h6! (Soltis ends his analysis here) 17...  gxh6 (17... Bxh6 18 Bxh6 gxh6 19 Rxh6 +) 18 Bxg5 (18 Rxh6 +? Bxh6 19 Bxh6 Qe7 20 Bg7 + Kh7 –+)   18... Qxg5 19 Qxe8 Bb7 20 Qf7 Qg7 21 Qh5 Kh7 is still unclear. b23) 16 0-0-0 Qd7 17 e4 (17 h5? Bxg5 –+) 17... d4 (17... Bd8? 18 exd5 Qxf7 19 Nxf7 + Kg8 20 Nd6 Re7 21 Bg5! Rd7 22 f4 exd5 23 Bxd8 Rxd8 24 f5 Kh7 25 g4 +/–) 18 Be3 Ba6 19 cxd4 cxd4 20 Rxd4 Rec8 + 21 Kb1 Qe8 22 Qf3 + =. We now return to 13... f6?}
-
 14. Ng5! fxg5 15. hxg5 Rf5 {16 g6 was the main threat.}
 16. Qh7+ Kf7 {16... Kf8? loses immediately to 17 Qg6.}
 17. g6+ Ke8 18. Qxg7 {The passed pawn is now a deadly force in its own right. Black is lost.}
-
 18... Bf8 {Two other possibilities: a) 18... Rf8 19 Rh8 threatening Qf7#. b) 18... Nf8 19 Qh8 Kd7 20 g7 Ng6 21 Qxd8+, queening.}
-
 19. Qh8 {19 Qg8 Nxe5 20 Bxe5 Kd7 21 g7 +– is even more effective.}
-
 19... Rg5 20. Qg8 Nxe5 {20... Rf5 21 Qxe6+.}
-
 21. Bxe5 Kd7 22. Rh8 Bb7 23. Qh7+ { 23...Qe7 24 Bf6 or 23...Kc6 24 g7 +–. Lessons to be learned: 1. A slightly atypical bishop sacrifice on h7, with the knight not yet ready to go to g5, may work if a few other preconditions (like an advanced h-pawn) are in place. 2. Black should consider not committing himself to ... 0-0 too early, but rather stay ready to castle ‘at short notice’. 3. It may occasionally be a good idea for White to delay 0-0 for a time, trying to use the attacking power of the king’s rook on the h-file. }
